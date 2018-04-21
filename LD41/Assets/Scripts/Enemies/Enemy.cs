@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour {
 
     NavMeshAgent agent;
-    public EnemyData enemyData;
+    public MovementData movementData;
+    public AttackData attackData;
     public GameObject target = null;
 
     Health health;
@@ -16,14 +17,13 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 
         agent = GetComponent<NavMeshAgent>();
+
         health = GetComponent<Health>();
-        
-
-        health.SetInitialHealth(enemyData.health);
         health.OnDeathChange += Die;
-        agent.speed = enemyData.speed;
 
-        attackManager = new AttackManager(this.gameObject, enemyData.attackDamage, enemyData.attackRange, enemyData.attackCooldown);
+        agent.speed = movementData.speed;
+
+        attackManager = new AttackManager(this.gameObject, attackData);
     }
 
     void Die()
@@ -32,31 +32,9 @@ public class Enemy : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    GameObject GetTarget()
-    {
-        float? minDistance = null;
-        GameObject target = null;
-        foreach (GameObject buildingObj in GetAllBuildingGameObjs())
-        {
-            float currentDistance = Vector3.Distance(this.transform.position, buildingObj.transform.position);
-            if(minDistance == null || currentDistance < minDistance)
-            {
-                minDistance = currentDistance;
-                target = buildingObj;
-            }
-        }
-
-        return target;
-    }
-
-    GameObject[] GetAllBuildingGameObjs()
-    {
-        return GameObject.FindGameObjectsWithTag("Building");
-    }
-
     void setTarget()
     {
-        target = GetTarget();
+        target = Target.GetClosestTarget(this.transform.position, "Building");
         if(target != null)
         {
             agent.SetDestination(target.transform.position);

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObject/EnemyData")]
-public class EnemyData : ScriptableObject {
-
-    public float speed;
+[CreateAssetMenu(fileName = "AttackData", menuName = "ScriptableObject/AttackData")]
+public class AttackData : ScriptableObject
+{
     public float attackRange;
     public int attackDamage;
     public float attackCooldown;
