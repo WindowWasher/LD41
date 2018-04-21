@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Resource", menuName = "New Resource")]
+[CreateAssetMenu(fileName = "Resource", menuName = "ScriptableObject/Resource")]
 public class ResourceInventory: ScriptableObject
 {
     public string resourceName;
