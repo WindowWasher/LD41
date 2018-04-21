@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour {
 
+    public GameObject building;
     public Vector2 gridWorldSize;
-    public LayerMask unwalkableMask;
+    public LayerMask occupiedMask;
     public float nodeRadius;
 
     private Node[,] grid;
@@ -35,8 +36,8 @@ public class GridManager : MonoBehaviour {
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
-                grid[x, y] = new Node(walkable, worldPoint);
+                bool occupied = Physics.CheckSphere(worldPoint, nodeRadius, occupiedMask);
+                grid[x, y] = new Node(occupied, worldPoint, x, y);
 
             }
         }
@@ -65,9 +66,15 @@ public class GridManager : MonoBehaviour {
             Node mouseNode = NodeFromWorldPoint(worldMousePosition);
             foreach (Node n in grid)
             {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                // Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.color = Color.white;
                 if (mouseNode == n)
-                    Gizmos.color = Color.cyan;
+                {
+                    if (!n.occupied)
+                        Gizmos.color = Color.cyan;
+                    else
+                        Gizmos.color = Color.red;
+                }
                 Gizmos.DrawCube(n.worldPosition, new Vector3(1,0,1) * (nodeDiameter - .1f)); 
             }
         }
@@ -76,6 +83,44 @@ public class GridManager : MonoBehaviour {
     private void Update()
     {
         worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30));
-        Debug.Log(Input.mousePosition + " " + worldMousePosition);
+
+        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
+        building.transform.position = mouseNode.worldPosition;
+        if (Input.GetMouseButtonDown(0))
+            Debug.Log(CanPlaceBuilding(new Vector2(2, 2)));
+    }
+
+    public bool CanPlaceBuilding(Vector2 size)
+    {
+        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
+
+        int x = mouseNode.xPos;
+        int y = mouseNode.yPos;
+
+        // Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
+        if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
+        {
+            for (int xPos = x; xPos < x + size.x; xPos++)
+            {
+                if (grid[xPos, y].occupied)
+                {
+                    return false;
+                }
+            }
+
+            for (int yPos = y; yPos < y + size.y; yPos++)
+            {
+                if (grid[x, yPos].occupied)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

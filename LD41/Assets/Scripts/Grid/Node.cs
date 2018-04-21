@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Node {
 
-    public bool walkable;
+    public bool occupied;
     public Vector3 worldPosition;
 
-    public Node(bool _walkable, Vector3 _worldPosition)
+    public int xPos;
+    public int yPos;
+
+    public Node(bool _occupied, Vector3 _worldPosition, int _xPos, int _yPos)
     {
-        walkable = _walkable;
+        occupied = _occupied;
         worldPosition = _worldPosition;
+        xPos = _xPos;
+        yPos = _yPos;
     }
 }
