@@ -24,6 +24,20 @@ public class Target {
         return target;
     }
 
+    public static List<GameObject> GetBuildingsInRange(Vector3 position, float range)
+    {
+        List<GameObject> buildingObjs = new List<GameObject>();
+        foreach (GameObject buildingObj in GameObject.FindGameObjectsWithTag("buildings"))
+        {
+            float currentDistance = Vector3.Distance(position, buildingObj.transform.position);
+            if (currentDistance <= range)
+            {
+                buildingObjs.Add(buildingObj);
+            }
+        }
+
+        return buildingObjs;
+    }
     //GameObject[] GetAllBuildingGameObjs()
     //{
     //    return GameObject.FindGameObjectsWithTag("Building");
