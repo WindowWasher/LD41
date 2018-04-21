@@ -57,9 +57,7 @@ public class GridManager : MonoBehaviour {
             {
                 for (int yPos = y; yPos < y + size.y; yPos++)
                 {
-                    Debug.Log("Updating " + grid[x, yPos].occupied);
                     grid[xPos, yPos].occupied = Physics.CheckSphere(grid[xPos, yPos].worldPosition, nodeRadius, occupiedMask);
-                    Debug.Log("It's now " + grid[x, yPos].occupied);
                 }
             }
         }
@@ -85,17 +83,10 @@ public class GridManager : MonoBehaviour {
 
         if (grid != null)
         {
-            Node mouseNode = NodeFromWorldPoint(worldMousePosition);
             foreach (Node n in grid)
             {
-                Gizmos.color = Color.white;
-                if (mouseNode == n)
-                {
-                    if (CanPlaceBuilding(new Vector2(2, 2)))
-                        Gizmos.color = Color.cyan;
-                    else
-                        Gizmos.color = Color.red;
-                }
+                Color color = new Color(1, 1, 1, 0.5f);
+                Gizmos.color = color;
                 Gizmos.DrawCube(n.worldPosition, new Vector3(1,0,1) * (nodeDiameter - .1f)); 
             }
         }

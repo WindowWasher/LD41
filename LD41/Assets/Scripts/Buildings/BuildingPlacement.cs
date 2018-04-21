@@ -27,6 +27,7 @@ public class BuildingPlacement : MonoBehaviour {
         {
             isBuilding = false;
             canvas.enabled = false;
+            placementImage.enabled = false;
             gridRef.UpdateGridCurrentMousePosition(building.gridSize);
         }
         else if (Input.GetMouseButtonDown(0) && !isBuilding)
@@ -34,6 +35,7 @@ public class BuildingPlacement : MonoBehaviour {
             isBuilding = true;
             buildingRef = GameObject.Instantiate(building.building, Vector3.zero, Quaternion.identity);
             canvas.enabled = true;
+            placementImage.enabled = true;
             canvas.transform.localScale = building.gridSize;
         }
 
