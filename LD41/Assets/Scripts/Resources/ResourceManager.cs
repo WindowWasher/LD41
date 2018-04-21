@@ -24,7 +24,7 @@ public class ResourceManager:MonoBehaviour  {
         return GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
     }
 
-    void Start()
+    void Awake()
     {
         resources = new Dictionary<Resource, ResourceInventory>();
         foreach(ResourceInventory inventory in resourceList)
