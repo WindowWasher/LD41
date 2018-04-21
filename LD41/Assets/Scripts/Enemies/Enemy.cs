@@ -7,22 +7,29 @@ public class Enemy : MonoBehaviour {
 
     NavMeshAgent agent;
     public EnemyData enemyData;
-
-    public float health;
-
     public GameObject target = null;
 
-    Timer attackCooldownTimer = new Timer();
+    Health health;
+    AttackManager attackManager;
 
 	// Use this for initialization
 	void Start () {
 
         agent = GetComponent<NavMeshAgent>();
-
+        health = GetComponent<Health>();
         
 
-        health = enemyData.health;
+        health.SetInitialHealth(enemyData.health);
+        health.OnDeathChange += Die;
         agent.speed = enemyData.speed;
+
+        attackManager = new AttackManager(this.gameObject, enemyData.attackDamage, enemyData.attackRange, enemyData.attackCooldown);
+    }
+
+    void Die()
+    {
+        Debug.Log(this.name + " died!");
+        Destroy(this.gameObject);
     }
 
     GameObject GetTarget()
@@ -53,12 +60,18 @@ public class Enemy : MonoBehaviour {
         if(target != null)
         {
             agent.SetDestination(target.transform.position);
+            target.GetComponent<Health>().OnDeathChange += targetDestroyed;
         }
         else
         {
             // Player loses
         }
         
+    }
+
+    void targetDestroyed()
+    {
+        target = null;
     }
 
     void Attack()
@@ -73,13 +86,9 @@ public class Enemy : MonoBehaviour {
         {
             setTarget();
         }
-        if (target != null && attackCooldownTimer.Expired())
+        if (target != null && attackManager.AttackReady() && attackManager.InRange(target))
         {
-            float targetDistance = Vector3.Distance(target.transform.position, this.transform.position);
-            if (targetDistance <= enemyData.attackRange)
-            {
-                Attack();
-            }
+            attackManager.Attack(target);
         }
 
         

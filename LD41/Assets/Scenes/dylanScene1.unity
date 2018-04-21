@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 15922143}
   - component: {fileID: 15922148}
   - component: {fileID: 15922147}
+  - component: {fileID: 15922149}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -321,7 +322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: e0172499e49bf9648a0a6951e67866ba, type: 2}
-  health: 0
   target: {fileID: 0}
 --- !u!195 &15922148
 NavMeshAgent:
@@ -344,6 +344,17 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &15922149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15922142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &73811572
 Prefab:
   m_ObjectHideFlags: 0
@@ -542,6 +553,8 @@ GameObject:
   - component: {fileID: 949422887}
   - component: {fileID: 949422886}
   - component: {fileID: 949422885}
+  - component: {fileID: 949422889}
+  - component: {fileID: 949422890}
   m_Layer: 0
   m_Name: House (1)
   m_TagString: Building
@@ -615,6 +628,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &949422889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949422884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &949422890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949422884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &985550825
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +661,8 @@ GameObject:
   - component: {fileID: 985550828}
   - component: {fileID: 985550827}
   - component: {fileID: 985550826}
+  - component: {fileID: 985550830}
+  - component: {fileID: 985550831}
   m_Layer: 0
   m_Name: House
   m_TagString: Building
@@ -699,6 +736,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985550830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 985550825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &985550831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 985550825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1091814919
 Prefab:
   m_ObjectHideFlags: 0
@@ -1112,6 +1171,8 @@ GameObject:
   - component: {fileID: 1397215519}
   - component: {fileID: 1397215518}
   - component: {fileID: 1397215517}
+  - component: {fileID: 1397215521}
+  - component: {fileID: 1397215522}
   m_Layer: 0
   m_Name: House (2)
   m_TagString: Building
@@ -1185,6 +1246,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1397215521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1397215516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1397215522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1397215516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1563485361
 GameObject:
   m_ObjectHideFlags: 0
