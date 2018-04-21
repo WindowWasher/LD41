@@ -8,6 +8,8 @@ public class ResourceInventory: ScriptableObject
 {
     public string resourceName;
     public Resource resourceEnum;
+    public int initialCount;
+    [HideInInspector]
     public int count;
     public Sprite hudImage;
 
@@ -16,7 +18,7 @@ public class ResourceInventory: ScriptableObject
     /// </summary>
     public void OnEnable()
     {
-        count = 100;
+        count = initialCount;
     }
     // Color?
 

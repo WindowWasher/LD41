@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: Gold
   resourceEnum: 3
-  count: 25
+  initialCount: 100
+  count: 0
   hudImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
