@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +8,18 @@ public class ResourceInventory: ScriptableObject
 {
     public string resourceName;
     public Resource resourceEnum;
+    public int initialCount;
+    [HideInInspector]
     public int count;
     public Sprite hudImage;
 
+    /// <summary>
+    ///TODO: remove this 
+    /// </summary>
+    public void OnEnable()
+    {
+        count = initialCount;
+    }
     // Color?
 
     //public void Add(int addition)

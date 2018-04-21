@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: Happiness
   resourceEnum: 2
-  count: 50
+  initialCount: 100
+  count: 0
   hudImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
