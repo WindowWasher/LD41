@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
+public class Health: MonoBehaviour {
 
     /// <summary>
     /// Event that can be registered against and is called anytime health is changed
@@ -13,15 +13,23 @@ public class Health : MonoBehaviour {
     public delegate void OnDeathChangeAction();
     public event OnDeathChangeAction OnDeathChange;
 
+    public int maxHealth;
+
+    public void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
     /// <summary>
     /// The current health of the entity
     /// </summary>
     public int currentHealth { get; private set; }
 
-    // Use this for initialization
-    public void SetInitialHealth (int health) {
-        currentHealth = health;
-	}
+ //   // Use this for initialization
+ //   public void InitHealth (int health, OnDeathChangeAction deathAction) {
+ //       currentHealth = health;
+ //       OnDeathChange += deathAction;
+	//}
 
     public void Damage(int damage)
     {

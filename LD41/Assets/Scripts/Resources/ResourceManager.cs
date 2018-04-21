@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public enum Resource
@@ -43,10 +44,12 @@ public class ResourceManager:MonoBehaviour  {
         OnResourceChange(resources[resource]);
     }
 
-    public void Remove(Resource resource, int subtraction)
+    public void UpdateResources(List<ResourceDelta> resourceDeltas)
     {
-        resources[resource].count -= subtraction;
-        OnResourceChange(resources[resource]);
+        foreach(ResourceDelta delta in resourceDeltas.Where(d=>!d.oneTimeChange))
+        {
+            this.Add(delta.resource, delta.amount);
+        }
     }
 
 

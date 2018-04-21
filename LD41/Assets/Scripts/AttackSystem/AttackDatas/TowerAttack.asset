@@ -8,10 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
-  m_Name: TempBuilding_1x1
+  m_Script: {fileID: 11500000, guid: 1cf9ad85f4e2b96439eca0a7fe07e231, type: 3}
+  m_Name: TowerAttack
   m_EditorClassIdentifier: 
-  building: {fileID: 1105271495333960, guid: af4397d065be5fc4bb41db38d22e8e3a, type: 2}
-  gridSize: {x: 1, y: 1}
-  health: 0
-  resourceDeltas: []
+  attackRange: 50
+  attackDamage: 20
+  attackCooldown: 1

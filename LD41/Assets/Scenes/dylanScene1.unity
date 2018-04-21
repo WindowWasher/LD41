@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 15922149}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,7 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d88a6b6c54f43429dde2e2091a6e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: e0172499e49bf9648a0a6951e67866ba, type: 2}
+  movementData: {fileID: 11400000, guid: 209a5bde5819c1c4b849a4a62e7390ed, type: 2}
+  attackData: {fileID: 11400000, guid: 28332a7e75017f848897c38f46ac23e8, type: 2}
   target: {fileID: 0}
 --- !u!195 &15922148
 NavMeshAgent:
@@ -355,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1001 &73811572
 Prefab:
   m_ObjectHideFlags: 0
@@ -561,7 +563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &949422885
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -639,6 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!114 &949422890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
 --- !u!1 &985550825
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,8 +665,8 @@ GameObject:
   - component: {fileID: 985550828}
   - component: {fileID: 985550827}
   - component: {fileID: 985550826}
-  - component: {fileID: 985550830}
   - component: {fileID: 985550831}
+  - component: {fileID: 985550830}
   m_Layer: 0
   m_Name: House
   m_TagString: Building
@@ -744,9 +748,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 985550825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 30fe725ae8a6229499c45248b5c08cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingData: {fileID: 11400000, guid: deaf57bf08c5ff74f94ad420cec5b136, type: 2}
+  attackData: {fileID: 11400000, guid: a288c0d98712acc479df1ef90906904b, type: 2}
 --- !u!114 &985550831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1001 &1091814919
 Prefab:
   m_ObjectHideFlags: 0
@@ -1179,7 +1186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1397215517
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1257,6 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baccf23a41ab4c46b6ad7fb4285e1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!114 &1397215522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,6 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
 --- !u!1 &1563485361
 GameObject:
   m_ObjectHideFlags: 0
