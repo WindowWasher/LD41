@@ -15,9 +15,9 @@ public class EnemyManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        enemyPrefabs = new List<GameObject>();
+        //enemyPrefabs = new List<GameObject>();
 
-        enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
+        //enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
 
         SpawnWave();
 	}

@@ -54,15 +54,15 @@ public class Enemy : MonoBehaviour {
     {
         float xVal = buildObj.GetComponent<Renderer>().bounds.size.x / 2;
         float zVal = buildObj.GetComponent<Renderer>().bounds.size.z / 2;
-        Debug.Log("X: " + xVal);
-        Debug.Log("Z: " + zVal);
+        //Debug.Log("X: " + xVal);
+        //Debug.Log("Z: " + zVal);
         Vector3 randomPoint =  new Vector3(
             Random.Range(-xVal, xVal),
             buildObj.transform.position.y,
             Random.Range(-zVal, zVal)
             ) + buildObj.transform.position;
 
-        Debug.Log("Random " + randomPoint.ToString());
+        //Debug.Log("Random " + randomPoint.ToString());
         return randomPoint;
         //Vector2 randomPoint = Random.insideUnitCircle.normalized * Mathf.Min(building.buildingData.gridSize.x, building.buildingData.gridSize.y);
         //return new Vector3(randomPoint.x, building.transform.position.y, randomPoint.y) + building.transform.position;
@@ -143,12 +143,12 @@ public class Enemy : MonoBehaviour {
 
         if(closestUnTargtedBuildingObj != null)
         {
-            Debug.Log("Found untraged building " + closestUnTargtedBuildingObj.name);
+            //Debug.Log("Found untraged building " + closestUnTargtedBuildingObj.name);
             return closestUnTargtedBuildingObj;
         }
         else
         {
-            Debug.Log("Did not find untraged building " + closestTargetdBulidngObj.name);
+            //Debug.Log("Did not find untraged building " + closestTargetdBulidngObj.name);
             return closestTargetdBulidngObj;
         }
 
