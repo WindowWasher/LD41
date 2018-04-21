@@ -9,7 +9,7 @@ public class BuildingPlacement : MonoBehaviour {
     [HideInInspector]
     public BuildingData buildingData;
     public GridManager gridRef;
-    public Canvas canvas;
+    public Canvas placementCanvas;
     public Image placementImage;
     public Sprite canPlaceGraphic;
     public Sprite cantPlaceGraphic;
@@ -19,7 +19,7 @@ public class BuildingPlacement : MonoBehaviour {
     private GameObject buildingRef;
 	// Use this for initialization
 	void Start () {
-        canvas.enabled = false;
+        placementCanvas.enabled = false;
 	}
 
     public void BeginPlacingBuilding()
@@ -28,10 +28,10 @@ public class BuildingPlacement : MonoBehaviour {
             Destroy(buildingRef);
         isBuilding = true;
         buildingRef = GameObject.Instantiate(buildingData.building, gridRef.getMouseToNodeBottomLeftWorld(), Quaternion.identity);
-        canvas.transform.position = gridRef.getMouseToNodeBottomLeftWorld();
-        canvas.enabled = true;
+        placementCanvas.transform.position = gridRef.getMouseToNodeBottomLeftWorld();
+        placementCanvas.enabled = true;
         placementImage.enabled = true;
-        canvas.transform.localScale = buildingData.gridSize;
+        placementCanvas.transform.localScale = buildingData.gridSize;
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class BuildingPlacement : MonoBehaviour {
             buildingRef.GetComponent<Building>().BuildingPlaced(gridRef.GetNodeUnderMouse());
 
             // Disable everything and set buildingRef to null
-            canvas.enabled = false;
+            placementCanvas.enabled = false;
             placementImage.enabled = false;
             buildingRef = null;
 
@@ -61,7 +61,7 @@ public class BuildingPlacement : MonoBehaviour {
             if (buildingRef != null)
                 Destroy(buildingRef);
             isBuilding = false;
-            canvas.enabled = false;
+            placementCanvas.enabled = false;
             placementImage.enabled = false;
             buildingRef = null;
         }
@@ -85,7 +85,7 @@ public class BuildingPlacement : MonoBehaviour {
         {
             Vector3 mouseNodeBottomLeftPos = gridRef.getMouseToNodeBottomLeftWorld();
             buildingRef.transform.position = mouseNodeBottomLeftPos;
-            canvas.transform.position = mouseNodeBottomLeftPos;
+            placementCanvas.transform.position = mouseNodeBottomLeftPos;
 
             if (gridRef.CanPlaceBuilding(buildingData.gridSize))
                 placementImage.sprite = canPlaceGraphic;

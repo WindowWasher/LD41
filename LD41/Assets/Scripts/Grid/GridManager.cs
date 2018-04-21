@@ -137,7 +137,7 @@ public class GridManager : MonoBehaviour {
 
     public Vector3 getMouseToNodeWorldPos()
     {
-        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30));
+        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
         Node mouseNode = NodeFromWorldPoint(worldMousePosition);
 
         return mouseNode.worldPosition;
@@ -145,7 +145,7 @@ public class GridManager : MonoBehaviour {
 
     public Vector3 getMouseToNodeBottomLeftWorld()
     {
-        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30));
+        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
         Node mouseNode = NodeFromWorldPoint(worldMousePosition);
 
         return mouseNode.worldBottomLeft;
