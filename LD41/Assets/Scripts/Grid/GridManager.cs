@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour {
 
-    public GameObject building;
     public Vector2 gridWorldSize;
     public LayerMask occupiedMask;
     public float nodeRadius;
@@ -35,10 +34,34 @@ public class GridManager : MonoBehaviour {
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
+                Vector3 bottomLeft = worldBottomLeft + Vector3.right * (x * nodeDiameter) + Vector3.forward * (y * nodeDiameter);
 
                 bool occupied = Physics.CheckSphere(worldPoint, nodeRadius, occupiedMask);
-                grid[x, y] = new Node(occupied, worldPoint, x, y);
+                grid[x, y] = new Node(occupied, worldPoint, bottomLeft, x, y);
 
+            }
+        }
+    }
+
+    public void UpdateGridCurrentMousePosition(Vector2 size)
+    {
+        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
+
+        int x = mouseNode.xPos;
+        int y = mouseNode.yPos;
+
+        // Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
+        if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
+        {
+            for (int xPos = x; xPos < x + size.x; xPos++)
+            {
+                Debug.Log("Updating");
+                grid[xPos, y].occupied = Physics.CheckSphere(grid[xPos, y].worldPosition, nodeRadius, occupiedMask);
+            }
+
+            for (int yPos = y; yPos < y + size.y; yPos++)
+            {
+                grid[x, yPos].occupied = Physics.CheckSphere(grid[x, yPos].worldPosition, nodeRadius, occupiedMask);
             }
         }
     }
@@ -70,7 +93,7 @@ public class GridManager : MonoBehaviour {
                 Gizmos.color = Color.white;
                 if (mouseNode == n)
                 {
-                    if (!n.occupied)
+                    if (CanPlaceBuilding(new Vector2(2, 2)))
                         Gizmos.color = Color.cyan;
                     else
                         Gizmos.color = Color.red;
@@ -80,14 +103,20 @@ public class GridManager : MonoBehaviour {
         }
     }
 
-    private void Update()
+    public Vector3 getMouseToNodeWorldPos()
     {
         worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30));
-
         Node mouseNode = NodeFromWorldPoint(worldMousePosition);
-        building.transform.position = mouseNode.worldPosition;
-        if (Input.GetMouseButtonDown(0))
-            Debug.Log(CanPlaceBuilding(new Vector2(2, 2)));
+
+        return mouseNode.worldPosition;
+    }
+
+    public Vector3 getMouseToNodeBottomLeftWorld()
+    {
+        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30));
+        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
+
+        return mouseNode.worldBottomLeft;
     }
 
     public bool CanPlaceBuilding(Vector2 size)
