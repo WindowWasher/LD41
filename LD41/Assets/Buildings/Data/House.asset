@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   building: {fileID: 1101558959010768, guid: 29374cfae5279cb438a40374c7b2183b, type: 2}
+  buildingName: House
   gridSize: {x: 2, y: 3}
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}

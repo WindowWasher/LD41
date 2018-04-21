@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Name: TempBuilding_1x1
   m_EditorClassIdentifier: 
   building: {fileID: 1105271495333960, guid: af4397d065be5fc4bb41db38d22e8e3a, type: 2}
+  buildingName: 1x1
   gridSize: {x: 1, y: 1}
+  icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
