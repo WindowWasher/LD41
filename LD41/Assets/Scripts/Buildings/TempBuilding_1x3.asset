@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
-  m_Name: TempBuilding_1x1
+  m_Name: TempBuilding_1x3
   m_EditorClassIdentifier: 
-  building: {fileID: 1105271495333960, guid: af4397d065be5fc4bb41db38d22e8e3a, type: 2}
-  gridSize: {x: 1, y: 1}
+  building: {fileID: 1053271250202122, guid: fe36d2163f4cc994a8f19b2ac4dcf271, type: 2}
+  gridSize: {x: 1, y: 3}

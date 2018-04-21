@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class BuildingPlacement : MonoBehaviour {
 
-    public Building building;
+    public BuildingData building;
     public GridManager gridRef;
-    public Canvas placementCanvas;
+    public Canvas canvas;
     public Image placementImage;
     public Sprite canPlaceGraphic;
     public Sprite cantPlaceGraphic;
@@ -17,7 +17,7 @@ public class BuildingPlacement : MonoBehaviour {
     private GameObject buildingRef;
 	// Use this for initialization
 	void Start () {
-        placementCanvas.enabled = false;
+        canvas.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -26,22 +26,22 @@ public class BuildingPlacement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(building.gridSize))
         {
             isBuilding = false;
-            placementCanvas.enabled = false;
+            canvas.enabled = false;
             gridRef.UpdateGridCurrentMousePosition(building.gridSize);
         }
         else if (Input.GetMouseButtonDown(0) && !isBuilding)
         {
             isBuilding = true;
             buildingRef = GameObject.Instantiate(building.building, Vector3.zero, Quaternion.identity);
-            placementCanvas.enabled = true;
-            placementCanvas.transform.localScale = building.gridSize;
+            canvas.enabled = true;
+            canvas.transform.localScale = building.gridSize;
         }
 
         if (isBuilding && buildingRef)
         {
-            Vector3 mouseNodeWorldPos = gridRef.getMouseToNodeWorldPos();
-            buildingRef.transform.position = gridRef.getMouseToNodeBottomLeftWorld();
-            placementCanvas.transform.position = mouseNodeWorldPos + new Vector3(0.5f, 0, 0.5f);
+            Vector3 mouseNodeBottomLeftPos = gridRef.getMouseToNodeBottomLeftWorld();
+            buildingRef.transform.position = mouseNodeBottomLeftPos;
+            canvas.transform.position = mouseNodeBottomLeftPos;
 
             if (gridRef.CanPlaceBuilding(building.gridSize))
                 placementImage.sprite = canPlaceGraphic;

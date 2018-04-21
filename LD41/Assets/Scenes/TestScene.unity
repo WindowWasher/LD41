@@ -206,9 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01f18f7be293634c9bfb69e5b5a5f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building: {fileID: 11400000, guid: ffc8f1534bc814042977f81e74a090a2, type: 2}
+  building: {fileID: 11400000, guid: 9104812d4e477e84f80e31d420cb56fd, type: 2}
   gridRef: {fileID: 2010102441}
-  placementCanvas: {fileID: 809648976}
+  canvasPivoit: {fileID: 809648976}
   placementImage: {fileID: 1660447458}
   canPlaceGraphic: {fileID: 21300000, guid: e965d38e2ea90994eb61f3a133dec64d, type: 3}
   cantPlaceGraphic: {fileID: 21300000, guid: 968f4bd9a25e58447930c18307dc9c97, type: 3}
@@ -379,18 +379,18 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 809648973}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0.12899995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1660447457}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.75, y: 0}
-  m_SizeDelta: {x: 1.25, y: 1.25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.13, y: 0}
+  m_SizeDelta: {x: 1.15, y: 1.15}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &930881715
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +451,35 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1405538588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1405538589}
+  m_Layer: 0
+  m_Name: CanvasPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1405538589
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1405538588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660447456
 GameObject:

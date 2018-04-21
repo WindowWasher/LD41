@@ -55,13 +55,12 @@ public class GridManager : MonoBehaviour {
         {
             for (int xPos = x; xPos < x + size.x; xPos++)
             {
-                Debug.Log("Updating");
-                grid[xPos, y].occupied = Physics.CheckSphere(grid[xPos, y].worldPosition, nodeRadius, occupiedMask);
-            }
-
-            for (int yPos = y; yPos < y + size.y; yPos++)
-            {
-                grid[x, yPos].occupied = Physics.CheckSphere(grid[x, yPos].worldPosition, nodeRadius, occupiedMask);
+                for (int yPos = y; yPos < y + size.y; yPos++)
+                {
+                    Debug.Log("Updating " + grid[x, yPos].occupied);
+                    grid[xPos, yPos].occupied = Physics.CheckSphere(grid[xPos, yPos].worldPosition, nodeRadius, occupiedMask);
+                    Debug.Log("It's now " + grid[x, yPos].occupied);
+                }
             }
         }
     }
@@ -89,7 +88,6 @@ public class GridManager : MonoBehaviour {
             Node mouseNode = NodeFromWorldPoint(worldMousePosition);
             foreach (Node n in grid)
             {
-                // Gizmos.color = (n.walkable) ? Color.white : Color.red;
                 Gizmos.color = Color.white;
                 if (mouseNode == n)
                 {
@@ -131,20 +129,14 @@ public class GridManager : MonoBehaviour {
         {
             for (int xPos = x; xPos < x + size.x; xPos++)
             {
-                if (grid[xPos, y].occupied)
+                for (int yPos = y; yPos < y + size.y; yPos++)
                 {
-                    return false;
+                    if (grid[xPos, yPos].occupied)
+                    {
+                        return false;
+                    }
                 }
             }
-
-            for (int yPos = y; yPos < y + size.y; yPos++)
-            {
-                if (grid[x, yPos].occupied)
-                {
-                    return false;
-                }
-            }
-
             return true;
         }
         else
