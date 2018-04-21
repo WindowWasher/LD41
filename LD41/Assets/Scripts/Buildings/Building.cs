@@ -14,6 +14,7 @@ public class Building : MonoBehaviour {
     AttackManager attackManager = null;
 
     private bool buildingActive = false;
+    private Node buildingStartNode;
 
 	// Use this for initialization
 	void Start () {
@@ -30,15 +31,23 @@ public class Building : MonoBehaviour {
     void Die()
     { 
         Debug.Log(this.name + " died!");
+        ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
+        GridManager.instance.SetOccupiedToFalse(buildingStartNode, buildingData.gridSize);
         Destroy(this.gameObject);
     }
 
-    public void ActivateBuilding()
+    public void DestroyBuilding()
     {
+        Die();
+    }
+
+    public void BuildingPlaced(Node startNode)
+    {
+        buildingStartNode = startNode;
         if (buildingActive)
             return;
 
-        ResourceManager.Instance().RemoveOneTimeCostResources(buildingData.resourceDeltas);
+        ResourceManager.Instance().UpdateOneTimeCostResources(buildingData.resourceDeltas);
         buildingActive = true;
     }
 

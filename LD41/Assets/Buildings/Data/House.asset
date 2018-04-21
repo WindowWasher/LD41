@@ -19,3 +19,9 @@ MonoBehaviour:
   - resource: 4
     amount: -25
     oneTimeChange: 1
+  - resource: 3
+    amount: 1
+    oneTimeChange: 0
+  - resource: 0
+    amount: 10
+    oneTimeChange: 1

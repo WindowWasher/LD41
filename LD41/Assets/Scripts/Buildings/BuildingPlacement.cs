@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BuildingPlacement : MonoBehaviour {
 
     [HideInInspector]
-    public BuildingData building;
+    public BuildingData buildingData;
     public GridManager gridRef;
     public Canvas canvas;
     public Image placementImage;
@@ -27,22 +27,22 @@ public class BuildingPlacement : MonoBehaviour {
         if (buildingRef != null)
             Destroy(buildingRef);
         isBuilding = true;
-        buildingRef = GameObject.Instantiate(building.building, gridRef.getMouseToNodeBottomLeftWorld(), Quaternion.identity);
+        buildingRef = GameObject.Instantiate(buildingData.building, gridRef.getMouseToNodeBottomLeftWorld(), Quaternion.identity);
         canvas.transform.position = gridRef.getMouseToNodeBottomLeftWorld();
         canvas.enabled = true;
         placementImage.enabled = true;
-        canvas.transform.localScale = building.gridSize;
+        canvas.transform.localScale = buildingData.gridSize;
     }
 
     // Update is called once per frame
     void Update() {
 
         // Click to place building
-        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(building.gridSize) && ResourceManager.Instance().CanAfford(building.resourceDeltas))
+        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas))
         {
             // Make any updates before disabling everything
-            buildingRef.GetComponent<Building>().ActivateBuilding();
-            gridRef.UpdateGridCurrentMousePosition(building.gridSize);
+            gridRef.UpdateGridCurrentMousePosition(buildingData.gridSize);
+            buildingRef.GetComponent<Building>().BuildingPlaced(gridRef.GetNodeUnderMouse());
 
             // Disable everything and set buildingRef to null
             canvas.enabled = false;
@@ -65,6 +65,21 @@ public class BuildingPlacement : MonoBehaviour {
             placementImage.enabled = false;
             buildingRef = null;
         }
+        else if (Input.GetMouseButtonDown(1) && !isBuilding)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                Debug.Log(hit.collider.name);
+                Building building = hit.collider.GetComponent<Building>();
+
+                if (building)
+                {
+                    building.DestroyBuilding();
+                }
+            }
+        }
 
         if (isBuilding && buildingRef)
         {
@@ -72,7 +87,7 @@ public class BuildingPlacement : MonoBehaviour {
             buildingRef.transform.position = mouseNodeBottomLeftPos;
             canvas.transform.position = mouseNodeBottomLeftPos;
 
-            if (gridRef.CanPlaceBuilding(building.gridSize))
+            if (gridRef.CanPlaceBuilding(buildingData.gridSize))
                 placementImage.sprite = canPlaceGraphic;
             else
                 placementImage.sprite = cantPlaceGraphic;

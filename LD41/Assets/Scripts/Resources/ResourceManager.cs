@@ -33,7 +33,6 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
-
     public List<ResourceInventory> resourceList;
     public Dictionary<Resource, ResourceInventory> resources;
 
@@ -52,7 +51,20 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
-    public void RemoveOneTimeCostResources(List<ResourceDelta> resourceDeltas)
+    public void RemoveOneTimeBenifits(List<ResourceDelta> resourceDeltas)
+    {
+        foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
+        {
+            if (delta.amount > 0)
+            {
+                resources[delta.resource].count -= delta.amount;
+                if (OnResourceChange != null)
+                    OnResourceChange(resources[delta.resource]);
+            }
+        }
+    }
+
+    public void UpdateOneTimeCostResources(List<ResourceDelta> resourceDeltas)
     {
         foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
         {
@@ -60,11 +72,11 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
-    public bool CanAfford(List<ResourceDelta> resourceDeltas)
+    public bool CanAffordOneTimeCost(List<ResourceDelta> resourceDeltas)
     {
-        foreach(ResourceDelta resourceDelta in resourceDeltas.Where(d=>d.oneTimeChange))
+        foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
         {
-            if (resources[resourceDelta.resource].count + resourceDelta.amount < 0)
+            if (resources[delta.resource].count + delta.amount < 0)
                 return false;
         }
 

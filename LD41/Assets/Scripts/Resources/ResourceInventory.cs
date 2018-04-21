@@ -13,9 +13,6 @@ public class ResourceInventory: ScriptableObject
     public int count;
     public Sprite hudImage;
 
-    /// <summary>
-    ///TODO: remove this 
-    /// </summary>
     public void OnEnable()
     {
         count = initialCount;

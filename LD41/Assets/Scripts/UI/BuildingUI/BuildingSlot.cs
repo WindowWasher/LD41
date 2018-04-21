@@ -15,7 +15,7 @@ public class BuildingSlot : MonoBehaviour {
 
     public void OnClickBuilding()
     {
-        placement.building = buildingData;
+        placement.buildingData = buildingData;
         placement.BeginPlacingBuilding();
     }
 
@@ -29,7 +29,7 @@ public class BuildingSlot : MonoBehaviour {
 
     public void Update()
     {
-        if (!ResourceManager.Instance().CanAfford(buildingData.resourceDeltas))
+        if (!ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas))
         {
             inactiveImage.enabled = true;
             buildButton.interactable = false;
