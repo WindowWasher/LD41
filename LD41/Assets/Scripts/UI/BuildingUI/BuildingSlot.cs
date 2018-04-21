@@ -24,5 +24,20 @@ public class BuildingSlot : MonoBehaviour {
         buildingText.text = buildingData.buildingName;
         buildingImage.sprite = buildingData.icon;
         inactiveImage.enabled = false;
+        buildButton.interactable = true;
+    }
+
+    public void Update()
+    {
+        if (!ResourceManager.Instance().CanAfford(buildingData.resourceDeltas))
+        {
+            inactiveImage.enabled = true;
+            buildButton.interactable = false;
+        }
+        else
+        {
+            inactiveImage.enabled = false;
+            buildButton.interactable = true;
+        }
     }
 }

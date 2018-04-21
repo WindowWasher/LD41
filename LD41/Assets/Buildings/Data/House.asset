@@ -15,3 +15,7 @@ MonoBehaviour:
   buildingName: House
   gridSize: {x: 2, y: 3}
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  resourceDeltas:
+  - resource: 4
+    amount: -25
+    oneTimeChange: 1

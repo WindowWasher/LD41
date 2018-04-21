@@ -8,11 +8,12 @@ public class Building : MonoBehaviour {
     public BuildingData buildingData;
     Health health;
     Timer resourceTimer = new Timer();
-
     int resourceInterval = 1;
 
     public AttackData attackData;
     AttackManager attackManager = null;
+
+    private bool buildingActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,21 +22,39 @@ public class Building : MonoBehaviour {
         attackManager = new AttackManager(this.gameObject, attackData);
     }
 
+    private void OnDisable()
+    {
+        health.OnDeathChange -= Die;
+    }
+
     void Die()
     { 
         Debug.Log(this.name + " died!");
         Destroy(this.gameObject);
     }
 
+    public void ActivateBuilding()
+    {
+        if (buildingActive)
+            return;
+
+        ResourceManager.Instance().RemoveOneTimeCostResources(buildingData.resourceDeltas);
+        buildingActive = true;
+    }
+
     // Update is called once per frame
     void Update () {
+
+        if (!buildingActive)
+            return;
+
         if(resourceTimer.Expired())
         {
             ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas);
             resourceTimer.Start(resourceInterval);
         }
         
-        if(attackManager.AttackReady())
+        if(attackManager != null && attackManager.AttackReady())
         {
             GameObject target = Target.GetClosestTarget(this.transform.position, "Enemy");
             if(target != null)

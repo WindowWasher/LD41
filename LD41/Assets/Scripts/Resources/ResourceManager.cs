@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -13,7 +13,6 @@ public enum Resource
     Wood,
     Iron
 }
-
 
 public class ResourceManager:MonoBehaviour  {
 
@@ -41,7 +40,8 @@ public class ResourceManager:MonoBehaviour  {
     public void Add(Resource resource, int addition)
     {
         resources[resource].count += addition;
-        OnResourceChange(resources[resource]);
+        if (OnResourceChange != null)
+            OnResourceChange(resources[resource]);
     }
 
     public void UpdateResources(List<ResourceDelta> resourceDeltas)
@@ -52,5 +52,22 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
+    public void RemoveOneTimeCostResources(List<ResourceDelta> resourceDeltas)
+    {
+        foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
+        {
+            this.Add(delta.resource, delta.amount);
+        }
+    }
 
+    public bool CanAfford(List<ResourceDelta> resourceDeltas)
+    {
+        foreach(ResourceDelta resourceDelta in resourceDeltas.Where(d=>d.oneTimeChange))
+        {
+            if (resources[resourceDelta.resource].count + resourceDelta.amount < 0)
+                return false;
+        }
+
+        return true;
+    }
 }

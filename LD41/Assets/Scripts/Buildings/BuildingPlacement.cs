@@ -38,12 +38,16 @@ public class BuildingPlacement : MonoBehaviour {
     void Update() {
 
         // Click to place building
-        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(building.gridSize))
+        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(building.gridSize) && ResourceManager.Instance().CanAfford(building.resourceDeltas))
         {
+            // Make any updates before disabling everything
+            buildingRef.GetComponent<Building>().ActivateBuilding();
+            gridRef.UpdateGridCurrentMousePosition(building.gridSize);
+
+            // Disable everything and set buildingRef to null
             canvas.enabled = false;
             placementImage.enabled = false;
             buildingRef = null;
-            gridRef.UpdateGridCurrentMousePosition(building.gridSize);
 
             if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
                 isBuilding = false;

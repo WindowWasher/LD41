@@ -9,7 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
-  m_Name: TempBuilding_2x2
+  m_Name: 1x1
   m_EditorClassIdentifier: 
-  building: {fileID: 1243008401596720, guid: 57d34631324054f4fac7e67b04b37199, type: 2}
-  gridSize: {x: 2, y: 2}
+  building: {fileID: 1443599949390830, guid: 8fde9e2ff50937d4887d4b085fcbecf7, type: 2}
+  buildingName: 1x1
+  gridSize: {x: 1, y: 1}
+  icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  resourceDeltas:
+  - resource: 4
+    amount: -10
+    oneTimeChange: 1
