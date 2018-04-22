@@ -17,6 +17,8 @@ public class BuildingInfoManager : MonoBehaviour {
     Button PeoplePlusButton;
     GameObject resourceDetailPanel;
 
+    Building building = null;
+
 	// Use this for initialization
 	void Start () {
         buildingPanel = GameObject.Find("BuildingPanel");
@@ -29,9 +31,26 @@ public class BuildingInfoManager : MonoBehaviour {
         PeoplePlusButton = GameObject.Find("PeoplePlusButton").GetComponent<Button>();
         resourceDetailPanel = GameObject.Find("ResourceDetailPanel");
 
+        PeopleMinusButton.onClick.AddListener(MinusButtonClicked);
+        PeoplePlusButton.onClick.AddListener(PlusButtonClicked);
+
+
 
         DisableBuildingPanel();
 
+    }
+
+    void MinusButtonClicked()
+    {
+        Debug.Log("Clicked minus!");
+        building.workers = Mathf.Max(0, building.workers - 1);
+        ShowBuildingInfo(building);
+    }
+
+    void PlusButtonClicked()
+    {
+        building.workers = Mathf.Min(building.buildingData.maxWorkerSize, building.workers + 1);
+        ShowBuildingInfo(building);
     }
 	
 	// Update is called once per frame
@@ -74,15 +93,19 @@ public class BuildingInfoManager : MonoBehaviour {
 
     public void ShowBuildingInfo(Building building)
     {
+        DisableBuildingPanel();
+        this.building = building;
         buildingPanel.SetActive(true);
+        buildingImage.sprite = building.buildingData.icon;
         buildingName.text = building.buildingData.name;
-        PeopleUsage.text = "(5/18)";
+        PeopleUsage.text = string.Format("{0} / {1}", building.workers, building.buildingData.maxWorkerSize);
         foreach(var delta in building.buildingData.resourceDeltas)
         {
-            if (delta.oneTimeChange && delta.resource != Resource.People)
+            if ((delta.oneTimeChange && delta.resource != Resource.People))
                 continue;
             var obj = GameObject.Instantiate(resourceDeltaListItem, resourceDetailPanel.transform);
-            string intervalDataStr = string.Format("{0}{1}", (delta.amount <= 0 ? "" : "+"), delta.amount);
+            int deltaChange = delta.oneTimeChange || delta.amount < 0 ? delta.amount: building.workers * delta.amount;
+            string intervalDataStr = string.Format("{0}{1}", (deltaChange <= 0 ? "" : "+"), deltaChange);
             obj.GetComponentInChildren<Text>().text = intervalDataStr;
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;
         }

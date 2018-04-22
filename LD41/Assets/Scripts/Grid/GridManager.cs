@@ -89,7 +89,7 @@ public class GridManager : MonoBehaviour {
 
     public void UpdateGridFromNode(Node startNode, Vector2 size)
     {
-        Debug.Log("Called");
+        //Debug.Log("Called");
         int x = startNode.xPos;
         int y = startNode.yPos;
 

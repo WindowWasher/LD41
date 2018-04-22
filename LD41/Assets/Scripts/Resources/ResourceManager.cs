@@ -43,11 +43,11 @@ public class ResourceManager:MonoBehaviour  {
             OnResourceChange(resources[resource]);
     }
 
-    public void UpdateResources(List<ResourceDelta> resourceDeltas)
+    public void UpdateResources(List<ResourceDelta> resourceDeltas, int numWorkers)
     {
         foreach(ResourceDelta delta in resourceDeltas.Where(d=>!d.oneTimeChange))
         {
-            this.Add(delta.resource, delta.amount);
+            this.Add(delta.resource, (delta.amount < 0 ? delta.amount : delta.amount * numWorkers));
         }
     }
 
@@ -89,15 +89,36 @@ public class ResourceManager:MonoBehaviour  {
         int delta = 0;
         foreach(var gameObj in GameObject.FindGameObjectsWithTag("Building"))
         {
-            foreach(var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)
+            Building building = gameObj.GetComponent<Building>();
+            foreach (var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)
             {
                 if(rDelta.resource == resource && !rDelta.oneTimeChange)
                 {
-                    delta += rDelta.amount;
+                    delta += (rDelta.amount < 0 ? rDelta.amount : rDelta.amount * building.workers);
                 }
             }
         }
 
         return delta;
+    }
+
+    public int GetAvailableWorkers()
+    {
+        int availableWorkers = resources[Resource.People].count;
+        foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            Building building = gameObj.GetComponent<Building>();
+            //foreach (var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)
+            //{
+            //    if (rDelta.resource == Resource.People)
+            //    {
+            //        availableWorkers += rDelta.amount;
+            //    }
+            //}
+            availableWorkers -= building.workers;
+
+        }
+
+        return availableWorkers;
     }
 }
