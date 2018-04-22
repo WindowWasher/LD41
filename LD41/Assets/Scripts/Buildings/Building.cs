@@ -16,11 +16,14 @@ public class Building : MonoBehaviour {
     private bool buildingActive = false;
     private Node buildingStartNode;
 
+    public int workers;
+
 	// Use this for initialization
 	void Start () {
         health = GetComponent<Health>();
         health.OnDeathChange += Die;
         attackManager = new AttackManager(this.gameObject, attackData);
+        workers = 0;
     }
 
     private void OnDisable()
@@ -51,7 +54,12 @@ public class Building : MonoBehaviour {
         buildingActive = true;
         this.gameObject.tag = "Building";
 
-        //BuildingInfoManager.Instance().ShowBuildingInfo(this);
+        int peopleAvailable = ResourceManager.Instance().GetAvailableWorkers();
+        // Auto Add workers if available
+        workers = Mathf.Min(peopleAvailable, buildingData.maxWorkerSize);
+        ResourceManager.Instance().Add(Resource.People, -workers);
+        
+        BuildingInfoManager.Instance().ShowBuildingInfo(this);
     }
 
     // Update is called once per frame
@@ -62,7 +70,7 @@ public class Building : MonoBehaviour {
 
         if(resourceTimer.Expired())
         {
-            ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas);
+            ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas, workers);
             resourceTimer.Start(resourceInterval);
         }
         

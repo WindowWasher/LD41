@@ -18,4 +18,5 @@ public class BuildingData : ScriptableObject {
     public Vector2 gridSize;
     public Sprite icon;
     public List<ResourceDelta> resourceDeltas;
+    public int maxWorkerSize;
 }
