@@ -8,6 +8,10 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: unnamed
+    2100002: Grass
+    2100004: Snow
+    2100006: Rock
+    2100008: Dirt
     2300000: //RootNode
     3300000: //RootNode
     4300000: Plane
