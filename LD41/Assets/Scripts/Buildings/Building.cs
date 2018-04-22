@@ -51,7 +51,7 @@ public class Building : MonoBehaviour {
         buildingActive = true;
         this.gameObject.tag = "Building";
 
-        BuildingInfoManager.Instance().ShowBuildingInfo(this);
+        //BuildingInfoManager.Instance().ShowBuildingInfo(this);
     }
 
     // Update is called once per frame
