@@ -137,12 +137,18 @@ public class GridManager : MonoBehaviour {
 
     public Vector3 getMouseToNodeWorldPos()
     {
-        return mouseOverNode.worldPosition;
+        if (mouseOverNode != null)
+            return mouseOverNode.worldPosition;
+        else
+            return NodeFromWorldPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).worldPosition;
     }
 
     public Vector3 getMouseToNodeBottomLeftWorld()
     {
-        return mouseOverNode.worldBottomLeft;
+        if (mouseOverNode != null)
+            return mouseOverNode.worldBottomLeft;
+        else
+            return NodeFromWorldPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).worldBottomLeft;
     }
 
     public bool CanPlaceBuilding(Vector2 size)

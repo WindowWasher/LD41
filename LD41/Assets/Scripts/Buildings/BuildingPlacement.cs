@@ -38,7 +38,7 @@ public class BuildingPlacement : MonoBehaviour {
     void Update() {
 
         // Click to place building
-        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas))
+        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas) && !EventSystem.current.IsPointerOverGameObject())
         {
             // Make any updates before disabling everything
             gridRef.UpdateGridCurrentMousePosition(buildingData.gridSize);
