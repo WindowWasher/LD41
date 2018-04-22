@@ -8,6 +8,9 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: Material
+    2100002: Dirt
+    2100004: Corn
+    2100006: Stalk
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
