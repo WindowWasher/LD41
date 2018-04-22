@@ -62,7 +62,7 @@ public class Building : MonoBehaviour {
         workers = Mathf.Min(peopleAvailable, buildingData.maxWorkerSize);
         ResourceManager.Instance().Add(Resource.People, -workers);
         
-        BuildingInfoManager.Instance().ShowBuildingInfo(this);
+        //BuildingInfoManager.Instance().ShowBuildingInfo(this);
     }
 
     // Update is called once per frame
