@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9ad85f4e2b96439eca0a7fe07e231, type: 3}
   m_Name: TowerAttack
   m_EditorClassIdentifier: 
-  attackRange: 50
+  attackRange: 20
   attackDamage: 20
   attackCooldown: 1
+  rangedAttackPrefab: {fileID: 1468206951921538, guid: e8cedca8b670c92469f757ca493cb4f5,
+    type: 2}

@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour {
             GameObject newEnemyPrefab;
             if (Random.Range(0, 2) == 1)
             {
-                newEnemyPrefab = enemyPrefabs[1];
+                newEnemyPrefab = enemyPrefabs[0];
             }
             else
             {

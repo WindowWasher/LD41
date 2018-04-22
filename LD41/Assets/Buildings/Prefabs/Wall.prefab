@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 114713316096227288}
   - component: {fileID: 65152476579044204}
   - component: {fileID: 114681127629271394}
+  - component: {fileID: 208874374849821902}
   m_Layer: 8
   m_Name: Wall
   m_TagString: Building
@@ -299,6 +300,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+--- !u!208 &208874374849821902
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936433852553676}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.55, y: 0.73800004, z: 0.55}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.56200004, y: 0.74300003, z: 0.55700004}
+  m_TimeToStationary: 0.5
 --- !u!222 &222452748186130126
 CanvasRenderer:
   m_ObjectHideFlags: 1

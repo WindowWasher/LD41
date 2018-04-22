@@ -14,3 +14,4 @@ MonoBehaviour:
   attackRange: 20
   attackDamage: 10
   attackCooldown: 2
+  rangedAttackPrefab: {fileID: 0}
