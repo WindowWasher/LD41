@@ -97,7 +97,7 @@ public class BuildingInfoManager : MonoBehaviour {
         this.building = building;
         buildingPanel.SetActive(true);
         buildingImage.sprite = building.buildingData.icon;
-        buildingName.text = building.buildingData.name;
+        buildingName.text = building.buildingData.buildingName;
         PeopleUsage.text = string.Format("{0} / {1}", building.workers, building.buildingData.maxWorkerSize);
         foreach(var delta in building.buildingData.resourceDeltas)
         {
@@ -111,4 +111,5 @@ public class BuildingInfoManager : MonoBehaviour {
         }
         
     }
+
 }
