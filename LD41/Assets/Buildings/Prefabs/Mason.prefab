@@ -59,8 +59,8 @@ GameObject:
   - component: {fileID: 23811570798529720}
   - component: {fileID: 95534384342947594}
   - component: {fileID: 114324281824371024}
-  - component: {fileID: 61977536813317418}
   - component: {fileID: 114194635459227200}
+  - component: {fileID: 65859662526775346}
   m_Layer: 8
   m_Name: Mason
   m_TagString: Untagged
@@ -92,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796326429812560}
   m_LocalRotation: {x: -0.0000009536743, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.2900314, y: 0.28479815, z: -6.9622593}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children:
   - {fileID: 224041372920856770}
@@ -140,31 +140,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796326429812560}
   m_Mesh: {fileID: 4300000, guid: d3e075996daee0841b48ba38f2b409ba, type: 3}
---- !u!61 &61977536813317418
-BoxCollider2D:
+--- !u!65 &65859662526775346
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796326429812560}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1, y: 0.998572}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
+  m_Size: {x: 2, y: 2, z: 2.000001}
+  m_Center: {x: 1, y: 0.998572, z: 0.9921485}
 --- !u!95 &95534384342947594
 Animator:
   serializedVersion: 3

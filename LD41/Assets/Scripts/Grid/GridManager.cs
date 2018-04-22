@@ -129,6 +129,8 @@ public class GridManager : MonoBehaviour {
             {
                 Color color = new Color(1, 1, 1, 0.5f);
                 Gizmos.color = color;
+                if (n.occupied)
+                    Gizmos.color = Color.red;
                 Gizmos.DrawCube(n.worldPosition, new Vector3(1,0,1) * (nodeDiameter - .1f)); 
             }
         }
