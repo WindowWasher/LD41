@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: CabinetShop
   m_EditorClassIdentifier: 
-  building: {fileID: 1161215504268186, guid: fbbf736ae500ad5489304075e8f8bc9c, type: 2}
-  buildingName: Cabinet Shop
+  building: {fileID: 1589043521960002, guid: fbbf736ae500ad5489304075e8f8bc9c, type: 2}
+  buildingName: Barrel Maker
   gridSize: {x: 2, y: 2}
   icon: {fileID: 21300000, guid: 48f40f415b358824fa23d3eb92ac0792, type: 3}
   resourceDeltas: []

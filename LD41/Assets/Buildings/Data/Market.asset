@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: Market
   m_EditorClassIdentifier: 
-  building: {fileID: 1055350880536308, guid: 443d63fed4801e148849e02d60c85de3, type: 2}
+  building: {fileID: 1242808368084382, guid: 443d63fed4801e148849e02d60c85de3, type: 2}
   buildingName: Market
-  gridSize: {x: 2, y: 2}
+  gridSize: {x: 4, y: 4}
   icon: {fileID: 21300000, guid: 4f766e9249259eb478fa7fdad76009dc, type: 3}
   resourceDeltas: []
   maxWorkerSize: 0

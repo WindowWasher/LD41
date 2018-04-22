@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: Mason
   m_EditorClassIdentifier: 
-  building: {fileID: 1796326429812560, guid: 72db8aa34ea00014e815820c3e620719, type: 2}
+  building: {fileID: 1580572613741642, guid: 72db8aa34ea00014e815820c3e620719, type: 2}
   buildingName: Mason
   gridSize: {x: 2, y: 2}
   icon: {fileID: 21300000, guid: 325423fa1435267489ae0126985b83a9, type: 3}

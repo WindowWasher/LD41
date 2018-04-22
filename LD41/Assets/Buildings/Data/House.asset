@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
-  building: {fileID: 1101558959010768, guid: 29374cfae5279cb438a40374c7b2183b, type: 2}
+  building: {fileID: 1121966586705532, guid: 29374cfae5279cb438a40374c7b2183b, type: 2}
   buildingName: House
-  gridSize: {x: 2, y: 3}
+  gridSize: {x: 2, y: 2}
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   resourceDeltas:
   - resource: 4
