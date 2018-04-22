@@ -14,10 +14,12 @@ public class CameraController : MonoBehaviour {
     public float edgeDistanceForMouseScroll = 5f;
 
     private Camera mainCamera;
+    private float originalCameraHeight;
 
     private void Start()
     {
-        mainCamera = gameObject.GetComponent<Camera>(); 
+        mainCamera = gameObject.GetComponent<Camera>();
+        originalCameraHeight = mainCamera.transform.position.y;
     }
 
     // Update is called once per frame
@@ -25,16 +27,13 @@ public class CameraController : MonoBehaviour {
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-           // if (mainCamera.fieldOfView > minZoom)
-             //   mainCamera.fieldOfView -= zoomSpeed;
-            mainCamera.transform.Translate(0, 0, zoomSpeed*Time.deltaTime);
+            if (mainCamera.transform.position.y > originalCameraHeight - minZoom)
+                mainCamera.transform.Translate(0, 0, zoomSpeed*Time.deltaTime);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-           // if (mainCamera.fieldOfView < maxZoom)
-            //    mainCamera.fieldOfView += zoomSpeed;
-
-            mainCamera.transform.Translate(0, 0, -zoomSpeed*Time.deltaTime);
+            if (mainCamera.transform.position.y < originalCameraHeight + maxZoom)
+                mainCamera.transform.Translate(0, 0, -zoomSpeed*Time.deltaTime);
         }
 
         Vector3 localForward = mainCamera.transform.forward;
