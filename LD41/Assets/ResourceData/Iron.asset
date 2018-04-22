@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: Iron
   resourceEnum: 5
-  initialCount: 100
-  count: 100
+  initialCount: -5000
+  count: 10000
   hudImage: {fileID: 21300000, guid: 4936e3cb17cd914499b907458473c74c, type: 3}

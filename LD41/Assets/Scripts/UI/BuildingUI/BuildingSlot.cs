@@ -54,6 +54,10 @@ public class BuildingSlot : MonoBehaviour {
         buildButton.gameObject.AddComponent<EventTrigger>();
         buildButton.gameObject.GetComponent<EventTrigger>().triggers.Add(eventtype);
         buildButton.gameObject.GetComponent<EventTrigger>().triggers.Add(eventtype2);
+
+        inactiveImage.gameObject.AddComponent<EventTrigger>();
+        inactiveImage.gameObject.GetComponent<EventTrigger>().triggers.Add(eventtype);
+        inactiveImage.gameObject.GetComponent<EventTrigger>().triggers.Add(eventtype2);
     }
 
     private void Start()

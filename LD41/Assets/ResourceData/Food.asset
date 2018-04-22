@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: Food
   resourceEnum: 1
-  initialCount: 100
-  count: 100
+  initialCount: 10000
+  count: 560
   hudImage: {fileID: 21300000, guid: de203dee2f67f3446a6bafe8b1ef81e9, type: 3}

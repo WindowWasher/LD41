@@ -21,15 +21,15 @@ public class BuildingInfoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        buildingPanel = GameObject.Find("BuildingPanel");
+        buildingPanel = GameObject.Find("BuildingInfoPanel");
 
-        buildingImage = GameObject.Find("BuildingImage").GetComponent<Image>();
-        buildingName = GameObject.Find("BuildingName").GetComponent<Text>();
+        buildingImage = GameObject.Find("BuildingInfoImage").GetComponent<Image>();
+        buildingName = GameObject.Find("BuildingInfoName").GetComponent<Text>();
         //PeopleImage = GameObject.Find("PeopleImage").GetComponent<Image>();
-        PeopleUsage = GameObject.Find("PeopleUsage").GetComponent<Text>();
-        PeopleMinusButton = GameObject.Find("PeopleMinusButton").GetComponent<Button>();
-        PeoplePlusButton = GameObject.Find("PeoplePlusButton").GetComponent<Button>();
-        resourceDetailPanel = GameObject.Find("ResourceDetailPanel");
+        PeopleUsage = GameObject.Find("PeopleInfoUsage").GetComponent<Text>();
+        PeopleMinusButton = GameObject.Find("PeopleInfoMinusButton").GetComponent<Button>();
+        PeoplePlusButton = GameObject.Find("PeopleInfoPlusButton").GetComponent<Button>();
+        resourceDetailPanel = GameObject.Find("ResourceInfoDetailPanel");
 
         PeopleMinusButton.onClick.AddListener(MinusButtonClicked);
         PeoplePlusButton.onClick.AddListener(PlusButtonClicked);
@@ -63,21 +63,27 @@ public class BuildingInfoManager : MonoBehaviour {
                 DisableBuildingPanel();
             }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+            if(!buildingPlacement.isBuilding)
             {
-                Building building = hit.transform.gameObject.GetComponent<Building>();
-                if(building)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    ShowBuildingInfo(building);
+                    Building building = hit.transform.gameObject.GetComponent<Building>();
+                    if (building)
+                    {
+                        ShowBuildingInfo(building);
+                    }
                 }
             }
+
+            
         }
 		
 	}
 
-    void DisableBuildingPanel()
+    public void DisableBuildingPanel()
     {
         foreach (Transform child in resourceDetailPanel.transform)
         {

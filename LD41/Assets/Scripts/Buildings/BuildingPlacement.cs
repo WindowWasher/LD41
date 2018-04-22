@@ -45,6 +45,8 @@ public class BuildingPlacement : MonoBehaviour {
         {
             PlaceBeginningBuilding(buildingObj);
         }
+        BuildingInfoManager.Instance().DisableBuildingPanel();
+        gridRef.UpdateGrid();
         startBuildingsCreated = true;
     }
 

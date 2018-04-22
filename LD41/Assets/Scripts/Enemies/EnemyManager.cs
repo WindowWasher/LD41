@@ -16,6 +16,8 @@ public class EnemyManager : MonoBehaviour {
 
     public List<GameObject> enemyPrefabs;
 
+    int waveNumber = 1;
+
 	// Use this for initialization
 	void Start () {
         //enemyPrefabs = new List<GameObject>();
@@ -37,18 +39,39 @@ public class EnemyManager : MonoBehaviour {
 
     void SpawnWave()
     {
-        List<GameObject> currentSpawnPoints = new List<GameObject>();
-        foreach(var spawnP in spawnPoints)
+        //List<GameObject> currentSpawnPoints = new List<GameObject>();
+        //foreach(var spawnP in spawnPoints)
+        //{
+        //    currentSpawnPoints.Add(spawnP);
+        //}
+
+        List<int> rangeValues = new List<int>();
+        for(int i = 0; i < spawnPoints.Length; ++i)
         {
-            currentSpawnPoints.Add(spawnP);
+            rangeValues.Add(i);
         }
 
-        int numberOfEnemiesToSpawn = 20;
-        int enemiesPerWave = numberOfEnemiesToSpawn / spawnPoints.Length;
-        foreach(var spawnP in currentSpawnPoints)
+        int numberOfSpawnLocations = 3;
+        List<int> randomIndexes = new List<int>();
+        for(int i = 0; i < numberOfSpawnLocations; i++)
         {
+            int index = Random.Range(0, rangeValues.Count);
+            randomIndexes.Add(rangeValues[index]);
+            rangeValues.RemoveAt(index);
+        }
+
+
+
+        int numberOfEnemiesToSpawn = 5 * waveNumber;
+        int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
+        //foreach(var spawnP in currentSpawnPoints)
+        for(int i = 0; i < randomIndexes.Count; ++i)
+        {
+            var spawnP = spawnPoints[randomIndexes[i]];
             SpawnEnemiesAtPosition(spawnP.transform.position, enemiesPerWave);
         }
+
+        waveNumber += 1;
     }
 
     void SpawnEnemiesAtPosition(Vector3 spawnPoint, int numberOfEnemiesToSpawn)
