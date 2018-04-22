@@ -80,7 +80,7 @@ public class Building : MonoBehaviour {
         if(attackManager != null && attackManager.AttackReady())
         {
             GameObject target = Target.GetClosestTarget(this.transform.position, "Enemy");
-            if(target != null)
+            if(target != null && attackManager.InRange(target))
             {
                 attackManager.Attack(target);
             }
@@ -94,3 +94,4 @@ public class Building : MonoBehaviour {
     }
 
 }
+

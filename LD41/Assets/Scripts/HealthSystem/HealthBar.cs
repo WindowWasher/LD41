@@ -25,4 +25,13 @@ public class HealthBar : MonoBehaviour {
         Debug.Log("Update health");
         healthFg.fillAmount = (float)currentHealth / health.maxHealth;
     }
+
+    private void Update()
+    {
+        if(this.gameObject.GetComponent<Building>() == null)
+        {
+            this.transform.LookAt(Camera.main.transform);
+        }
+        
+    }
 }

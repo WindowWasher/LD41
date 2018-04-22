@@ -28,13 +28,64 @@ public class AttackManager {
     public void Attack(GameObject target)
     {
         Debug.Log("Attacked " + attackerObj.name + "=>" + target.name);
-        target.GetComponent<Health>().Damage(attackData.attackDamage);
+        
         attackCooldownTimer.Start(attackData.attackCooldown);
+
+        if(attackData.rangedAttackPrefab != null)
+        {
+            var rangedAttackObj = GameObject.Instantiate(attackData.rangedAttackPrefab);
+            rangedAttackObj.transform.position = attackerObj.transform.position;
+            rangedAttackObj.transform.LookAt(target.transform.position);
+            rangedAttackObj.AddComponent<RangedAttack>();
+            rangedAttackObj.GetComponent<RangedAttack>().init(target, attackData);
+        }
+        else
+        {
+            target.GetComponent<Health>().Damage(attackData.attackDamage);
+        }
+        
+
+        
+
+        
     }
 
     public float GetRange()
     {
         return attackData.attackRange;
+    }
+
+}
+
+public class RangedAttack : MonoBehaviour
+{
+    float speed = 40f;
+    GameObject target;
+    AttackData attackData;
+    public void init(GameObject target, AttackData attackData)
+    {
+        this.target = target;
+        this.attackData = attackData;
+    }
+
+    public void Update()
+    {
+        if(target == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        float step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == target)
+        {
+            target.GetComponent<Health>().Damage(attackData.attackDamage);
+        }
     }
 
 }

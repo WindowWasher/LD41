@@ -8,4 +8,5 @@ public class AttackData : ScriptableObject
     public float attackRange;
     public int attackDamage;
     public float attackCooldown;
+    public GameObject rangedAttackPrefab;
 }

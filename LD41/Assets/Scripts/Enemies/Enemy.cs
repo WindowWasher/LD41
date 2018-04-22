@@ -7,6 +7,8 @@ using System.Linq;
 public class Enemy : MonoBehaviour {
 
     NavMeshAgent agent;
+    Timer NavMeshTimer = new Timer();
+
     public MovementData movementData;
     public AttackData attackData;
     public GameObject target = null;
@@ -85,13 +87,36 @@ public class Enemy : MonoBehaviour {
 
     void setTarget(GameObject target)
     {
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit hit = new NavMeshHit();
+            if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
+            {
+                this.transform.position = hit.position;
+            }
+            else
+            {
+                Die();
+                return;
+            }
+        }
+
+        //if (agent.enabled == false)
+        //    return;
         //target = Target.GetClosestTarget(this.transform.position, "Building");
         this.target = target;
         if (target != null)
         {
             //agent.SetDestination(target.transform.position);
-            agent.isStopped = false;
             agent.SetDestination(GetRandomTargetPosition(target));
+            if (!attackManager.InRange(target))
+            {
+                agent.isStopped = false;
+            }
+            else
+            {
+                agent.isStopped = true;
+            }
             target.GetComponent<Health>().OnDeathChange += targetDestroyed;
         }
         else
@@ -128,6 +153,20 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit hit = new NavMeshHit();
+            if(NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
+            {
+                this.transform.position = hit.position;
+            }
+            else
+            {
+                Die();
+                return;
+            }
+        }
+
 		if(target == null)
         {
             resetTarget();
@@ -160,12 +199,12 @@ public class Enemy : MonoBehaviour {
         
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Building building = collision.gameObject.GetComponent<Building>();
-        if(building != null)
+        Building building = other.gameObject.GetComponent<Building>();
+        if (building != null)
         {
-            setTarget(collision.gameObject);
+            setTarget(other.gameObject);
         }
     }
 
@@ -179,8 +218,8 @@ public class Enemy : MonoBehaviour {
 
         //List<GameObject> buildObjsNotFullyTargted = new List<GameObject>();
 
-        float? closestUnTargetedDistance = null;
-        GameObject closestUnTargtedBuildingObj = null;
+        float? priorityDistance = null;
+        GameObject priorityObj = null;
 
         float? closestTargedDistance = null;
         GameObject closestTargetdBulidngObj = null;
@@ -189,12 +228,12 @@ public class Enemy : MonoBehaviour {
         {
             int enemyTargetCount = allEnemies.Where(e => e.target == bObj).Count();
             float distance = Vector3.Distance(this.transform.position, bObj.transform.position);
-            if (enemyTargetCount < numTargetsPerBuilding)
+            if (enemyTargetCount < numTargetsPerBuilding && !bObj.GetComponent<Building>().IsWall())
             {
-                if(closestUnTargetedDistance == null || distance < closestUnTargetedDistance)
+                if(priorityDistance == null || distance < priorityDistance)
                 {
-                    closestUnTargetedDistance = distance;
-                    closestUnTargtedBuildingObj = bObj;
+                    priorityDistance = distance;
+                    priorityObj = bObj;
                 }
             }
             else
@@ -207,10 +246,10 @@ public class Enemy : MonoBehaviour {
             }
         }
 
-        if(closestUnTargtedBuildingObj != null)
+        if(priorityObj != null)
         {
             //Debug.Log("Found untraged building " + closestUnTargtedBuildingObj.name);
-            return closestUnTargtedBuildingObj;
+            return priorityObj;
         }
         else
         {
