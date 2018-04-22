@@ -13,7 +13,7 @@ public class Building : MonoBehaviour {
     public AttackData attackData;
     AttackManager attackManager = null;
 
-    private bool buildingActive = false;
+    public bool buildingActive = false;
     private Node buildingStartNode;
 
     public delegate void OnBuildingChange(Building building);

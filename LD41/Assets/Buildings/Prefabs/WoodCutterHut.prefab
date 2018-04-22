@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 65744596762300226}
   m_Layer: 8
   m_Name: WoodCutterHut
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 61c260a7769210546b318caa48e2c3f7, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114790086411571936
 MonoBehaviour:
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 75
 --- !u!114 &114889303010780340
 MonoBehaviour:
   m_ObjectHideFlags: 1

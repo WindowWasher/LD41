@@ -27,7 +27,7 @@ public class Target {
     public static List<GameObject> GetBuildingsInRange(Vector3 position, float range)
     {
         List<GameObject> buildingObjs = new List<GameObject>();
-        foreach (GameObject buildingObj in GameObject.FindGameObjectsWithTag("buildings"))
+        foreach (GameObject buildingObj in GetActiveBuildingObjs())
         {
             float currentDistance = Vector3.Distance(position, buildingObj.transform.position);
             if (currentDistance <= range)
@@ -37,6 +37,21 @@ public class Target {
         }
 
         return buildingObjs;
+    }
+
+    public static List<GameObject> GetActiveBuildingObjs()
+    {
+        List < GameObject > buildingObjs = new List<GameObject>();
+        foreach(var bObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            if(bObj.GetComponent<Building>().buildingActive)
+            {
+                buildingObjs.Add(bObj);
+            }
+        }
+
+        return buildingObjs;
+        
     }
     //GameObject[] GetAllBuildingGameObjs()
     //{

@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114911835769190480}
   m_Layer: 8
   m_Name: Baker
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 200
 --- !u!114 &114911835769190480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: f4fc81c302ac9bc4d9fef669398a0629, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!222 &222274982153406272
 CanvasRenderer:

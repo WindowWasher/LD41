@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9ad85f4e2b96439eca0a7fe07e231, type: 3}
   m_Name: BarbarianAttack
   m_EditorClassIdentifier: 
-  attackRange: 1
+  attackRange: 3
   attackDamage: 20
   attackCooldown: 1

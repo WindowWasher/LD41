@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 114681127629271394}
   m_Layer: 8
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 116b108d4243c6340a2c278f1eecf2f5, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114713316096227288
 MonoBehaviour:
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 50
 --- !u!222 &222452748186130126
 CanvasRenderer:
   m_ObjectHideFlags: 1

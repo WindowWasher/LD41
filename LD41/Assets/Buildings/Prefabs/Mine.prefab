@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114033029122997200}
   m_Layer: 8
   m_Name: Mine
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: aa9ce4cff31879c4cb0d67a1b6057767, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114126575278592916
 MonoBehaviour:
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 500
 --- !u!114 &114408252530993376
 MonoBehaviour:
   m_ObjectHideFlags: 1

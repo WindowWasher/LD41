@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114488102719058564}
   m_Layer: 8
   m_Name: Market
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: d6c8e18fcf1d2764cbd7fe21524adfe3, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114616465712804130
 MonoBehaviour:
@@ -255,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 300
 --- !u!114 &114652252987917900
 MonoBehaviour:
   m_ObjectHideFlags: 1

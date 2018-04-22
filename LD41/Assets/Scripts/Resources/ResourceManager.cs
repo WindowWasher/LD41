@@ -60,7 +60,7 @@ public class ResourceManager:MonoBehaviour  {
         Add(Resource.People, -killedAvailableWorkers);
         while (peopleToKill > 0)
         {
-            foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+            foreach (var gameObj in Target.GetActiveBuildingObjs())
             {
                 Building building = gameObj.GetComponent<Building>();
                 if (building.workers > 0)
@@ -83,7 +83,7 @@ public class ResourceManager:MonoBehaviour  {
         {
             updates[inventory.resourceEnum] = 0;
         }
-        foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        foreach (var gameObj in Target.GetActiveBuildingObjs())
         {
             Building building = gameObj.GetComponent<Building>();
             foreach (ResourceDelta delta in building.buildingData.resourceDeltas.Where(d => !d.oneTimeChange))
@@ -135,7 +135,7 @@ public class ResourceManager:MonoBehaviour  {
     public int GetIntervalDelta(Resource resource)
     {
         int delta = 0;
-        foreach(var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        foreach(var gameObj in Target.GetActiveBuildingObjs())
         {
             Building building = gameObj.GetComponent<Building>();
             foreach (var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)

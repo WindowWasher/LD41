@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour {
         BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
         buildingPlacement.OnBuildingCreationAction += newBuilding;
 
-        foreach(var buildingObj in GameObject.FindGameObjectsWithTag("Building"))
+        foreach(var buildingObj in Target.GetActiveBuildingObjs())
         {
             buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
         }
@@ -49,7 +49,8 @@ public class Enemy : MonoBehaviour {
         {
             Building currentBuilding = target.GetComponent<Building>();
             List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
-            int enemyTargetCount = allEnemies.Where(e => e.target == currentBuilding).Count();
+            int enemyTargetCount = allEnemies.Where(e => e.target == target).Count();
+            //Debug.Log("NewBuilding, but currentBuildingTargetCount " + enemyTargetCount.ToString());
             if (newBuilding.IsWall() || (!currentBuilding.IsWall() && enemyTargetCount <= numTargetsPerBuilding))
                 return;
         }
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour {
         {
             Building currentBuilding = target.GetComponent<Building>();
             List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
-            int enemyTargetCount = allEnemies.Where(e => e.target == currentBuilding).Count();
+            int enemyTargetCount = allEnemies.Where(e => e.target == target).Count();
 
             if (enemyTargetCount <= numTargetsPerBuilding)
             {
@@ -123,11 +124,6 @@ public class Enemy : MonoBehaviour {
         target = null;
     }
 
-    void Attack()
-    {
-        Destroy(target);
-    }
-
 
     // Update is called once per frame
     void Update () {
@@ -157,7 +153,7 @@ public class Enemy : MonoBehaviour {
         //int sightRange = 50;
         
         //List<GameObject> gameObjects = Target.GetBuildingsInRange(this.transform.position, sightRange);
-        GameObject[] buildingObjects = GameObject.FindGameObjectsWithTag("Building");
+        List<GameObject> buildingObjects = Target.GetActiveBuildingObjs();
         List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
 
         //List<GameObject> buildObjsNotFullyTargted = new List<GameObject>();

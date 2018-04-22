@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114294942613778784}
   m_Layer: 8
   m_Name: CabinetShop
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 6333d93e26f851648a5e6b6ad870e1d2, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114697371964702114
 MonoBehaviour:
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 200
 --- !u!114 &114858832336760952
 MonoBehaviour:
   m_ObjectHideFlags: 1

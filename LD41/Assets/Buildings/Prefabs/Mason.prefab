@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 65859662526775346}
   m_Layer: 8
   m_Name: Mason
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: e52ebf1b940fd0e44ad2021fdc2099ea, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
   workers: 0
 --- !u!114 &114324281824371024
 MonoBehaviour:
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 250
 --- !u!114 &114396516041844622
 MonoBehaviour:
   m_ObjectHideFlags: 1

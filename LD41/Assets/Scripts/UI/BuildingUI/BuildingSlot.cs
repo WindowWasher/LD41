@@ -88,7 +88,7 @@ public class BuildingSlot : MonoBehaviour {
 
     public void OnPointerEnter()
     {
-        Debug.Log("Enter!");
+        //Debug.Log("Enter!");
         hovering = true;
         toolTipTimer.Start(toolTipTimerWait);
         
@@ -97,7 +97,7 @@ public class BuildingSlot : MonoBehaviour {
 
     public void OnPointerExit()
     {
-        Debug.Log("Exit!");
+        //Debug.Log("Exit!");
         hovering = false;
         HideToolTipeInfo();
     }

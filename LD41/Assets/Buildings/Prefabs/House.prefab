@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114086643740933358}
   m_Layer: 8
   m_Name: House
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 50
 --- !u!114 &114556029055793640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 6680e1b929348a24ea480fc27714311a, type: 2}
   attackData: {fileID: 0}
+  buildingActive: 0
+  workers: 0
 --- !u!114 &114760213137935716
 MonoBehaviour:
   m_ObjectHideFlags: 1
