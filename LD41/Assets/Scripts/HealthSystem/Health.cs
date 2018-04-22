@@ -14,13 +14,10 @@ public class Health: MonoBehaviour {
     public event OnDeathChangeAction OnDeathChange;
 
     public int maxHealth;
-    Timer timer;
 
     public void Awake()
     {
-        timer = new Timer();
         currentHealth = maxHealth;
-        timer.Start(3);
     }
 
     /// <summary>
@@ -43,7 +40,5 @@ public class Health: MonoBehaviour {
         {
             OnDeathChange();
         }
-
-
     }
 }
