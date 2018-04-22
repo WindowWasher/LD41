@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
-  m_Name: Wall
+  m_Name: Farm
   m_EditorClassIdentifier: 
-  building: {fileID: 1936433852553676, guid: d082ff043449cb34d9b826850417a4a1, type: 2}
-  buildingName: Wall
-  gridSize: {x: 1, y: 1}
-  icon: {fileID: 21300000, guid: e5003befe3770ef4d91b927163871a99, type: 3}
+  building: {fileID: 1083021461631944, guid: c10dba9cdee5d074a81d0ae4a43ac846, type: 2}
+  buildingName: Farm
+  gridSize: {x: 2, y: 2}
+  icon: {fileID: 21300000, guid: ba8043065329e534687d69e5e4a6d322, type: 3}
   resourceDeltas:
-  - resource: 5
-    amount: -10
-    oneTimeChange: 1
-  maxWorkerSize: 3
+  - resource: 1
+    amount: 2
+    oneTimeChange: 0
+  maxWorkerSize: 5

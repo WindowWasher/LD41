@@ -9,20 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
-  m_Name: 1x1
+  m_Name: Mine
   m_EditorClassIdentifier: 
-  building: {fileID: 1443599949390830, guid: 8fde9e2ff50937d4887d4b085fcbecf7, type: 2}
-  buildingName: 1x1
-  gridSize: {x: 1, y: 1}
-  icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  building: {fileID: 1501166397864416, guid: 3779d8927079aee49aad4f7a52d82b05, type: 2}
+  buildingName: Mine
+  gridSize: {x: 6, y: 6}
+  icon: {fileID: 21300000, guid: d82a5d997bdb95e4297783b13ada6ebd, type: 3}
   resourceDeltas:
-  - resource: 4
-    amount: -10
-    oneTimeChange: 1
-  - resource: 4
-    amount: 10
-    oneTimeChange: 0
   - resource: 3
-    amount: -1
+    amount: 1
     oneTimeChange: 0
-  maxWorkerSize: 2
+  - resource: 5
+    amount: 1
+    oneTimeChange: 0
+  maxWorkerSize: 1
