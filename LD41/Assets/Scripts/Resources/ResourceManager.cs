@@ -57,9 +57,10 @@ public class ResourceManager:MonoBehaviour  {
         {
             if (delta.amount > 0)
             {
-                resources[delta.resource].count -= delta.amount;
-                if (OnResourceChange != null)
-                    OnResourceChange(resources[delta.resource]);
+                this.Add(delta.resource, -delta.amount);
+                //resources[delta.resource].count -= delta.amount;
+                //if (OnResourceChange != null)
+                //    OnResourceChange(resources[delta.resource]);
             }
         }
     }
@@ -81,5 +82,22 @@ public class ResourceManager:MonoBehaviour  {
         }
 
         return true;
+    }
+
+    public int GetIntervalDelta(Resource resource)
+    {
+        int delta = 0;
+        foreach(var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            foreach(var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)
+            {
+                if(rDelta.resource == resource && !rDelta.oneTimeChange)
+                {
+                    delta += rDelta.amount;
+                }
+            }
+        }
+
+        return delta;
     }
 }
