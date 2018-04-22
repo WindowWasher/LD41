@@ -29,8 +29,8 @@ public class CameraController : MonoBehaviour {
                 mainCamera.fieldOfView += zoomSpeed;
         }
 
-        Debug.Log(Input.mousePosition);
-        Debug.Log(Screen.width + " " + Screen.height);
+        //Debug.Log(Input.mousePosition);
+        //Debug.Log(Screen.width + " " + Screen.height);
 
         if (Input.mousePosition.x < edgeDistanceForMouseScroll || Input.GetKey(KeyCode.A))
             mainCamera.transform.Translate(-scrollSpeed*Time.deltaTime, 0, 0, Space.World);
