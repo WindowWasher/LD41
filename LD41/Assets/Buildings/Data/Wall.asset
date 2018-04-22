@@ -11,8 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
-  building: {fileID: 0}
+  building: {fileID: 1934012838737446, guid: d082ff043449cb34d9b826850417a4a1, type: 2}
+  buildingName: Wall
   gridSize: {x: 1, y: 1}
+  icon: {fileID: 0}
   resourceDeltas:
   - resource: 5
     amount: -10
