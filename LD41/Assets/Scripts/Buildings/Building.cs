@@ -32,7 +32,7 @@ public class Building : MonoBehaviour {
     { 
         Debug.Log(this.name + " died!");
         ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
-        GridManager.instance.SetOccupiedToFalse(buildingStartNode, buildingData.gridSize);
+        GridManager.instance.SetOccupiedToValue(buildingStartNode, buildingData.gridSize, false);
         Destroy(this.gameObject);
     }
 

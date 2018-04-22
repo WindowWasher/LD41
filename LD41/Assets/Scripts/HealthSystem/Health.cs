@@ -40,9 +40,5 @@ public class Health: MonoBehaviour {
         {
             OnDeathChange();
         }
-
-
     }
-
-
 }
