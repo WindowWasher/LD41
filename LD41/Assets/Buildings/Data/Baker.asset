@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: Baker
   m_EditorClassIdentifier: 
-  building: {fileID: 1574242272830706, guid: a2757408b75eb464c8cd1a23f18d0b9b, type: 2}
+  building: {fileID: 1536171727026664, guid: a2757408b75eb464c8cd1a23f18d0b9b, type: 2}
   buildingName: Baker
   gridSize: {x: 2, y: 2}
   icon: {fileID: 21300000, guid: 32dd7da58d397c548bd73706785ca742, type: 3}

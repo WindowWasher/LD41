@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 95372557504424740}
   - component: {fileID: 65810447642178026}
   - component: {fileID: 114439061607706142}
+  - component: {fileID: 114939583047596610}
   m_Layer: 8
   m_Name: Mine 1
   m_TagString: Building
@@ -130,3 +131,15 @@ MonoBehaviour:
   attackData: {fileID: 0}
   buildingActive: 0
   workers: 0
+--- !u!114 &114939583047596610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104300581860702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

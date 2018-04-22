@@ -17,9 +17,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: d82a5d997bdb95e4297783b13ada6ebd, type: 3}
   resourceDeltas:
   - resource: 3
-    amount: 1
+    amount: 15
     oneTimeChange: 0
   - resource: 5
-    amount: 1
+    amount: 15
     oneTimeChange: 0
   maxWorkerSize: 1
