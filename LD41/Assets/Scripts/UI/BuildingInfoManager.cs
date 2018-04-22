@@ -11,7 +11,7 @@ public class BuildingInfoManager : MonoBehaviour {
     GameObject buildingPanel;
     Image buildingImage;
     Text buildingName;
-    Image PeopleImage;
+    //Image PeopleImage;
     Text PeopleUsage;
     Button PeopleMinusButton;
     Button PeoplePlusButton;
@@ -25,7 +25,7 @@ public class BuildingInfoManager : MonoBehaviour {
 
         buildingImage = GameObject.Find("BuildingImage").GetComponent<Image>();
         buildingName = GameObject.Find("BuildingName").GetComponent<Text>();
-        PeopleImage = GameObject.Find("PeopleImage").GetComponent<Image>();
+        //PeopleImage = GameObject.Find("PeopleImage").GetComponent<Image>();
         PeopleUsage = GameObject.Find("PeopleUsage").GetComponent<Text>();
         PeopleMinusButton = GameObject.Find("PeopleMinusButton").GetComponent<Button>();
         PeoplePlusButton = GameObject.Find("PeoplePlusButton").GetComponent<Button>();

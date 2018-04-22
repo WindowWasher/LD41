@@ -36,10 +36,11 @@ public class EnemyManager : MonoBehaviour {
         int numberOfEnemiesToSpawn = 10;
         for(int i = 0; i < numberOfEnemiesToSpawn; ++i)
         {
+            GameObject newEnemyPrefab = enemyPrefabs[0];
             Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
-            Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, 10, enemySpawnPointV2.y) + center;
+            Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, this.transform.position.y, enemySpawnPointV2.y) + center;
 
-            GameObject.Instantiate(enemyPrefabs[0], enemySpawnPoint, Quaternion.identity);
+            GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
 
         }
         intervalTimer.Start(interval);

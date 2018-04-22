@@ -14,8 +14,10 @@ public class Enemy : MonoBehaviour {
     Health health;
     AttackManager attackManager;
 
-	// Use this for initialization
-	void Start () {
+    int numTargetsPerBuilding = 4;
+
+    // Use this for initialization
+    void Start () {
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -25,12 +27,59 @@ public class Enemy : MonoBehaviour {
         agent.speed = movementData.speed;
 
         attackManager = new AttackManager(this.gameObject, attackData);
+        BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+        buildingPlacement.OnBuildingCreationAction += newBuilding;
+
+        foreach(var buildingObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
+        }
     }
 
     void Die()
     {
         Debug.Log(this.name + " died!");
         Destroy(this.gameObject);
+    }
+
+    void newBuilding(Building newBuilding)
+    {
+        newBuilding.OnBuildingDeath += buildingDestroyed;
+        if(target != null)
+        {
+            Building currentBuilding = target.GetComponent<Building>();
+            List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
+            int enemyTargetCount = allEnemies.Where(e => e.target == currentBuilding).Count();
+            if (newBuilding.IsWall() || (!currentBuilding.IsWall() && enemyTargetCount <= numTargetsPerBuilding))
+                return;
+        }
+
+        resetTarget();
+    }
+
+    void buildingDestroyed(Building destroyedBuilding)
+    {
+        if (target != null)
+        {
+            Building currentBuilding = target.GetComponent<Building>();
+            List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
+            int enemyTargetCount = allEnemies.Where(e => e.target == currentBuilding).Count();
+
+            if (enemyTargetCount <= numTargetsPerBuilding)
+            {
+                if (destroyedBuilding.IsWall() || !currentBuilding.IsWall())
+                    return;
+            }
+
+
+        }
+
+        resetTarget();
+    }
+
+    void resetTarget()
+    {
+        setTarget(GetTarget());
     }
 
     void setTarget(GameObject target)
@@ -84,7 +133,7 @@ public class Enemy : MonoBehaviour {
     void Update () {
 		if(target == null)
         {
-            setTarget(GetTarget());
+            resetTarget();
         }
         if (target != null && attackManager.AttackReady() && attackManager.InRange(target))
         {
@@ -106,7 +155,7 @@ public class Enemy : MonoBehaviour {
     GameObject GetTarget()
     {
         //int sightRange = 50;
-        int numTargetsPerBuilding = 4;
+        
         //List<GameObject> gameObjects = Target.GetBuildingsInRange(this.transform.position, sightRange);
         GameObject[] buildingObjects = GameObject.FindGameObjectsWithTag("Building");
         List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();

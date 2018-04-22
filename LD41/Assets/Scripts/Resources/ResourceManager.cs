@@ -8,7 +8,7 @@ public enum Resource
 {
     People,
     Food,
-    Happiness,
+    Goods,
     Gold,
     Wood,
     Iron
@@ -19,6 +19,17 @@ public class ResourceManager:MonoBehaviour  {
     public delegate void OnResourceChangeAction(ResourceInventory resource);
     public event OnResourceChangeAction OnResourceChange;
 
+    public List<ResourceInventory> resourceList;
+    public Dictionary<Resource, ResourceInventory> resources =null;
+
+    public Timer peopleStarveTimer = new Timer();
+    private float starveLength;
+
+    public Timer resourceIntervalTimer = new Timer();
+    private float resourceTick = 1f;
+
+    public bool awakened = false;
+
     public static ResourceManager Instance()
     {
         return GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
@@ -27,14 +38,12 @@ public class ResourceManager:MonoBehaviour  {
     void Awake()
     {
         resources = new Dictionary<Resource, ResourceInventory>();
-        foreach(ResourceInventory inventory in resourceList)
+        foreach (ResourceInventory inventory in resourceList)
         {
             resources[inventory.resourceEnum] = inventory;
         }
     }
 
-    public List<ResourceInventory> resourceList;
-    public Dictionary<Resource, ResourceInventory> resources;
 
     public void Add(Resource resource, int addition)
     {
@@ -43,11 +52,50 @@ public class ResourceManager:MonoBehaviour  {
             OnResourceChange(resources[resource]);
     }
 
-    public void UpdateResources(List<ResourceDelta> resourceDeltas, int numWorkers)
+    public void KillPeople(int peopleToKill)
     {
-        foreach(ResourceDelta delta in resourceDeltas.Where(d=>!d.oneTimeChange))
+        int availableWorkers = GetAvailableWorkers();
+        int killedAvailableWorkers = Mathf.Min(availableWorkers, peopleToKill);
+        peopleToKill -= killedAvailableWorkers;
+        Add(Resource.People, -killedAvailableWorkers);
+        while (peopleToKill > 0)
         {
-            this.Add(delta.resource, (delta.amount < 0 ? delta.amount : delta.amount * numWorkers));
+            foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+            {
+                Building building = gameObj.GetComponent<Building>();
+                if (building.workers > 0)
+                {
+                    building.workers -= 1;
+                    peopleToKill -= 1;
+                    Add(Resource.People, -1);
+                    if (peopleToKill <= 0)
+                        break;
+                }
+
+            }
+        }
+    }
+
+    public void UpdateResources()
+    {
+        Dictionary<Resource, int> updates = new Dictionary<Resource, int>();
+        foreach (ResourceInventory inventory in resourceList)
+        {
+            updates[inventory.resourceEnum] = 0;
+        }
+        foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            Building building = gameObj.GetComponent<Building>();
+            foreach (ResourceDelta delta in building.buildingData.resourceDeltas.Where(d => !d.oneTimeChange))
+            {
+                updates[delta.resource] += (delta.amount < 0 ? delta.amount : delta.amount * building.workers);
+                
+            }
+        }
+
+        foreach(var keyPair in updates)
+        {
+            this.Add(keyPair.Key, keyPair.Value);
         }
     }
 
@@ -102,9 +150,9 @@ public class ResourceManager:MonoBehaviour  {
         return delta;
     }
 
-    public int GetAvailableWorkers()
+    public int GetTotalWorkers()
     {
-        int availableWorkers = resources[Resource.People].count;
+        int totalWorkers = GetAvailableWorkers();
         foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
         {
             Building building = gameObj.GetComponent<Building>();
@@ -115,10 +163,38 @@ public class ResourceManager:MonoBehaviour  {
             //        availableWorkers += rDelta.amount;
             //    }
             //}
-            availableWorkers -= building.workers;
+            totalWorkers += building.workers;
 
         }
+        return totalWorkers;
+    }
 
-        return availableWorkers;
+    public int GetAvailableWorkers()
+    {
+        return resources[Resource.People].count;
+        //int availableWorkers = resources[Resource.People].count;
+
+
+        //return availableWorkers;
+    }
+
+    private void Update()
+    {
+        if(resources[Resource.Food].count < 0 && peopleStarveTimer.Expired())
+        {
+            KillPeople(1);
+            starveLength -= 1;
+            peopleStarveTimer.Start(starveLength);
+        }
+        else
+        {
+            starveLength = 30;
+        }
+
+        if(resourceIntervalTimer.Expired())
+        {
+            UpdateResources();
+            resourceIntervalTimer.Start(resourceTick);
+        }
     }
 }

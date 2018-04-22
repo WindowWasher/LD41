@@ -16,6 +16,9 @@ public class BuildingPlacement : MonoBehaviour {
 
     public bool isBuilding = false;
 
+    public delegate void OnBuildingCreation(Building building);
+    public event OnBuildingCreation OnBuildingCreationAction;
+
     private GameObject buildingRef;
 	// Use this for initialization
 	void Start () {
@@ -44,6 +47,11 @@ public class BuildingPlacement : MonoBehaviour {
             gridRef.UpdateGridCurrentMousePosition(buildingData.gridSize);
             buildingRef.GetComponent<Building>().BuildingPlaced(gridRef.GetNodeUnderMouse());
 
+            if (OnBuildingCreationAction != null)
+            {
+                OnBuildingCreationAction(buildingRef.GetComponent<Building>());
+            }
+
             // Disable everything and set buildingRef to null
             placementCanvas.enabled = false;
             placementImage.enabled = false;
@@ -53,6 +61,8 @@ public class BuildingPlacement : MonoBehaviour {
                 isBuilding = false;
             else
                 BeginPlacingBuilding();
+
+            
         }
 
         // Right click to clear building selection

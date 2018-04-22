@@ -27,8 +27,17 @@ public class UIManager : MonoBehaviour
         foreach (ResourceInventory resource in ResourceManager.Instance().resources.Values)
         {
             int intervalData = ResourceManager.Instance().GetIntervalDelta(resource.resourceEnum);
-            string intervalDataStr = string.Format(" ({0}{1})", (intervalData <= 0 ? "" : "+"), intervalData);
-            panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + intervalDataStr;
+            
+            if (resource.resourceEnum == Resource.People)
+            {
+                panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + "/" + ResourceManager.Instance().GetTotalWorkers().ToString();
+            }
+            else
+            {
+                string intervalDataStr = string.Format(" ({0}{1})", (intervalData <= 0 ? "" : "+"), intervalData);
+                panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + intervalDataStr;
+            }
+            
         }
     }
 	

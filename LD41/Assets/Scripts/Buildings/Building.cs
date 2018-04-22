@@ -7,14 +7,17 @@ public class Building : MonoBehaviour {
 
     public BuildingData buildingData;
     Health health;
-    Timer resourceTimer = new Timer();
-    int resourceInterval = 1;
+    //Timer resourceTimer = new Timer();
+    //int resourceInterval = 1;
 
     public AttackData attackData;
     AttackManager attackManager = null;
 
     private bool buildingActive = false;
     private Node buildingStartNode;
+
+    public delegate void OnBuildingChange(Building building);
+    public event OnBuildingChange OnBuildingDeath;
 
     public int workers;
 
@@ -68,11 +71,11 @@ public class Building : MonoBehaviour {
         if (!buildingActive)
             return;
 
-        if(resourceTimer.Expired())
-        {
-            ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas, workers);
-            resourceTimer.Start(resourceInterval);
-        }
+        //if(resourceTimer.Expired())
+        //{
+        //    ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas, workers);
+        //    resourceTimer.Start(resourceInterval);
+        //}
         
         if(attackManager != null && attackManager.AttackReady())
         {

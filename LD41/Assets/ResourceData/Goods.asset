@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31be9633a85d4f145842c31b19f1dc60, type: 3}
-  m_Name: Happiness
+  m_Name: Goods
   m_EditorClassIdentifier: 
-  resourceName: Happiness
+  resourceName: Goods
   resourceEnum: 2
   initialCount: 100
   count: 100
-  hudImage: {fileID: 21300000, guid: 10801b044beca24459846e5eed9019bb, type: 3}
+  hudImage: {fileID: 21300000, guid: 68228d01e2f89c444bd1a717e04942f2, type: 3}
