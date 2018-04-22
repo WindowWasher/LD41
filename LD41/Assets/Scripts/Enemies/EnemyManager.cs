@@ -33,10 +33,19 @@ public class EnemyManager : MonoBehaviour {
     void SpawnWave()
     {
         Vector2 localSpawnPoint = Random.insideUnitCircle.normalized * waveSpawnRadius;
-        int numberOfEnemiesToSpawn = 1;
+        int numberOfEnemiesToSpawn = 20;
         for(int i = 0; i < numberOfEnemiesToSpawn; ++i)
         {
-            GameObject newEnemyPrefab = enemyPrefabs[0];
+            GameObject newEnemyPrefab;
+            if (Random.Range(0, 2) == 1)
+            {
+                newEnemyPrefab = enemyPrefabs[1];
+            }
+            else
+            {
+                newEnemyPrefab = enemyPrefabs[0];
+            }
+            
             Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
             Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, this.transform.position.y, enemySpawnPointV2.y) + center;
 

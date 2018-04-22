@@ -16,6 +16,8 @@ public class BuildingPlacement : MonoBehaviour {
 
     public bool isBuilding = false;
 
+    public bool startBuildingsCreated = false;
+
     public delegate void OnBuildingCreation(Building building);
     public event OnBuildingCreation OnBuildingCreationAction;
 
@@ -37,8 +39,37 @@ public class BuildingPlacement : MonoBehaviour {
         placementCanvas.transform.localScale = buildingData.gridSize;
     }
 
+    public void PlaceStartBuildings()
+    {
+        foreach(GameObject buildingObj in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            PlaceBeginningBuilding(buildingObj);
+        }
+        startBuildingsCreated = true;
+    }
+
+    public void PlaceBeginningBuilding(GameObject buildingObj)
+    {
+        Building newBuilding = buildingObj.GetComponent<Building>();
+
+        Node startNode = gridRef.NodeFromWorldPoint(buildingObj.transform.position);
+        gridRef.UpdateGridFromNode(startNode, newBuilding.buildingData.gridSize);
+        buildingObj.transform.position = startNode.worldBottomLeft;
+        newBuilding.BuildingPlaced(gridRef.GetNodeUnderMouse());
+
+        if (OnBuildingCreationAction != null)
+        {
+            OnBuildingCreationAction(buildingObj.GetComponent<Building>());
+        }
+    }
+
     // Update is called once per frame
     void Update() {
+
+        if(!startBuildingsCreated)
+        {
+            PlaceStartBuildings();
+        }
 
         // Click to place building
         if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas) && !EventSystem.current.IsPointerOverGameObject())
