@@ -90,6 +90,7 @@ public class Enemy : MonoBehaviour {
         if (target != null)
         {
             //agent.SetDestination(target.transform.position);
+            agent.isStopped = false;
             agent.SetDestination(GetRandomTargetPosition(target));
             target.GetComponent<Health>().OnDeathChange += targetDestroyed;
         }
@@ -131,10 +132,30 @@ public class Enemy : MonoBehaviour {
         {
             resetTarget();
         }
-        if (target != null && attackManager.AttackReady() && attackManager.InRange(target))
+        if(target!= null)
         {
-            attackManager.Attack(target);
+            if(attackManager.InRange(target))
+            {
+                if (!agent.isStopped)
+                {
+                    agent.isStopped = true;
+                }
+                if (attackManager.AttackReady())
+                {
+                    attackManager.Attack(target);
+                }
+            }
+            else
+            {
+                if (agent.isStopped)
+                {
+                    agent.isStopped = false;
+                }
+            }
+            
+            
         }
+        
 
         
 	}

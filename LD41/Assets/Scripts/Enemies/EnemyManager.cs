@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour {
     void SpawnWave()
     {
         Vector2 localSpawnPoint = Random.insideUnitCircle.normalized * waveSpawnRadius;
-        int numberOfEnemiesToSpawn = 10;
+        int numberOfEnemiesToSpawn = 1;
         for(int i = 0; i < numberOfEnemiesToSpawn; ++i)
         {
             GameObject newEnemyPrefab = enemyPrefabs[0];
