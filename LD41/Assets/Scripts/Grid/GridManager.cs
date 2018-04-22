@@ -6,6 +6,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour {
 
     public static GridManager instance;
+    public LayerMask mask;
 
     public Vector2 gridWorldSize;
     public LayerMask occupiedMask;
@@ -15,7 +16,7 @@ public class GridManager : MonoBehaviour {
     private float nodeDiameter;
     private int gridSizeX, gridSizeY;
 
-    private Vector3 worldMousePosition;
+    private Node mouseOverNode = null;
 
     private void Start()
     {
@@ -47,7 +48,7 @@ public class GridManager : MonoBehaviour {
         }
     }
 
-    public void SetOccupiedToFalse(Node buildingStartNode, Vector2 size)
+    public void SetOccupiedToValue(Node buildingStartNode, Vector2 size, bool occupiedValue)
     {
         int x = buildingStartNode.xPos;
         int y = buildingStartNode.yPos;
@@ -59,7 +60,7 @@ public class GridManager : MonoBehaviour {
             {
                 for (int yPos = y; yPos < y + size.y; yPos++)
                 {
-                    grid[xPos, yPos].occupied = false;
+                    grid[xPos, yPos].occupied = occupiedValue;
                 }
             }
         }
@@ -78,13 +79,12 @@ public class GridManager : MonoBehaviour {
 
     public Node GetNodeUnderMouse()
     {
-        return NodeFromWorldPoint(worldMousePosition);
+        return mouseOverNode;
     }
 
     public void UpdateGridCurrentMousePosition(Vector2 size)
     {
-        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
-        UpdateGridFromNode(mouseNode, size);
+        UpdateGridFromNode(mouseOverNode, size);
     }
 
     public void UpdateGridFromNode(Node startNode, Vector2 size)
@@ -137,26 +137,21 @@ public class GridManager : MonoBehaviour {
 
     public Vector3 getMouseToNodeWorldPos()
     {
-        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
-
-        return mouseNode.worldPosition;
+        return mouseOverNode.worldPosition;
     }
 
     public Vector3 getMouseToNodeBottomLeftWorld()
     {
-        worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
-
-        return mouseNode.worldBottomLeft;
+        return mouseOverNode.worldBottomLeft;
     }
 
     public bool CanPlaceBuilding(Vector2 size)
     {
-        Node mouseNode = NodeFromWorldPoint(worldMousePosition);
+        if (mouseOverNode == null)
+            return false;
 
-        int x = mouseNode.xPos;
-        int y = mouseNode.yPos;
+        int x = mouseOverNode.xPos;
+        int y = mouseOverNode.yPos;
 
         // Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
         if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
@@ -176,6 +171,16 @@ public class GridManager : MonoBehaviour {
         else
         {
             return false;
+        }
+    }
+
+    private void Update()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 200, mask, QueryTriggerInteraction.Collide))
+        {
+            mouseOverNode = NodeFromWorldPoint(hit.point);
         }
     }
 }
