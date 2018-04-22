@@ -49,6 +49,7 @@ public class Building : MonoBehaviour {
 
         ResourceManager.Instance().UpdateOneTimeCostResources(buildingData.resourceDeltas);
         buildingActive = true;
+        this.gameObject.tag = "Building";
     }
 
     // Update is called once per frame

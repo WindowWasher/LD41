@@ -15,16 +15,21 @@ public class UIManager : MonoBehaviour
             string panelName = resource.resourceName + "Panel";
             panels[resource] = GameObject.Find(panelName);
             panels[resource].transform.Find("ResourceImage").GetComponent<Image>().sprite = resource.hudImage;
-            updateResource(resource);
         }
 
-        ResourceManager.Instance().OnResourceChange += updateResource;
+        ResourceManager.Instance().OnResourceChange += updateResources;
+        updateResources(null);
 
 	}
 
-    void updateResource(ResourceInventory resource)
+    void updateResources(ResourceInventory changedResource)
     {
-        panels[resource].GetComponentInChildren<Text>().text = resource.name + " " + resource.count.ToString();
+        foreach (ResourceInventory resource in ResourceManager.Instance().resources.Values)
+        {
+            int intervalData = ResourceManager.Instance().GetIntervalDelta(resource.resourceEnum);
+            string intervalDataStr = string.Format(" ({0}{1})", (intervalData <= 0 ? "" : "+"), intervalData);
+            panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + intervalDataStr;
+        }
     }
 	
 	// Update is called once per frame

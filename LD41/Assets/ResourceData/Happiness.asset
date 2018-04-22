@@ -15,4 +15,4 @@ MonoBehaviour:
   resourceEnum: 2
   initialCount: 100
   count: 100
-  hudImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  hudImage: {fileID: 21300000, guid: 10801b044beca24459846e5eed9019bb, type: 3}
