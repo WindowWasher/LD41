@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Building
   - Enemy
+  - EnemySpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -55,7 +55,7 @@ public class BuildingPlacement : MonoBehaviour {
         Node startNode = gridRef.NodeFromWorldPoint(buildingObj.transform.position);
         gridRef.UpdateGridFromNode(startNode, newBuilding.buildingData.gridSize);
         buildingObj.transform.position = startNode.worldBottomLeft;
-        newBuilding.BuildingPlaced(gridRef.GetNodeUnderMouse());
+        newBuilding.BuildingPlaced(startNode);
 
         if (OnBuildingCreationAction != null)
         {

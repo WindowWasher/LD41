@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour {
 
+    //public float waveSpawnRadius;
+    //public Vector3 center;
+
     public float interval;
-    public float waveSpawnRadius;
     public float localSpawnRadius;
 
-    public Vector3 center;
+    GameObject[] spawnPoints;
+    
     Timer intervalTimer = new Timer();
 
     public List<GameObject> enemyPrefabs;
@@ -18,6 +21,8 @@ public class EnemyManager : MonoBehaviour {
         //enemyPrefabs = new List<GameObject>();
 
         //enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
+
+        spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
         SpawnWave();
 	}
@@ -32,8 +37,25 @@ public class EnemyManager : MonoBehaviour {
 
     void SpawnWave()
     {
-        Vector2 localSpawnPoint = Random.insideUnitCircle.normalized * waveSpawnRadius;
+        List<GameObject> currentSpawnPoints = new List<GameObject>();
+        foreach(var spawnP in spawnPoints)
+        {
+            currentSpawnPoints.Add(spawnP);
+        }
+
         int numberOfEnemiesToSpawn = 20;
+        int enemiesPerWave = numberOfEnemiesToSpawn / spawnPoints.Length;
+        foreach(var spawnP in currentSpawnPoints)
+        {
+            SpawnEnemiesAtPosition(spawnP.transform.position, enemiesPerWave);
+        }
+    }
+
+    void SpawnEnemiesAtPosition(Vector3 spawnPoint, int numberOfEnemiesToSpawn)
+    {
+        //Vector2 localSpawnPoint = Random.insideUnitCircle.normalized * waveSpawnRadius;
+        Vector2 localSpawnPoint = new Vector2(spawnPoint.x, spawnPoint.z);
+        
         for(int i = 0; i < numberOfEnemiesToSpawn; ++i)
         {
             GameObject newEnemyPrefab;
@@ -47,7 +69,7 @@ public class EnemyManager : MonoBehaviour {
             }
             
             Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
-            Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, this.transform.position.y, enemySpawnPointV2.y) + center;
+            Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, spawnPoint.y, enemySpawnPointV2.y);
 
             GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
 
@@ -55,12 +77,12 @@ public class EnemyManager : MonoBehaviour {
         intervalTimer.Start(interval);
     }
 
-    private void OnDrawGizmos()
-    {
-        UnityEditor.Handles.color = Color.green;
-        UnityEditor.Handles.DrawWireDisc(center, Vector3.up, waveSpawnRadius);
-        //UnityEditor.Handles.DrawWireDisc(collider.transform.position, Vector3.back, collider.radius);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    //UnityEditor.Handles.color = Color.green;
+    //    //UnityEditor.Handles.DrawWireDisc(center, Vector3.up, waveSpawnRadius);
+    //    //UnityEditor.Handles.DrawWireDisc(collider.transform.position, Vector3.back, collider.radius);
+    //}
 
     public static EnemyManager Instance()
     {

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4273241665906490}
   - component: {fileID: 33191531104942314}
   - component: {fileID: 23611635432671354}
-  - component: {fileID: 114624548413998438}
   - component: {fileID: 136772651322369278}
   m_Layer: 8
   m_Name: AppleTree02
@@ -87,18 +86,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732753494728712}
   m_Mesh: {fileID: 4300000, guid: 44c79e7ae8a2dac4b9dc6c21d31517ac, type: 3}
---- !u!114 &114624548413998438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732753494728712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!136 &136772651322369278
 CapsuleCollider:
   m_ObjectHideFlags: 1
