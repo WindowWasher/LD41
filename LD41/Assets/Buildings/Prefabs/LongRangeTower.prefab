@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 65694032518627762}
   - component: {fileID: 114759948619906600}
   - component: {fileID: 114520762405341602}
+  - component: {fileID: 135252041864613974}
   m_Layer: 8
   m_Name: LongRangeTower
   m_TagString: Building
@@ -201,6 +202,7 @@ MonoBehaviour:
   placementCanvas: {fileID: 223822786465569050}
   placementImage: {fileID: 114950622815611594}
   workers: 0
+  target: {fileID: 0}
 --- !u!114 &114950622815611594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,6 +230,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!135 &135252041864613974
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1738812920582318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.838831
+  m_Center: {x: 0.99999994, y: 1.837403, z: 1.004699}
 --- !u!222 &222613667999313088
 CanvasRenderer:
   m_ObjectHideFlags: 1
