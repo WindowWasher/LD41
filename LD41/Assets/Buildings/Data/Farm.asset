@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1105362946207734, guid: c10dba9cdee5d074a81d0ae4a43ac846, type: 2}
   buildingName: Farm
   gridSize: {x: 2, y: 2}
-  icon: {fileID: 21300000, guid: ba8043065329e534687d69e5e4a6d322, type: 3}
+  icon: {fileID: 21300000, guid: 6218b579beda226458cec8e025fcb91c, type: 3}
   resourceDeltas:
   - resource: 5
     amount: 20
@@ -29,3 +29,4 @@ MonoBehaviour:
     amount: -50
     oneTimeChange: 1
   maxWorkerSize: 2
+  attackData: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1947565377960376, guid: b07ecd2f5e0b8e1419229f4f47b168ac, type: 2}
   buildingName: Cannon Tower
   gridSize: {x: 2, y: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2d29748f2bb678744a159968a2846d04, type: 3}
   resourceDeltas: []
   maxWorkerSize: 1
   attackData: {fileID: 11400000, guid: 140360024a871c0489825e62f4862ea7, type: 2}

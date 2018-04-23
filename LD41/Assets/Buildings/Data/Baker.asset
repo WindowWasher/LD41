@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1955659749013618, guid: a2757408b75eb464c8cd1a23f18d0b9b, type: 2}
   buildingName: Baker
   gridSize: {x: 2, y: 2}
-  icon: {fileID: 21300000, guid: 32dd7da58d397c548bd73706785ca742, type: 3}
+  icon: {fileID: 21300000, guid: a68297061b66da74f8457de0b68d1b44, type: 3}
   resourceDeltas:
   - resource: 5
     amount: 10
@@ -38,3 +38,4 @@ MonoBehaviour:
     amount: -500
     oneTimeChange: 1
   maxWorkerSize: 1
+  attackData: {fileID: 0}

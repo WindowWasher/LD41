@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1242808368084382, guid: 443d63fed4801e148849e02d60c85de3, type: 2}
   buildingName: Market
   gridSize: {x: 4, y: 4}
-  icon: {fileID: 21300000, guid: 4f766e9249259eb478fa7fdad76009dc, type: 3}
+  icon: {fileID: 21300000, guid: 82bd6c1a0a7983645823026f6d5ded91, type: 3}
   resourceDeltas:
   - resource: 1
     amount: 25
@@ -29,3 +29,4 @@ MonoBehaviour:
     amount: -25
     oneTimeChange: 1
   maxWorkerSize: 3
+  attackData: {fileID: 0}

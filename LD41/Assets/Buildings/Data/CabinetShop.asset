@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1589043521960002, guid: fbbf736ae500ad5489304075e8f8bc9c, type: 2}
   buildingName: Barrel Maker
   gridSize: {x: 2, y: 2}
-  icon: {fileID: 21300000, guid: 48f40f415b358824fa23d3eb92ac0792, type: 3}
+  icon: {fileID: 21300000, guid: df285e76dae76434eafc7e831d8ecfd9, type: 3}
   resourceDeltas:
   - resource: 4
     amount: 10
@@ -35,3 +35,4 @@ MonoBehaviour:
     amount: -500
     oneTimeChange: 1
   maxWorkerSize: 1
+  attackData: {fileID: 0}
