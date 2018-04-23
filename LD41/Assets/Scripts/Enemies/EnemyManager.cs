@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour {
 
     GameObject waveCountPanel;
 
-    int waveNumber = 10;
+    int waveNumber = 1;
     //int numPerWave = 5;
     int lastWaveCount = 0;
     bool waveRunning = false;
@@ -45,7 +45,6 @@ public class EnemyManager : MonoBehaviour {
         string name = enemyPrefab.GetComponent<Enemy>().name;
         if (enemyObjectPool[name].Count > 0)
         {
-            Debug.Log("Optimized create");
             enemy = enemyObjectPool[name].First();
             enemyObjectPool[name].RemoveAt(0);
 
