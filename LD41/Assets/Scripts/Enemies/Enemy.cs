@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour {
     {
         //Debug.Log(this.name + " died!");
         alive = false;
+        target = null;
         BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
         buildingPlacement.OnBuildingCreationAction -= newBuilding;
 
