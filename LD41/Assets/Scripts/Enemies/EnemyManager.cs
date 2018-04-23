@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 20000 + 5 * waveNumber;
+        int numberOfEnemiesToSpawn = 200 + 5 * waveNumber;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         List<GameObject> selectedSpawnPoints = new List<GameObject>();
