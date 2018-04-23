@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224899484680833746}
   - component: {fileID: 222553096001954860}
-  - component: {fileID: 114770443915100170}
+  - component: {fileID: 114837640533531510}
   m_Layer: 8
   m_Name: HealthBarFG
   m_TagString: Untagged
@@ -271,6 +271,22 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &114779282542468318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1054254494150674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d88a6b6c54f43429dde2e2091a6e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   movementData: {fileID: 11400000, guid: 209a5bde5819c1c4b849a4a62e7390ed, type: 2}
   attackData: {fileID: 11400000, guid: 28332a7e75017f848897c38f46ac23e8, type: 2}
   target: {fileID: 0}
@@ -303,22 +319,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114779282542468318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1054254494150674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d88a6b6c54f43429dde2e2091a6e20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementData: {fileID: 11400000, guid: 209a5bde5819c1c4b849a4a62e7390ed, type: 2}
-  attackData: {fileID: 11400000, guid: 28332a7e75017f848897c38f46ac23e8, type: 2}
-  target: {fileID: 0}
-  alive: 1
-  buildingChanges: []
 --- !u!114 &114919128958315028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff6cebe6644cc04aa14c11a420d85f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthFg: {fileID: 114770443915100170}
+  healthFg: {fileID: 0}
 --- !u!136 &136320136360772390
 CapsuleCollider:
   m_ObjectHideFlags: 1
