@@ -167,6 +167,7 @@ public class ResourceManager:MonoBehaviour  {
             {
                 if(delta.resource == Resource.People)
                 {
+                    houseSpaceAvailable -= delta.amount;
                     KillPeople(delta.amount);
                 }
                 else
@@ -230,7 +231,7 @@ public class ResourceManager:MonoBehaviour  {
     public int GetTotalWorkers()
     {
         int totalWorkers = GetAvailableWorkers();
-        foreach (var gameObj in GameObject.FindGameObjectsWithTag("Building"))
+        foreach (var gameObj in Target.GetActiveBuildingObjs())
         {
             Building building = gameObj.GetComponent<Building>();
             //foreach (var rDelta in gameObj.GetComponent<Building>().buildingData.resourceDeltas)
