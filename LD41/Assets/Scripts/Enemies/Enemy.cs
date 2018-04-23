@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour {
 
     int numTargetsPerBuilding = 4;
 
+    public bool alive = true;
+
+    public List<Building> buildingChanges = new List<Building>();
+
     // Use this for initialization
     void Start () {
 
@@ -35,19 +39,30 @@ public class Enemy : MonoBehaviour {
         foreach(var buildingObj in Target.GetActiveBuildingObjs())
         {
             buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
+            buildingChanges.Add(buildingObj.GetComponent<Building>());
         }
     }
 
     void Die()
     {
         Debug.Log(this.name + " died!");
+        alive = false;
+        BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+        buildingPlacement.OnBuildingCreationAction -= newBuilding;
+
+        foreach(Building building in buildingChanges)
+        {
+            building.OnBuildingDeath -= buildingDestroyed;
+        }
+
         Destroy(this.gameObject);
     }
 
     void newBuilding(Building newBuilding)
     {
         newBuilding.OnBuildingDeath += buildingDestroyed;
-        if(target != null)
+        buildingChanges.Add(newBuilding.GetComponent<Building>());
+        if (target != null)
         {
             Building currentBuilding = target.GetComponent<Building>();
             List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
@@ -62,11 +77,13 @@ public class Enemy : MonoBehaviour {
 
     void buildingDestroyed(Building destroyedBuilding)
     {
+        destroyedBuilding.OnBuildingDeath -= buildingDestroyed;
+        buildingChanges.Remove(destroyedBuilding);
         if (target != null)
         {
             Building currentBuilding = target.GetComponent<Building>();
             List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
-            int enemyTargetCount = allEnemies.Where(e => e.target == target).Count();
+            int enemyTargetCount = allEnemies.Where(e => e != null && e.target == target).Count();
 
             if (enemyTargetCount <= numTargetsPerBuilding)
             {

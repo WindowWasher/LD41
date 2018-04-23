@@ -39,6 +39,8 @@ public class Building : MonoBehaviour {
         Debug.Log(this.name + " died!");
         ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
         GridManager.instance.SetOccupiedToValue(buildingStartNode, buildingData.gridSize, false);
+        ResourceManager.Instance().Add(Resource.People, workers);
+        workers = 0;
         Destroy(this.gameObject);
     }
 
@@ -77,7 +79,7 @@ public class Building : MonoBehaviour {
         //    resourceTimer.Start(resourceInterval);
         //}
         
-        if(attackManager != null && attackManager.AttackReady())
+        if(attackManager != null && attackManager.AttackReady() && workers > 0)
         {
             GameObject target = Target.GetClosestTarget(this.transform.position, "Enemy");
             if(target != null && attackManager.InRange(target))

@@ -62,7 +62,7 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 5 * waveNumber;
+        int numberOfEnemiesToSpawn = 15 * waveNumber;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         for(int i = 0; i < randomIndexes.Count; ++i)
@@ -117,6 +117,8 @@ public class EnemyManager : MonoBehaviour {
         List<Enemy> enemies = new List<Enemy>();
         foreach(var enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
+            if (enemyObj == null || enemyObj.GetComponent<Enemy>().alive == false)
+                continue;
             enemies.Add(enemyObj.GetComponent<Enemy>());
         }
 

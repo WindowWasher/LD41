@@ -67,7 +67,7 @@ public class ResourceManager:MonoBehaviour  {
                 {
                     building.workers -= 1;
                     peopleToKill -= 1;
-                    Add(Resource.People, -1);
+                    //Add(Resource.People, -1);
                     if (peopleToKill <= 0)
                         break;
                 }
@@ -129,9 +129,11 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
-    public bool CanAffordOneTimeCost(List<ResourceDelta> resourceDeltas)
+    public bool CanAffordOneTimeCost(BuildingData data)
     {
-        foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
+        if (data.maxWorkerSize > GetAvailableWorkers())
+            return false;
+        foreach(ResourceDelta delta in data.resourceDeltas.Where(d=>d.oneTimeChange))
         {
             if (resources[delta.resource].count + delta.amount < 0)
                 return false;

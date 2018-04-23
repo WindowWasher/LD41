@@ -74,7 +74,7 @@ public class BuildingSlot : MonoBehaviour {
 
     public void Update()
     {
-        if (!ResourceManager.Instance().CanAffordOneTimeCost(buildingData.resourceDeltas))
+        if (!ResourceManager.Instance().CanAffordOneTimeCost(buildingData))
         {
             inactiveImage.enabled = true;
             buildButton.interactable = false;
@@ -129,10 +129,17 @@ public class BuildingSlot : MonoBehaviour {
         ToolTipBuildingName.text = buildingData.buildingName;
         toolTipPeopleUsage.text = "Max: " + buildingData.maxWorkerSize.ToString();
 
+        if(buildingData.maxWorkerSize > 0)
+        {
+            var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipCostPanel.transform);
+            obj.GetComponentInChildren<Text>().text = buildingData.maxWorkerSize.ToString();
+            obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[Resource.People].hudImage;
+        }
+
         // Cost
         foreach (var delta in buildingData.resourceDeltas)
         {
-            if ((!delta.oneTimeChange || delta.resource == Resource.People | delta.amount > 0))
+            if (!delta.oneTimeChange || delta.amount > 0)
                 continue;
             var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipCostPanel.transform);
             obj.GetComponentInChildren<Text>().text = delta.amount.ToString();
