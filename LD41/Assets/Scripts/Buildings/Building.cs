@@ -125,7 +125,7 @@ public class Building : MonoBehaviour {
     public bool IsWall()
     {
         // TODO
-        return this.buildingData.name.ToLower().Contains("wall");
+        return this.buildingData.name == "Wall";
     }
 
 }
