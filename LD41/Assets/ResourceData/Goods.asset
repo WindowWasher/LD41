@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Goods
   m_EditorClassIdentifier: 
   resourceName: Goods
-  resourceEnum: 2
+  resourceEnum: 4
   initialCount: 100
-  count: 10000
+  count: -200
   hudImage: {fileID: 21300000, guid: 68228d01e2f89c444bd1a717e04942f2, type: 3}

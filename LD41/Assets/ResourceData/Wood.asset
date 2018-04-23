@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   resourceName: Wood
-  resourceEnum: 4
-  initialCount: 150
-  count: 50
+  resourceEnum: 2
+  initialCount: 100
+  count: 150
   hudImage: {fileID: 21300000, guid: 48f40f415b358824fa23d3eb92ac0792, type: 3}

@@ -69,6 +69,17 @@ public class BuildingPlacement : MonoBehaviour {
             PlaceBeginningBuilding(bObj);
         }
 
+        // reset initial values
+        foreach(var keyVal in ResourceManager.Instance().resources)
+        {
+            if(keyVal.Value.resourceEnum != Resource.People)
+            {
+                keyVal.Value.count = keyVal.Value.initialCount;
+            }
+        }
+
+        GameObject.FindObjectOfType<UIManager>().updateResources(null);
+
         BuildingInfoManager.Instance().DisableBuildingPanel();
         //gridRef.UpdateGrid();
         startBuildingsCreated = true;
@@ -114,7 +125,7 @@ public class BuildingPlacement : MonoBehaviour {
             placementImage.enabled = false;
             buildingRef = null;
 
-            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift) || !ResourceManager.Instance().CanAffordOneTimeCost(buildingData))
                 isBuilding = false;
             else
                 BeginPlacingBuilding();

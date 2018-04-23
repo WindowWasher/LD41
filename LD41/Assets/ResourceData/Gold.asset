@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   resourceName: Gold
-  resourceEnum: 3
+  resourceEnum: 1
   initialCount: 100
-  count: 220
+  count: -420
   hudImage: {fileID: 21300000, guid: 33a22d2feac3d7a4480afb28f3c6b46c, type: 3}

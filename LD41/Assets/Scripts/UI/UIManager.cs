@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
 	}
 
-    void updateResources(ResourceInventory changedResource)
+    public void updateResources(ResourceInventory changedResource)
     {
         foreach (ResourceInventory resource in ResourceManager.Instance().resources.Values)
         {
@@ -37,7 +37,15 @@ public class UIManager : MonoBehaviour
                 string intervalDataStr = string.Format(" ({0}{1})", (intervalData <= 0 ? "" : "+"), intervalData);
                 panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + intervalDataStr;
             }
-            
+            if (resource.count < 0)
+            {
+                panels[resource].GetComponentInChildren<Text>().color = Color.red;
+            }
+            else
+            {
+                panels[resource].GetComponentInChildren<Text>().color = Color.white;
+            }
+
         }
     }
 	

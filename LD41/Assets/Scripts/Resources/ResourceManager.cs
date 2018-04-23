@@ -6,12 +6,12 @@ using System.Linq;
 
 public enum Resource
 {
-    People,
-    Food,
-    Goods,
-    Gold,
-    Wood,
-    Iron
+    People=0,
+    Gold=1,
+    Wood=2,
+    Iron=3,
+    Goods=4,
+    Food=5
 }
 
 public class ResourceManager:MonoBehaviour  {
@@ -54,17 +54,20 @@ public class ResourceManager:MonoBehaviour  {
 
     public void KillPeople(int peopleToKill)
     {
+        Debug.Log("Killing " + peopleToKill);
         int availableWorkers = GetAvailableWorkers();
         int killedAvailableWorkers = Mathf.Min(availableWorkers, peopleToKill);
         peopleToKill -= killedAvailableWorkers;
         Add(Resource.People, -killedAvailableWorkers);
         while (peopleToKill > 0)
         {
+            bool changeMade = false;
             foreach (var gameObj in Target.GetActiveBuildingObjs())
             {
                 Building building = gameObj.GetComponent<Building>();
                 if (building.workers > 0)
                 {
+                    changeMade = true;
                     building.workers -= 1;
                     peopleToKill -= 1;
                     //Add(Resource.People, -1);
@@ -73,6 +76,15 @@ public class ResourceManager:MonoBehaviour  {
                 }
 
             }
+
+            //
+            if (!changeMade)
+            {
+                // this means there are no people left (can happen if people are starving)
+                return;
+                //throw new KeyNotFoundException("Something went horribly wrong! No people to kill");
+            }
+                
         }
     }
 
@@ -206,5 +218,19 @@ public class ResourceManager:MonoBehaviour  {
             UpdateResources();
             resourceIntervalTimer.Start(resourceTick);
         }
+    }
+
+    public static List<ResourceDelta> SortResourceList(List<ResourceDelta> resourceDeltas)
+    {
+        //List<ResourceDelta> sortedList;
+        //foreach(Resource resource in )
+
+        List<ResourceDelta> negatives = resourceDeltas.Where(r=>r.amount<0).OrderBy(r => (int)(r.resource)).ToList();
+        List<ResourceDelta> positives = resourceDeltas.Where(r => r.amount > 0).OrderBy(r => (int)(r.resource)).ToList();
+
+        positives.AddRange(negatives);
+
+        return positives;
+
     }
 }

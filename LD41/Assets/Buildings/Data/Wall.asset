@@ -16,7 +16,7 @@ MonoBehaviour:
   gridSize: {x: 1, y: 1}
   icon: {fileID: 21300000, guid: e5003befe3770ef4d91b927163871a99, type: 3}
   resourceDeltas:
-  - resource: 5
+  - resource: 3
     amount: -10
     oneTimeChange: 1
   maxWorkerSize: 0
