@@ -292,6 +292,15 @@ public class ResourceManager:MonoBehaviour  {
             
         }
 
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            foreach (ResourceInventory resource in resourceList)
+            {
+                //resources[resource.resourceEnum].
+                this.Add(resource.resourceEnum, 100);
+            }
+        }
+
         if(resourceIntervalTimer.Expired())
         {
             UpdateResources();
