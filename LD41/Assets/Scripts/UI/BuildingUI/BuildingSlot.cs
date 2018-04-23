@@ -64,7 +64,7 @@ public class BuildingSlot : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log(buildingData.buildingName);
+        //Debug.Log(buildingData.buildingName);
 
         buildingText.text = buildingData.buildingName;
         buildingImage.sprite = buildingData.icon;

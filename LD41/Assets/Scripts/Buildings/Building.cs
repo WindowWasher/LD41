@@ -95,7 +95,7 @@ public class Building : MonoBehaviour {
 
         if (buildingData.attackData != null && target != null && attackManager.AttackReady() && workers > 0)
         {
-            Debug.Log("Shooting " + target.name);
+            //Debug.Log("Shooting " + target.name);
             attackManager.Attack(target);
         }
 	}

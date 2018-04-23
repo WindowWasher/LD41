@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour {
 
     void Die()
     {
-        Debug.Log(this.name + " died!");
+        //Debug.Log(this.name + " died!");
         alive = false;
         BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
         buildingPlacement.OnBuildingCreationAction -= newBuilding;
@@ -230,17 +230,17 @@ public class Enemy : MonoBehaviour {
                 {
                     agent.isStopped = false;
                 }
-                //if (agent.velocity == Vector3.zero)
-                //{
-                //    if(stoppedLastTime)
-                //    {
-                //        setTarget(Target.GetClosestTarget(this.transform.position, "Building"));
-                //    }
-                //    else
-                //    {
-                //        stoppedLastTime = true;
-                //    }
-                //}
+                if (agent.velocity == Vector3.zero)
+                {
+                    if (stoppedLastTime)
+                    {
+                        setTarget(Target.GetClosestTarget(this.transform.position, "Building"));
+                    }
+                    else
+                    {
+                        stoppedLastTime = true;
+                    }
+                }
             }
             
             
