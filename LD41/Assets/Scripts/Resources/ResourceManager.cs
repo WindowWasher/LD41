@@ -105,7 +105,15 @@ public class ResourceManager:MonoBehaviour  {
         {
             if (delta.amount > 0)
             {
-                this.Add(delta.resource, -delta.amount);
+                if(delta.resource == Resource.People)
+                {
+                    KillPeople(delta.amount);
+                }
+                else
+                {
+                    this.Add(delta.resource, -delta.amount);
+                }
+                
                 //resources[delta.resource].count -= delta.amount;
                 //if (OnResourceChange != null)
                 //    OnResourceChange(resources[delta.resource]);

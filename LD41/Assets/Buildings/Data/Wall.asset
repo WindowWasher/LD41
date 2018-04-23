@@ -19,4 +19,4 @@ MonoBehaviour:
   - resource: 5
     amount: -10
     oneTimeChange: 1
-  maxWorkerSize: 3
+  maxWorkerSize: 0

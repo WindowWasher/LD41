@@ -41,12 +41,36 @@ public class BuildingPlacement : MonoBehaviour {
 
     public void PlaceStartBuildings()
     {
+        List<GameObject> houseObjs = new List<GameObject>();
+        List<GameObject> nonHouseObjs = new List<GameObject>();
         foreach(GameObject buildingObj in GameObject.FindGameObjectsWithTag("Building"))
         {
-            PlaceBeginningBuilding(buildingObj);
+            foreach(var delta in buildingObj.GetComponent<Building>().buildingData.resourceDeltas)
+            {
+                if(delta.oneTimeChange && delta.resource == Resource.People && delta.amount > 0)
+                {
+                    houseObjs.Add(buildingObj);   
+                }
+                else
+                {
+                    nonHouseObjs.Add(buildingObj);
+                }
+            }
+            
         }
+
+        // Do houses first
+        foreach(GameObject bObj in houseObjs)
+        {
+            PlaceBeginningBuilding(bObj);
+        }
+        foreach (GameObject bObj in nonHouseObjs)
+        {
+            PlaceBeginningBuilding(bObj);
+        }
+
         BuildingInfoManager.Instance().DisableBuildingPanel();
-        gridRef.UpdateGrid();
+        //gridRef.UpdateGrid();
         startBuildingsCreated = true;
     }
 

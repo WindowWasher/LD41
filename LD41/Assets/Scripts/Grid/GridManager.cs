@@ -89,20 +89,25 @@ public class GridManager : MonoBehaviour {
 
     public void UpdateGridFromNode(Node startNode, Vector2 size)
     {
-        int x = startNode.xPos;
-        int y = startNode.yPos;
 
-        // Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
-        if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
-        {
-            for (int xPos = x; xPos < x + size.x; xPos++)
-            {
-                for (int yPos = y; yPos < y + size.y; yPos++)
-                {
-                    grid[xPos, yPos].occupied = Physics.CheckSphere(grid[xPos, yPos].worldPosition, nodeRadius, occupiedMask);
-                }
-            }
-        }
+        SetOccupiedToValue(startNode, size, true);
+        return;
+
+
+        //int x = startNode.xPos;
+        //int y = startNode.yPos;
+
+        //// Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
+        //if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
+        //{
+        //    for (int xPos = x; xPos < x + size.x; xPos++)
+        //    {
+        //        for (int yPos = y; yPos < y + size.y; yPos++)
+        //        {
+        //            grid[xPos, yPos].occupied = Physics.CheckSphere(grid[xPos, yPos].worldPosition, nodeRadius, occupiedMask);
+        //        }
+        //    }
+        //}
     }
 
     public Node NodeFromWorldPoint(Vector3 worldPosition)
