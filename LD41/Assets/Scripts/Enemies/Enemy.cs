@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Enemy : MonoBehaviour {
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     Timer NavMeshTimer = new Timer();
 
     public MovementData movementData;
@@ -29,25 +29,56 @@ public class Enemy : MonoBehaviour {
     bool stoppedLastTime = false;
     bool lockedOn = false;
 
+    public string name;
+
 
     // Use this for initialization
     void Start () {
 
-        agent = GetComponent<NavMeshAgent>();
+        
 
-        health = GetComponent<Health>();
+        
         health.OnDeathChange += Die;
 
         agent.speed = movementData.speed;
 
         attackManager = new AttackManager(this.gameObject, attackData);
+
+        Init();
+    }
+
+    public void Init()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.Warp(this.transform.position);
         BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
         buildingPlacement.OnBuildingCreationAction += newBuilding;
 
-        foreach(var buildingObj in Target.GetActiveBuildingObjs())
+        health = GetComponent<Health>();
+        health.currentHealth = health.maxHealth;
+        GetComponentInChildren<HealthBar>().Reset();
+
+        foreach (var buildingObj in Target.GetActiveBuildingObjs())
         {
             buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
             buildingChanges.Add(buildingObj.GetComponent<Building>());
+        }
+
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit hit = new NavMeshHit();
+            if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
+            {
+                this.transform.position = hit.position;
+                agent.Warp(this.transform.position);
+            }
+
+            //if (!agent.isOnNavMesh)
+            //{
+            //    Debug.Log("Weird? agent not on navmesh");
+            //    Die();
+            //    return;
+            //}
         }
     }
 
@@ -63,7 +94,10 @@ public class Enemy : MonoBehaviour {
             building.OnBuildingDeath -= buildingDestroyed;
         }
 
-        Destroy(this.gameObject);
+        EnemyManager.Instance().enemyObjectPool[name].Add(this.gameObject);
+        this.gameObject.SetActive(false);
+
+        //Destroy(this.gameObject);
     }
 
     void newBuilding(Building newBuilding)
@@ -115,21 +149,21 @@ public class Enemy : MonoBehaviour {
         //Debug.Log("New Target " + target.name);
         attacking = false;
         stoppedLastTime = false;
-        if (!agent.isOnNavMesh)
-        {
-            NavMeshHit hit = new NavMeshHit();
-            if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
-            {
-                this.transform.position = hit.position + new Vector3(0, 5f, 0);
-            }
+        //if (!agent.isOnNavMesh)
+        //{
+        //    NavMeshHit hit = new NavMeshHit();
+        //    if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
+        //    {
+        //        this.transform.position = hit.position + new Vector3(0, 5f, 0);
+        //    }
 
-            if (!agent.isOnNavMesh)
-            {
-                Debug.Log("Weird? agent not on navmesh");
-                Die();
-                return;
-            }
-        }
+        //    if (!agent.isOnNavMesh)
+        //    {
+        //        Debug.Log("Weird? agent not on navmesh");
+        //        Die();
+        //        return;
+        //    }
+        //}
 
         if(this.target != null)
         {
@@ -192,19 +226,19 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (!agent.isOnNavMesh)
-        {
-            NavMeshHit hit = new NavMeshHit();
-            if(NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
-            {
-                this.transform.position = hit.position;
-            }
-            else
-            {
-                Die();
-                return;
-            }
-        }
+        //if (!agent.isOnNavMesh)
+        //{
+        //    NavMeshHit hit = new NavMeshHit();
+        //    if(NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
+        //    {
+        //        this.transform.position = hit.position + new Vector3(0,1,0);
+        //    }
+        //    else
+        //    {
+        //        Die();
+        //        return;
+        //    }
+        //}
 
 		if(target == null)
         {

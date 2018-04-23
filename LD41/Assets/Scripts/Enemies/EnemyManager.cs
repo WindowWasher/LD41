@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour {
 
@@ -25,20 +26,50 @@ public class EnemyManager : MonoBehaviour {
     int lastWaveCount = 0;
     bool waveRunning = false;
 
-    //public Dictionary<GameObject, List<GameObject>> enemyObjectPool;
+    public Dictionary<string, List<GameObject>> enemyObjectPool = new Dictionary<string, List<GameObject>>();
 
-    //void CreateEnemy(GameObject enemyPrefab)
-    //{
-    //    if(enemyObjectPool.ha)
-    //}
+    GameObject CreateEnemy(GameObject enemyPrefab, Vector3 position)
+    {
+        GameObject enemy;
+        NavMeshHit hit = new NavMeshHit();
+        if (NavMesh.SamplePosition(position, out hit, 10f, NavMesh.AllAreas))
+        {
+            position = hit.position;
+        }
+        else
+        {
+            //var a = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //a.transform.position = position;
+            return null;
+        }
+        string name = enemyPrefab.GetComponent<Enemy>().name;
+        if (enemyObjectPool[name].Count > 0)
+        {
+            Debug.Log("Optimized create");
+            enemy = enemyObjectPool[name].First();
+            enemyObjectPool[name].RemoveAt(0);
 
-	// Use this for initialization
-	void Start () {
+        }
+        else
+        {
+            enemy = GameObject.Instantiate(enemyPrefab, position, Quaternion.identity);
+        }
+        enemy.SetActive(true);
+        enemy.transform.position = position;
+        enemy.GetComponent<Enemy>().Init();
+
+        return enemy;
+    }
+
+    // Use this for initialization
+    void Start () {
         //enemyPrefabs = new List<GameObject>();
 
         //enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
 
         //intervalTimer.Start(10f);
+        enemyObjectPool["Barbarian"] = new List<GameObject>();
+        enemyObjectPool["Archer"] = new List<GameObject>();
         waveCountPanel = GameObject.Find("WaveCountPanel");
 
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
@@ -197,7 +228,8 @@ public class EnemyManager : MonoBehaviour {
             Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
             Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, spawnPoint.y, enemySpawnPointV2.y);
 
-            GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
+            //GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
+            this.CreateEnemy(newEnemyPrefab, enemySpawnPoint);
 
         }
 

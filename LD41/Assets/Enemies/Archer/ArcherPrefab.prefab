@@ -304,6 +304,7 @@ MonoBehaviour:
   target: {fileID: 0}
   alive: 1
   buildingChanges: []
+  name: Archer
 --- !u!114 &114912806412031646
 MonoBehaviour:
   m_ObjectHideFlags: 1

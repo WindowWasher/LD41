@@ -23,7 +23,7 @@ public class Health: MonoBehaviour {
     /// <summary>
     /// The current health of the entity
     /// </summary>
-    public int currentHealth { get; private set; }
+    public int currentHealth { get; set; }
 
  //   // Use this for initialization
  //   public void InitHealth (int health, OnDeathChangeAction deathAction) {

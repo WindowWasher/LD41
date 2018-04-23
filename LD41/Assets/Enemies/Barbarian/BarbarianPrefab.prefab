@@ -292,6 +292,7 @@ MonoBehaviour:
   target: {fileID: 0}
   alive: 1
   buildingChanges: []
+  name: Barbarian
 --- !u!114 &114837640533531510
 MonoBehaviour:
   m_ObjectHideFlags: 1

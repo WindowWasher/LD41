@@ -87,14 +87,14 @@ public class Building : MonoBehaviour {
         if (!buildingActive)
             return;
 
-        if(buildingData.attackData != null && target == null && checkForTargets.Expired())
+        if(buildingData.attackData != null && Target.NullTarget(target) && checkForTargets.Expired())
         {
             checkForTargets.Start(1f);
             target = Target.GetClosestTarget(this.transform.position, "Enemy", buildingData.attackData.attackRange);
             //target = Target.GetClosestTarget(this.transform.position, "Enemy");
         }
 
-        if (buildingData.attackData != null && target != null && attackManager.AttackReady() && workers > 0)
+        if (buildingData.attackData != null && !Target.NullTarget(target) && attackManager.AttackReady() && workers > 0)
         {
             //Debug.Log("Shooting " + target.name);
             attackManager.Attack(target);
