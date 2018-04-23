@@ -14,7 +14,7 @@ MonoBehaviour:
   building: {fileID: 1121966586705532, guid: 29374cfae5279cb438a40374c7b2183b, type: 2}
   buildingName: House
   gridSize: {x: 2, y: 2}
-  icon: {fileID: 21300000, guid: b5d349a42c4e6ec45ad76b7f29e94f76, type: 3}
+  icon: {fileID: 21300000, guid: ed862e16b3a665a45abc87ddb1e5d0dd, type: 3}
   resourceDeltas:
   - resource: 0
     amount: 5
@@ -26,3 +26,4 @@ MonoBehaviour:
     amount: -50
     oneTimeChange: 1
   maxWorkerSize: 0
+  attackData: {fileID: 0}
