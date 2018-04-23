@@ -27,6 +27,7 @@ public class BuildingPlacement : MonoBehaviour {
         if (buildingRef != null)
             Destroy(buildingRef);
         isBuilding = true;
+        Debug.Log("Starting to place " + this.gameObject.name);
         buildingRef = GameObject.Instantiate(buildingData.building, gridRef.getMouseToNodeBottomLeftWorld(), Quaternion.identity);
         buildingComp = buildingRef.GetComponent<Building>();
         buildingComp.placementCanvas.enabled = true;

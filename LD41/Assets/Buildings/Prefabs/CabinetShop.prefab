@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 100
 --- !u!114 &114509084369803796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,11 +273,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 6333d93e26f851648a5e6b6ad870e1d2, type: 2}
-  attackData: {fileID: 0}
   buildingActive: 0
   placementCanvas: {fileID: 223498784275756446}
   placementImage: {fileID: 114527049004495724}
   workers: 0
+  target: {fileID: 0}
 --- !u!114 &114527049004495724
 MonoBehaviour:
   m_ObjectHideFlags: 1

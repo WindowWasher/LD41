@@ -42,7 +42,7 @@ public class Building : MonoBehaviour {
         health.OnDeathChange -= Die;
     }
 
-    void Die()
+    public void Die()
     { 
         Debug.Log(this.name + " died!");
         ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
