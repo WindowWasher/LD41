@@ -28,7 +28,6 @@ public class MenuScreen : MonoBehaviour {
             menuPanel.SetActive(!menuPanel.activeSelf);
         }
         
-        Debug.Log(BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count());
         if (timer.Expired() && BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)
         {
             menuPanel.SetActive(true);
