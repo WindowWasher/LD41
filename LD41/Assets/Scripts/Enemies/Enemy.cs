@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour {
             NavMeshHit hit = new NavMeshHit();
             if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, NavMesh.AllAreas))
             {
-                this.transform.position = hit.position;
+                this.transform.position = hit.position + new Vector3(0, 5f, 0);
             }
             else
             {
