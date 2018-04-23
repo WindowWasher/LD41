@@ -72,39 +72,39 @@ public class Enemy : MonoBehaviour {
     {
         newBuilding.OnBuildingDeath += buildingDestroyed;
         buildingChanges.Add(newBuilding.GetComponent<Building>());
-        if (target != null)
-        {
-            Building currentBuilding = target.GetComponent<Building>();
-            List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
-            int enemyTargetCount = allEnemies.Where(e => e.target == target).Count();
-            //Debug.Log("NewBuilding, but currentBuildingTargetCount " + enemyTargetCount.ToString());
-            if (newBuilding.IsWall() || (!currentBuilding.IsWall() && enemyTargetCount <= numTargetsPerBuilding))
-                return;
-        }
+        //if (target != null)
+        //{
+        //    Building currentBuilding = target.GetComponent<Building>();
+        //    List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
+        //    int enemyTargetCount = allEnemies.Where(e => e.target == target).Count();
+        //    //Debug.Log("NewBuilding, but currentBuildingTargetCount " + enemyTargetCount.ToString());
+        //    if (newBuilding.IsWall() || (!currentBuilding.IsWall() && enemyTargetCount <= numTargetsPerBuilding))
+        //        return;
+        //}
 
-        resetTarget();
+        //resetTarget();
     }
 
     void buildingDestroyed(Building destroyedBuilding)
     {
         destroyedBuilding.OnBuildingDeath -= buildingDestroyed;
         buildingChanges.Remove(destroyedBuilding);
-        if (target != null)
-        {
-            Building currentBuilding = target.GetComponent<Building>();
-            List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
-            int enemyTargetCount = allEnemies.Where(e => e != null && e.target == target).Count();
+        //if (target != null)
+        //{
+        //    Building currentBuilding = target.GetComponent<Building>();
+        //    List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
+        //    int enemyTargetCount = allEnemies.Where(e => e != null && e.target == target).Count();
 
-            if (enemyTargetCount <= numTargetsPerBuilding)
-            {
-                if (destroyedBuilding.IsWall() || !currentBuilding.IsWall())
-                    return;
-            }
+        //    if (enemyTargetCount <= numTargetsPerBuilding)
+        //    {
+        //        if (destroyedBuilding.IsWall() || !currentBuilding.IsWall())
+        //            return;
+        //    }
 
 
-        }
+        //}
 
-        resetTarget();
+        //resetTarget();
     }
 
     void resetTarget()
@@ -133,12 +133,18 @@ public class Enemy : MonoBehaviour {
             }
         }
 
+        if(this.target != null)
+        {
+            this.target.GetComponent<Building>().enemyAttackerCount -= 1;
+        }
+
         //if (agent.enabled == false)
         //    return;
         //target = Target.GetClosestTarget(this.transform.position, "Building");
         this.target = target;
         if (target != null)
         {
+            target.GetComponent<Building>().enemyAttackerCount -= 1;
             //agent.SetDestination(target.transform.position);
             targetPosition = GetRandomTargetPosition(target);
             //targetPosition = target.transform.position;
@@ -256,7 +262,7 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         Building building = other.gameObject.GetComponent<Building>();
-        if (building != null && !lockedOn)
+        if (building != null && !lockedOn && building.buildingActive)
         {
             setTarget(other.gameObject);
             attacking = true;
@@ -279,7 +285,7 @@ public class Enemy : MonoBehaviour {
         
         //List<GameObject> gameObjects = Target.GetBuildingsInRange(this.transform.position, sightRange);
         List<GameObject> buildingObjects = BuildingInfoManager.instance.getAllActiveBuildings();
-        List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
+        //List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
 
         //List<GameObject> buildObjsNotFullyTargted = new List<GameObject>();
 
@@ -291,7 +297,8 @@ public class Enemy : MonoBehaviour {
 
         foreach(var bObj in buildingObjects)
         {
-            int enemyTargetCount = allEnemies.Where(e => e.target == bObj).Count();
+            //int enemyTargetCount = allEnemies.Where(e => e.target == bObj).Count();
+            int enemyTargetCount = bObj.GetComponent<Building>().enemyAttackerCount;
             Vector3 offset = this.transform.position - bObj.transform.position;
             float distance = offset.sqrMagnitude;
             //float distance = Vector3.Distance(this.transform.position, bObj.transform.position);
