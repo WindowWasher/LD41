@@ -10,7 +10,6 @@ public class Building : MonoBehaviour {
     //Timer resourceTimer = new Timer();
     //int resourceInterval = 1;
 
-    public AttackData attackData;
     AttackManager attackManager = null;
 
     public bool buildingActive = false;
@@ -25,7 +24,7 @@ public class Building : MonoBehaviour {
 	void Start () {
         health = GetComponent<Health>();
         health.OnDeathChange += Die;
-        attackManager = new AttackManager(this.gameObject, attackData);
+        attackManager = new AttackManager(this.gameObject, buildingData.attackData);
         workers = 0;
     }
 

@@ -146,6 +146,13 @@ public class BuildingSlot : MonoBehaviour {
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;
         }
 
+        // Weapon Output
+        if(buildingData.attackData != null)
+        {
+
+        }
+
+
         // Output
         foreach (var delta in ResourceManager.SortResourceList(buildingData.resourceDeltas))
         {
@@ -161,5 +168,8 @@ public class BuildingSlot : MonoBehaviour {
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;
                         
         }
+
+        
+
     }
 }

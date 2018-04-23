@@ -19,4 +19,5 @@ public class BuildingData : ScriptableObject {
     public Sprite icon;
     public List<ResourceDelta> resourceDeltas;
     public int maxWorkerSize;
+    public AttackData attackData;
 }

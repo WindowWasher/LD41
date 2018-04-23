@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour {
 
     private void Update()
     {
-        if(this.gameObject.GetComponent<Building>() == null)
+        if(this.gameObject.transform.parent.GetComponent<Building>() == null)
         {
             this.transform.LookAt(Camera.main.transform);
         }
