@@ -21,10 +21,11 @@ public class BuildingSlot : MonoBehaviour {
     Text toolTipPeopleUsage;
     GameObject toolTipCostPanel;
     GameObject toolTipOutputPanel;
+    GameObject toolTipUpkeepPanel;
     public GameObject resourceDeltaListItem;
     Timer toolTipTimer = new Timer();
     bool hovering = false;
-    float toolTipTimerWait = 0.6f;
+    float toolTipTimerWait = 0.5f;
 
 
     public void OnClickBuilding()
@@ -42,6 +43,7 @@ public class BuildingSlot : MonoBehaviour {
         toolTipPeopleUsage = GameObject.Find("ToolTipPeopleUsage").GetComponent<Text>();
         toolTipCostPanel = GameObject.Find("ToolTipCostPanel");
         toolTipOutputPanel = GameObject.Find("ToolTipOutputPanel");
+        toolTipUpkeepPanel = GameObject.Find("ToolTipUpkeepPanel");
 
         EventTrigger.Entry eventtype = new EventTrigger.Entry();
         eventtype.eventID = EventTriggerType.PointerEnter;
@@ -117,6 +119,11 @@ public class BuildingSlot : MonoBehaviour {
         {
             GameObject.Destroy(child.gameObject);
         }
+
+        foreach (Transform child in toolTipUpkeepPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
 
@@ -142,14 +149,28 @@ public class BuildingSlot : MonoBehaviour {
             if (!delta.oneTimeChange || delta.amount > 0)
                 continue;
             var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipCostPanel.transform);
-            obj.GetComponentInChildren<Text>().text = delta.amount.ToString();
+            obj.GetComponentInChildren<Text>().text = (-1 * delta.amount).ToString();
+            if(ResourceManager.Instance().resources[delta.resource].count + delta.amount < 0)
+            {
+                obj.GetComponentInChildren<Text>().color = Color.red;
+            }
+            else
+            {
+                obj.GetComponentInChildren<Text>().color = Color.white;
+            }
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;
         }
 
         // Weapon Output
         if(buildingData.attackData != null)
         {
+            var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipOutputPanel.transform);
+            obj.GetComponentInChildren<Text>().text = buildingData.attackData.attackDamage.ToString();
+            obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().AttackDamageIcon;
 
+            var obj2 = GameObject.Instantiate(resourceDeltaListItem, toolTipOutputPanel.transform);
+            obj2.GetComponentInChildren<Text>().text = buildingData.attackData.attackRange.ToString();
+            obj2.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().AttackRangeIcon;
         }
 
 
@@ -160,10 +181,16 @@ public class BuildingSlot : MonoBehaviour {
                 continue;
 
             int workerSize = Mathf.Max(buildingData.maxWorkerSize, 1);
-            string intervalDataStr = string.Format("{0}{1}", (delta.amount <= 0 ? "" : "+"), delta.amount * workerSize);
+            string intervalDataStr = string.Format("{0}{1}", (delta.amount <= 0 ? "" : ""), Mathf.Abs(delta.amount) * workerSize);
             //if (!delta.oneTimeChange)
             //    intervalDataStr += "/worker";
-            var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipOutputPanel.transform);
+            GameObject panel;
+            if (delta.amount < 0)
+                panel = toolTipUpkeepPanel;
+            else
+                panel = toolTipOutputPanel;
+
+            var obj = GameObject.Instantiate(resourceDeltaListItem, panel.transform);
             obj.GetComponentInChildren<Text>().text = intervalDataStr;
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;
                         

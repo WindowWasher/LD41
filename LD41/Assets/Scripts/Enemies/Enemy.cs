@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour {
 
     public bool alive = true;
 
+    bool attacking = false;
+    Timer nextRangeCheck = new Timer();
+
     public List<Building> buildingChanges = new List<Building>();
 
     // Use this for initialization
@@ -104,6 +107,7 @@ public class Enemy : MonoBehaviour {
 
     void setTarget(GameObject target)
     {
+        attacking = false;
         if (!agent.isOnNavMesh)
         {
             NavMeshHit hit = new NavMeshHit();
@@ -188,10 +192,11 @@ public class Enemy : MonoBehaviour {
         {
             resetTarget();
         }
-        if(target!= null)
+        if(target!= null && nextRangeCheck.Expired())
         {
-            if(attackManager.InRange(target))
+            if(attacking || attackManager.InRange(target))
             {
+                attacking = true;
                 if (!agent.isStopped)
                 {
                     agent.isStopped = true;
@@ -203,6 +208,7 @@ public class Enemy : MonoBehaviour {
             }
             else
             {
+                nextRangeCheck.Start(1);
                 if (agent.isStopped)
                 {
                     agent.isStopped = false;
@@ -244,7 +250,9 @@ public class Enemy : MonoBehaviour {
         foreach(var bObj in buildingObjects)
         {
             int enemyTargetCount = allEnemies.Where(e => e.target == bObj).Count();
-            float distance = Vector3.Distance(this.transform.position, bObj.transform.position);
+            Vector3 offset = this.transform.position - bObj.transform.position;
+            float distance = offset.sqrMagnitude;
+            //float distance = Vector3.Distance(this.transform.position, bObj.transform.position);
             if (enemyTargetCount < numTargetsPerBuilding && !bObj.GetComponent<Building>().IsWall())
             {
                 if(priorityDistance == null || distance < priorityDistance)

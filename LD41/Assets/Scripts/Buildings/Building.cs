@@ -24,6 +24,9 @@ public class Building : MonoBehaviour {
 
     public int workers;
 
+    public GameObject target = null;
+    bool lookForNewTarget = false;
+
 	// Use this for initialization
 	void Start () {
         health = GetComponent<Health>();
@@ -42,7 +45,7 @@ public class Building : MonoBehaviour {
         Debug.Log(this.name + " died!");
         ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
         GridManager.instance.SetOccupiedToValue(buildingStartNode, buildingData.gridSize, false);
-        ResourceManager.Instance().Add(Resource.People, workers);
+        ResourceManager.Instance().AddPeople(workers);
         workers = 0;
         Destroy(this.gameObject);
     }
@@ -67,7 +70,12 @@ public class Building : MonoBehaviour {
         workers = Mathf.Min(peopleAvailable, buildingData.maxWorkerSize);
         ResourceManager.Instance().Add(Resource.People, -workers);
         
-        BuildingInfoManager.Instance().ShowBuildingInfo(this);
+        //BuildingInfoManager.Instance().ShowBuildingInfo(this);
+
+        if(buildingData.attackData != null)
+        {
+            this.gameObject.GetComponent<SphereCollider>().radius = buildingData.attackData.attackRange;
+        }
     }
 
     // Update is called once per frame
@@ -76,21 +84,36 @@ public class Building : MonoBehaviour {
         if (!buildingActive)
             return;
 
-        //if(resourceTimer.Expired())
-        //{
-        //    ResourceManager.Instance().UpdateResources(buildingData.resourceDeltas, workers);
-        //    resourceTimer.Start(resourceInterval);
-        //}
-        
-        if(attackManager != null && attackManager.AttackReady() && workers > 0)
+        if(lookForNewTarget)
         {
-            GameObject target = Target.GetClosestTarget(this.transform.position, "Enemy");
-            if(target != null && attackManager.InRange(target))
-            {
-                attackManager.Attack(target);
-            }
+            target = Target.GetClosestTarget(this.transform.position, "Enemy");
+            lookForNewTarget = false;
+        }
+
+        if (attackManager != null && target != null && attackManager.AttackReady() && workers > 0)
+        {
+            Debug.Log("Shooting " + target.name);
+            attackManager.Attack(target);
         }
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!buildingActive || target != null || lookForNewTarget)
+            return;
+
+        if(other.gameObject.GetComponent<Enemy>() != null)
+        {
+            target = other.gameObject;
+            target.GetComponent<Health>().OnDeathChange += targetDied;
+        }
+    }
+
+    void targetDied()
+    {
+        target.GetComponent<Health>().OnDeathChange -= targetDied;
+        lookForNewTarget = true;
+    }
 
     public bool IsWall()
     {

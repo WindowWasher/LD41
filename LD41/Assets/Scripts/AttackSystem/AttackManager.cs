@@ -22,12 +22,15 @@ public class AttackManager {
 
     public bool InRange( GameObject target)
     {
-        return Vector3.Distance(target.transform.position, attackerObj.transform.position) <= attackData.attackRange;
+        Vector3 offset = target.transform.position - attackerObj.transform.position;
+        float sqrLen = offset.sqrMagnitude;
+        return sqrLen <= attackData.attackRange * attackData.attackRange;
+            // return Vector3.Distance(target.transform.position, attackerObj.transform.position) <= attackData.attackRange;
     }
 
     public void Attack(GameObject target)
     {
-        Debug.Log("Attacked " + attackerObj.name + "=>" + target.name);
+        //Debug.Log("Attacked " + attackerObj.name + "=>" + target.name);
         
         attackCooldownTimer.Start(attackData.attackCooldown);
 

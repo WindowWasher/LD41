@@ -62,7 +62,7 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 5 + 5 * waveNumber;
+        int numberOfEnemiesToSpawn = 20 + 5 * waveNumber;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         for(int i = 0; i < randomIndexes.Count; ++i)

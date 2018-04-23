@@ -71,7 +71,7 @@ public class BuildingPlacement : MonoBehaviour {
 
         GameObject.FindObjectOfType<UIManager>().updateResources(null);
 
-        BuildingInfoManager.Instance().DisableBuildingPanel();
+        //BuildingInfoManager.Instance().DisableBuildingPanel();
         //gridRef.UpdateGrid();
         startBuildingsCreated = true;
     }

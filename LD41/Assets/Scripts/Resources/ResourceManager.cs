@@ -30,6 +30,9 @@ public class ResourceManager:MonoBehaviour  {
 
     public bool awakened = false;
 
+    public Sprite AttackDamageIcon;
+    public Sprite AttackRangeIcon;
+
     public static ResourceManager Instance()
     {
         return GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
@@ -88,6 +91,28 @@ public class ResourceManager:MonoBehaviour  {
         }
     }
 
+    public void AddPeople(int peopleToAdd)
+    {
+        foreach (var gameObj in Target.GetActiveBuildingObjs())
+        {
+            Building building = gameObj.GetComponent<Building>();
+            if (building.workers < building.buildingData.maxWorkerSize)
+            {
+                int buildingAddtion = Mathf.Min(building.buildingData.maxWorkerSize - building.workers, peopleToAdd);
+                building.workers += buildingAddtion;
+                peopleToAdd -= buildingAddtion;
+            }
+        }
+
+        if(peopleToAdd > 0)
+        {
+            Add(Resource.People, peopleToAdd);
+
+        }
+    }
+
+
+
     public void UpdateResources()
     {
         Dictionary<Resource, int> updates = new Dictionary<Resource, int>();
@@ -137,7 +162,14 @@ public class ResourceManager:MonoBehaviour  {
     {
         foreach(ResourceDelta delta in resourceDeltas.Where(d=>d.oneTimeChange))
         {
-            this.Add(delta.resource, delta.amount);
+            if (delta.resource == Resource.People)
+            {
+                AddPeople(delta.amount);
+            }
+            else
+            {
+                this.Add(delta.resource, delta.amount);
+            }
         }
     }
 

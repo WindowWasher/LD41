@@ -21,22 +21,22 @@ public class BuildingInfoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        buildingPanel = GameObject.Find("BuildingInfoPanel");
+        //buildingPanel = GameObject.Find("BuildingInfoPanel");
 
-        buildingImage = GameObject.Find("BuildingInfoImage").GetComponent<Image>();
-        buildingName = GameObject.Find("BuildingInfoName").GetComponent<Text>();
-        //PeopleImage = GameObject.Find("PeopleImage").GetComponent<Image>();
-        PeopleUsage = GameObject.Find("PeopleInfoUsage").GetComponent<Text>();
-        PeopleMinusButton = GameObject.Find("PeopleInfoMinusButton").GetComponent<Button>();
-        PeoplePlusButton = GameObject.Find("PeopleInfoPlusButton").GetComponent<Button>();
-        resourceDetailPanel = GameObject.Find("ResourceInfoDetailPanel");
+        //buildingImage = GameObject.Find("BuildingInfoImage").GetComponent<Image>();
+        //buildingName = GameObject.Find("BuildingInfoName").GetComponent<Text>();
+        ////PeopleImage = GameObject.Find("PeopleImage").GetComponent<Image>();
+        //PeopleUsage = GameObject.Find("PeopleInfoUsage").GetComponent<Text>();
+        //PeopleMinusButton = GameObject.Find("PeopleInfoMinusButton").GetComponent<Button>();
+        //PeoplePlusButton = GameObject.Find("PeopleInfoPlusButton").GetComponent<Button>();
+        //resourceDetailPanel = GameObject.Find("ResourceInfoDetailPanel");
 
-        PeopleMinusButton.onClick.AddListener(MinusButtonClicked);
-        PeoplePlusButton.onClick.AddListener(PlusButtonClicked);
+        //PeopleMinusButton.onClick.AddListener(MinusButtonClicked);
+        //PeoplePlusButton.onClick.AddListener(PlusButtonClicked);
 
 
 
-        DisableBuildingPanel();
+        //DisableBuildingPanel();
 
     }
 
@@ -56,30 +56,30 @@ public class BuildingInfoManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (buildingPanel.activeSelf && !EventSystem.current.IsPointerOverGameObject())
-            {
-                DisableBuildingPanel();
-            }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (buildingPanel.activeSelf && !EventSystem.current.IsPointerOverGameObject())
+        //    {
+        //        DisableBuildingPanel();
+        //    }
 
-            BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
-            if(!buildingPlacement.isBuilding)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    Building building = hit.transform.gameObject.GetComponent<Building>();
-                    if (building)
-                    {
-                        ShowBuildingInfo(building);
-                    }
-                }
-            }
+        //    BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+        //    if(!buildingPlacement.isBuilding)
+        //    {
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(ray, out hit, 100))
+        //        {
+        //            Building building = hit.transform.gameObject.GetComponent<Building>();
+        //            if (building)
+        //            {
+        //                ShowBuildingInfo(building);
+        //            }
+        //        }
+        //    }
 
             
-        }
+        //}
 		
 	}
 
