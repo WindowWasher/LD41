@@ -9,8 +9,6 @@ public class BuildingPlacement : MonoBehaviour {
     [HideInInspector]
     public BuildingData buildingData;
     public GridManager gridRef;
-    public Canvas placementCanvas;
-    public Image placementImage;
     public Sprite canPlaceGraphic;
     public Sprite cantPlaceGraphic;
 
@@ -22,10 +20,7 @@ public class BuildingPlacement : MonoBehaviour {
     public event OnBuildingCreation OnBuildingCreationAction;
 
     private GameObject buildingRef;
-	// Use this for initialization
-	void Start () {
-        placementCanvas.enabled = false;
-	}
+    private Building buildingComp;
 
     public void BeginPlacingBuilding()
     {
@@ -33,10 +28,8 @@ public class BuildingPlacement : MonoBehaviour {
             Destroy(buildingRef);
         isBuilding = true;
         buildingRef = GameObject.Instantiate(buildingData.building, gridRef.getMouseToNodeBottomLeftWorld(), Quaternion.identity);
-        placementCanvas.transform.position = gridRef.getMouseToNodeBottomLeftWorld();
-        placementCanvas.enabled = true;
-        placementImage.enabled = true;
-        placementCanvas.transform.localScale = buildingData.gridSize;
+        buildingComp = buildingRef.GetComponent<Building>();
+        buildingComp.placementCanvas.enabled = true;
     }
 
     public void PlaceStartBuildings()
@@ -64,7 +57,6 @@ public class BuildingPlacement : MonoBehaviour {
 
         foreach (GameObject bObj in nonHouseObjs)
         {
-            Debug.Log(bObj.name);
             PlaceBeginningBuilding(bObj);
         }
 
@@ -87,6 +79,7 @@ public class BuildingPlacement : MonoBehaviour {
     public void PlaceBeginningBuilding(GameObject buildingObj)
     {
         Building newBuilding = buildingObj.GetComponent<Building>();
+        newBuilding.placementCanvas.enabled = false;
 
         Node startNode = gridRef.NodeFromWorldPoint(buildingObj.transform.position);
         buildingObj.transform.position = startNode.worldBottomLeft;
@@ -126,16 +119,14 @@ public class BuildingPlacement : MonoBehaviour {
             }
 
             // Disable everything and set buildingRef to null
-            placementCanvas.enabled = false;
-            placementImage.enabled = false;
+            buildingComp.placementCanvas.enabled = false;
             buildingRef = null;
+            buildingComp = null;
 
             if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift) || !ResourceManager.Instance().CanAffordOneTimeCost(buildingData))
                 isBuilding = false;
             else
                 BeginPlacingBuilding();
-
-            
         }
 
         // Right click to clear building selection
@@ -144,9 +135,9 @@ public class BuildingPlacement : MonoBehaviour {
             if (buildingRef != null)
                 Destroy(buildingRef);
             isBuilding = false;
-            placementCanvas.enabled = false;
-            placementImage.enabled = false;
+            buildingComp.placementCanvas.enabled = false;
             buildingRef = null;
+            buildingComp = null;
         }
         else if (Input.GetMouseButtonDown(1) && !isBuilding)
         {
@@ -167,12 +158,11 @@ public class BuildingPlacement : MonoBehaviour {
         if (isBuilding && buildingRef)
         {
             buildingRef.transform.position = mouseNode.worldBottomLeft; 
-            placementCanvas.transform.position = mouseNode.worldBottomLeft;
 
             if (gridRef.CanPlaceBuilding(buildingData.gridSize, mouseNode))
-                placementImage.sprite = canPlaceGraphic;
+                buildingComp.placementImage.sprite = canPlaceGraphic;
             else
-                placementImage.sprite = cantPlaceGraphic;
+                buildingComp.placementImage.sprite = cantPlaceGraphic;
         }
     }
 }
