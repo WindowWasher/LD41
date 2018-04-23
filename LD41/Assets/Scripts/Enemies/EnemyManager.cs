@@ -54,7 +54,6 @@ public class EnemyManager : MonoBehaviour {
 
     void SpawnWave()
     {
-        return;
         //List<GameObject> currentSpawnPoints = new List<GameObject>();
         //foreach(var spawnP in spawnPoints)
         //{
