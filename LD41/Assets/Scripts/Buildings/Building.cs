@@ -29,6 +29,7 @@ public class Building : MonoBehaviour {
 
     public Timer checkForTargets = new Timer();
 
+    public int enemyAttackerCount = 0;
 	// Use this for initialization
 	void Start () {
         health = GetComponent<Health>();

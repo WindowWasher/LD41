@@ -20,10 +20,17 @@ public class EnemyManager : MonoBehaviour {
 
     GameObject waveCountPanel;
 
-    int waveNumber = 1;
+    int waveNumber = 10;
     //int numPerWave = 5;
     int lastWaveCount = 0;
     bool waveRunning = false;
+
+    //public Dictionary<GameObject, List<GameObject>> enemyObjectPool;
+
+    //void CreateEnemy(GameObject enemyPrefab)
+    //{
+    //    if(enemyObjectPool.ha)
+    //}
 
 	// Use this for initialization
 	void Start () {
