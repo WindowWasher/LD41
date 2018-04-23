@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour {
     public List<Building> buildingChanges = new List<Building>();
 
     bool stoppedLastTime = false;
+    bool lockedOn = false;
 
 
     // Use this for initialization
@@ -111,7 +112,7 @@ public class Enemy : MonoBehaviour {
 
     void setTarget(GameObject target)
     {
-        Debug.Log("New Target " + target.name);
+        //Debug.Log("New Target " + target.name);
         attacking = false;
         stoppedLastTime = false;
         if (!agent.isOnNavMesh)
@@ -157,8 +158,8 @@ public class Enemy : MonoBehaviour {
 
     public Vector3 GetRandomTargetPosition(GameObject buildObj)
     {
-        float xVal = buildObj.GetComponent<Renderer>().bounds.size.x / 2;
-        float zVal = buildObj.GetComponent<Renderer>().bounds.size.z / 2;
+        float xVal = buildObj.GetComponent<Renderer>().bounds.size.x / 4;
+        float zVal = buildObj.GetComponent<Renderer>().bounds.size.z / 4;
         //Debug.Log("X: " + xVal);
         //Debug.Log("Z: " + zVal);
         Vector3 randomPoint =  new Vector3(
@@ -177,6 +178,7 @@ public class Enemy : MonoBehaviour {
     void targetDestroyed()
     {
         target = null;
+        lockedOn = false;
     }
 
 
@@ -226,17 +228,17 @@ public class Enemy : MonoBehaviour {
                 {
                     agent.isStopped = false;
                 }
-                if (agent.velocity == Vector3.zero)
-                {
-                    if(stoppedLastTime)
-                    {
-                        setTarget(Target.GetClosestTarget(this.transform.position, "Building"));
-                    }
-                    else
-                    {
-                        stoppedLastTime = true;
-                    }
-                }
+                //if (agent.velocity == Vector3.zero)
+                //{
+                //    if(stoppedLastTime)
+                //    {
+                //        setTarget(Target.GetClosestTarget(this.transform.position, "Building"));
+                //    }
+                //    else
+                //    {
+                //        stoppedLastTime = true;
+                //    }
+                //}
             }
             
             
@@ -249,9 +251,20 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         Building building = other.gameObject.GetComponent<Building>();
-        if (building != null)
+        if (building != null && !lockedOn)
         {
             setTarget(other.gameObject);
+            attacking = true;
+            lockedOn = true;
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other == target)
+        {
+            lockedOn = false;
         }
     }
 
