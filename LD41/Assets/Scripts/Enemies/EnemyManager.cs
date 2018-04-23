@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour {
     public List<GameObject> enemyPrefabs;
 
     int waveNumber = 0;
+    int numPerWave = 5;
     bool waveRunning = false;
 
 	// Use this for initialization
@@ -65,7 +66,8 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 200 + 5 * waveNumber;
+        int numberOfEnemiesToSpawn = 5 + numPerWave * waveNumber;
+        numPerWave += 1; //Add some addtiona scaling
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         List<GameObject> selectedSpawnPoints = new List<GameObject>();

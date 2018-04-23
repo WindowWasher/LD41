@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: People
   resourceEnum: 0
-  initialCount: 1000000
-  count: 999908
+  initialCount: 10000
+  count: 56
   hudImage: {fileID: 21300000, guid: ce9c5ad11a836d746a111927b2ba5a31, type: 3}

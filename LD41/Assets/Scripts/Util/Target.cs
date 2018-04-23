@@ -16,7 +16,7 @@ public class Target {
             if (range != null && currentDistanceSq > range * range)
                 continue;
 
-            if (minDistance == null || currentDistanceSq < minDistance * minDistance)
+            if (minDistance == null || currentDistanceSq < minDistance)
             {
                 minDistance = currentDistanceSq;
                 target = buildingObj;
