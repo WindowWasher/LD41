@@ -90,7 +90,7 @@ public class EnemyManager : MonoBehaviour {
         }
 
         //int numberOfEnemiesToSpawn = 200* 5 + numPerWave * waveNumber;
-        int numberOfEnemiesToSpawn = 200 * lastWaveCount + waveNumber * 2;
+        int numberOfEnemiesToSpawn = lastWaveCount + waveNumber * 2;
         if (waveNumber == 1)
         {
             numberOfSpawnLocations = 2;

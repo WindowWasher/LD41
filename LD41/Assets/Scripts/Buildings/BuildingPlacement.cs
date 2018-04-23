@@ -16,6 +16,9 @@ public class BuildingPlacement : MonoBehaviour {
 
     public bool startBuildingsCreated = false;
 
+    public AudioSource source;
+    public AudioClip clip;
+
     public delegate void OnBuildingCreation(Building building);
     public event OnBuildingCreation OnBuildingCreationAction;
 
@@ -130,6 +133,9 @@ public class BuildingPlacement : MonoBehaviour {
                 isBuilding = false;
             else
                 BeginPlacingBuilding();
+
+            if (!source.isPlaying)
+                source.Play();
         }
 
         // Right click to clear building selection
