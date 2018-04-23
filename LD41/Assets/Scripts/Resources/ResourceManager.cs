@@ -25,6 +25,8 @@ public class ResourceManager:MonoBehaviour  {
     public Timer peopleStarveTimer = new Timer();
     private float starveLength;
 
+    public Timer unstartTimer = new Timer();
+
     public Timer resourceIntervalTimer = new Timer();
     private float resourceTick = 1f;
 
@@ -32,6 +34,8 @@ public class ResourceManager:MonoBehaviour  {
 
     public Sprite AttackDamageIcon;
     public Sprite AttackRangeIcon;
+
+    public int houseSpaceAvailable = 0;
 
     public static ResourceManager Instance()
     {
@@ -57,11 +61,13 @@ public class ResourceManager:MonoBehaviour  {
 
     public void KillPeople(int peopleToKill)
     {
+        houseSpaceAvailable += peopleToKill;
         Debug.Log("Killing " + peopleToKill);
         int availableWorkers = GetAvailableWorkers();
         int killedAvailableWorkers = Mathf.Min(availableWorkers, peopleToKill);
         peopleToKill -= killedAvailableWorkers;
         Add(Resource.People, -killedAvailableWorkers);
+        
         while (peopleToKill > 0)
         {
             bool changeMade = false;
@@ -72,6 +78,10 @@ public class ResourceManager:MonoBehaviour  {
                 {
                     changeMade = true;
                     building.workers -= 1;
+                    //if(building.workers == 0)
+                    //{
+                    //    building.Die();
+                    //}
                     peopleToKill -= 1;
                     //Add(Resource.People, -1);
                     if (peopleToKill <= 0)
@@ -220,7 +230,7 @@ public class ResourceManager:MonoBehaviour  {
             totalWorkers += building.workers;
 
         }
-        return totalWorkers;
+        return totalWorkers + houseSpaceAvailable;
     }
 
     public int GetAvailableWorkers()
@@ -234,15 +244,38 @@ public class ResourceManager:MonoBehaviour  {
 
     private void Update()
     {
-        if(resources[Resource.Food].count < 0 && peopleStarveTimer.Expired())
+        if(resources[Resource.Food].count < 0)
         {
-            KillPeople(1);
-            starveLength -= 1;
-            peopleStarveTimer.Start(starveLength);
+            if(peopleStarveTimer.Expired())
+            {
+                KillPeople(1);
+                starveLength -= 1;
+                peopleStarveTimer.Start(starveLength);
+            }
+
+            //if (resources[Resource.People].count > 5)
+            //{
+            //    starveLength = 1;
+            //}
+            //else
+            //{
+            //    KillPeople(10);
+            //    starveLength = 100;
+            //}
         }
         else
         {
-            starveLength = 30;
+            starveLength = 15;
+            if(unstartTimer.Expired())
+            {
+                unstartTimer.Start(starveLength);
+                if(houseSpaceAvailable > 0)
+                {
+                    this.AddPeople(1);
+                    houseSpaceAvailable -=1;
+                }
+            }
+            
         }
 
         if(resourceIntervalTimer.Expired())

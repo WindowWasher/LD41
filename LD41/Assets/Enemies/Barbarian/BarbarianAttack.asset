@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: BarbarianAttack
   m_EditorClassIdentifier: 
   attackRange: 1.5
-  attackDamage: 20
+  attackDamage: 30
   attackCooldown: 1
   rangedAttackPrefab: {fileID: 0}

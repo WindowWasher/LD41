@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
   m_Name: LongRangeTower
   m_EditorClassIdentifier: 
-  building: {fileID: 1738812920582318, guid: 5cd5c174d5970ff45802c2da49433dd6, type: 2}
+  building: {fileID: 1539839166739304, guid: 5cd5c174d5970ff45802c2da49433dd6, type: 2}
   buildingName: Sniper Tower
   gridSize: {x: 3, y: 3}
   icon: {fileID: 21300000, guid: f7710c42cbc4c484e8b77bf63996eda7, type: 3}

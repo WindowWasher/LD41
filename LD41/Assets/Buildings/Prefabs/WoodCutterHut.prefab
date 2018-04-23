@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add4cf60aca2ed7408572e9a8dcbfe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 60
 --- !u!114 &114227794446591314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,6 +380,7 @@ MonoBehaviour:
   placementCanvas: {fileID: 223865286579785134}
   placementImage: {fileID: 114026886437993912}
   workers: 0
+  target: {fileID: 0}
 --- !u!114 &114647021680086966
 MonoBehaviour:
   m_ObjectHideFlags: 1

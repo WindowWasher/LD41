@@ -27,8 +27,6 @@ public class BuildingSlot : MonoBehaviour {
     bool hovering = false;
     float toolTipTimerWait = 0.5f;
 
-    public GameObject tmpBuilding;
-
 
     public void OnClickBuilding()
     {
@@ -66,6 +64,8 @@ public class BuildingSlot : MonoBehaviour {
 
     private void Start()
     {
+        Debug.Log(buildingData.buildingName);
+
         buildingText.text = buildingData.buildingName;
         buildingImage.sprite = buildingData.icon;
         inactiveImage.enabled = false;
