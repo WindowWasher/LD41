@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour {
     public List<GameObject> enemyPrefabs;
 
     int waveNumber = 0;
+    bool waveRunning = false;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,8 @@ public class EnemyManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(intervalTimer.Expired())
+
+		if(intervalTimer.Expired() && !waveRunning)
         {
             SpawnWave();
         }
@@ -44,6 +46,7 @@ public class EnemyManager : MonoBehaviour {
         //{
         //    currentSpawnPoints.Add(spawnP);
         //}
+        waveRunning = true;
 
         List<int> rangeValues = new List<int>();
         for(int i = 0; i < spawnPoints.Length; ++i)
@@ -62,25 +65,72 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 20 + 5 * waveNumber;
+        int numberOfEnemiesToSpawn = 20000 + 5 * waveNumber;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
+        List<GameObject> selectedSpawnPoints = new List<GameObject>();
         for(int i = 0; i < randomIndexes.Count; ++i)
         {
             var spawnP = spawnPoints[randomIndexes[i]];
-            SpawnEnemiesAtPosition(spawnP.transform.position, enemiesPerWave);
+            selectedSpawnPoints.Add(spawnP);
+            StartCoroutine(SpawnEnemiesAtPosition(spawnP.transform.position, enemiesPerWave));
+            
         }
+        //StartCoroutine(DoSpawning(selectedSpawnPoints, enemiesPerWave));
+
+        intervalTimer.Start(interval);
 
         waveNumber += 1;
     }
 
-    void SpawnEnemiesAtPosition(Vector3 spawnPoint, int numberOfEnemiesToSpawn)
+    //IEnumerator DoSpawning(List<GameObject> spawnPoints, int enemiesPerWave)
+    //{
+    //    Debug.Log("Enemies per wave" + enemiesPerWave.ToString());
+    //    foreach (GameObject spawnPoint in spawnPoints)
+    //    {
+    //        Vector2 localSpawnPoint = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.z);
+
+    //        for (int i = 0; i < enemiesPerWave; ++i)
+    //        {
+    //            //if (i % 2 == 0)
+    //            {
+    //                yield return new WaitForSeconds(5f);
+    //            }
+
+    //            GameObject newEnemyPrefab;
+    //            if (Random.Range(0, 2) == 1)
+    //            {
+    //                newEnemyPrefab = enemyPrefabs[1];
+    //            }
+    //            else
+    //            {
+    //                newEnemyPrefab = enemyPrefabs[0];
+    //            }
+
+    //            Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
+    //            Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, spawnPoint.transform.position.y, enemySpawnPointV2.y);
+
+    //            GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
+
+    //        }
+    //    }
+
+    //}
+
+
+
+    IEnumerator SpawnEnemiesAtPosition(Vector3 spawnPoint, int numberOfEnemiesToSpawn)
     {
         //Vector2 localSpawnPoint = Random.insideUnitCircle.normalized * waveSpawnRadius;
         Vector2 localSpawnPoint = new Vector2(spawnPoint.x, spawnPoint.z);
-        
-        for(int i = 0; i < numberOfEnemiesToSpawn; ++i)
+
+        for (int i = 0; i < numberOfEnemiesToSpawn; ++i)
         {
+            if (i % 2 == 0)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+
             GameObject newEnemyPrefab;
             if (Random.Range(0, 2) == 1)
             {
@@ -90,14 +140,16 @@ public class EnemyManager : MonoBehaviour {
             {
                 newEnemyPrefab = enemyPrefabs[0];
             }
-            
+
             Vector2 enemySpawnPointV2 = (Random.insideUnitCircle.normalized * localSpawnRadius) + localSpawnPoint;
             Vector3 enemySpawnPoint = new Vector3(enemySpawnPointV2.x, spawnPoint.y, enemySpawnPointV2.y);
 
             GameObject.Instantiate(newEnemyPrefab, enemySpawnPoint, Quaternion.identity);
 
         }
-        intervalTimer.Start(interval);
+
+        waveRunning = false;
+
     }
 
     //private void OnDrawGizmos()
