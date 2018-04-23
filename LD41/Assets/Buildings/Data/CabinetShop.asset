@@ -20,7 +20,7 @@ MonoBehaviour:
     amount: 10
     oneTimeChange: 0
   - resource: 2
-    amount: -50
+    amount: -25
     oneTimeChange: 0
   - resource: 3
     amount: -10
@@ -35,3 +35,4 @@ MonoBehaviour:
     amount: -500
     oneTimeChange: 1
   maxWorkerSize: 1
+  attackData: {fileID: 0}

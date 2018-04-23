@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: LongRangeAttack
   m_EditorClassIdentifier: 
   attackRange: 40
-  attackDamage: 10
+  attackDamage: 0
   attackCooldown: 1
   rangedAttackPrefab: {fileID: 1468206951921538, guid: e8cedca8b670c92469f757ca493cb4f5,
     type: 2}

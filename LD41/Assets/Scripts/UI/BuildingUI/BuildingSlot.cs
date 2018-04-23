@@ -27,6 +27,8 @@ public class BuildingSlot : MonoBehaviour {
     bool hovering = false;
     float toolTipTimerWait = 0.5f;
 
+    public GameObject tmpBuilding;
+
 
     public void OnClickBuilding()
     {
@@ -68,7 +70,6 @@ public class BuildingSlot : MonoBehaviour {
         buildingImage.sprite = buildingData.icon;
         inactiveImage.enabled = false;
         buildButton.interactable = true;
-
 
 
         HideToolTipeInfo();
@@ -140,6 +141,14 @@ public class BuildingSlot : MonoBehaviour {
         {
             var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipCostPanel.transform);
             obj.GetComponentInChildren<Text>().text = buildingData.maxWorkerSize.ToString();
+            if(ResourceManager.Instance().resources[Resource.People].count - buildingData.maxWorkerSize < 0)
+            {
+                obj.GetComponentInChildren<Text>().color = Color.red;
+            }
+            else
+            {
+                obj.GetComponentInChildren<Text>().color = Color.white;
+            }
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[Resource.People].hudImage;
         }
 

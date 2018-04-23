@@ -15,6 +15,21 @@ MonoBehaviour:
   buildingName: Sniper Tower
   gridSize: {x: 3, y: 3}
   icon: {fileID: 0}
-  resourceDeltas: []
+  resourceDeltas:
+  - resource: 2
+    amount: -200
+    oneTimeChange: 1
+  - resource: 1
+    amount: -400
+    oneTimeChange: 1
+  - resource: 3
+    amount: -2
+    oneTimeChange: 0
+  - resource: 1
+    amount: -4
+    oneTimeChange: 0
+  - resource: 2
+    amount: -5
+    oneTimeChange: 0
   maxWorkerSize: 1
   attackData: {fileID: 11400000, guid: 55abc5225f305c84abef903fcaab41ef, type: 2}

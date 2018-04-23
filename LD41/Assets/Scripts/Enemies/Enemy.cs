@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
     public MovementData movementData;
     public AttackData attackData;
     public GameObject target = null;
+    private Vector3 targetPosition;
 
     Health health;
     AttackManager attackManager;
@@ -24,6 +25,9 @@ public class Enemy : MonoBehaviour {
     Timer nextRangeCheck = new Timer();
 
     public List<Building> buildingChanges = new List<Building>();
+
+    bool stoppedLastTime = false;
+
 
     // Use this for initialization
     void Start () {
@@ -107,7 +111,9 @@ public class Enemy : MonoBehaviour {
 
     void setTarget(GameObject target)
     {
+        Debug.Log("New Target " + target.name);
         attacking = false;
+        stoppedLastTime = false;
         if (!agent.isOnNavMesh)
         {
             NavMeshHit hit = new NavMeshHit();
@@ -129,8 +135,10 @@ public class Enemy : MonoBehaviour {
         if (target != null)
         {
             //agent.SetDestination(target.transform.position);
-            agent.SetDestination(GetRandomTargetPosition(target));
-            if (!attackManager.InRange(target))
+            targetPosition = GetRandomTargetPosition(target);
+            //targetPosition = target.transform.position;
+            agent.SetDestination(targetPosition);
+            if (!attackManager.InRange(target.transform.position))
             {
                 agent.isStopped = false;
             }
@@ -192,9 +200,14 @@ public class Enemy : MonoBehaviour {
         {
             resetTarget();
         }
+
+        //if(agent.destination == this.transform.position && agent.destination != targetPosition)
+        //{
+        //    agent.SetDestination(targetPosition);
+        //}
         if(target!= null && nextRangeCheck.Expired())
         {
-            if(attacking || attackManager.InRange(target))
+            if(attacking || attackManager.InRange(target.transform.position))
             {
                 attacking = true;
                 if (!agent.isStopped)
@@ -213,6 +226,17 @@ public class Enemy : MonoBehaviour {
                 {
                     agent.isStopped = false;
                 }
+                if (agent.velocity == Vector3.zero)
+                {
+                    if(stoppedLastTime)
+                    {
+                        setTarget(Target.GetClosestTarget(this.transform.position, "Building"));
+                    }
+                    else
+                    {
+                        stoppedLastTime = true;
+                    }
+                }
             }
             
             
@@ -222,7 +246,7 @@ public class Enemy : MonoBehaviour {
         
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         Building building = other.gameObject.GetComponent<Building>();
         if (building != null)

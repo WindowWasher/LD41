@@ -93,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054254494150674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.719711, y: 18.580858, z: -25.47064}
+  m_LocalPosition: {x: -19.5, y: 1.14, z: -20.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224265629950327762}
@@ -246,6 +246,8 @@ MonoBehaviour:
   movementData: {fileID: 11400000, guid: 209a5bde5819c1c4b849a4a62e7390ed, type: 2}
   attackData: {fileID: 11400000, guid: 28332a7e75017f848897c38f46ac23e8, type: 2}
   target: {fileID: 0}
+  alive: 1
+  buildingChanges: []
 --- !u!114 &114837640533531510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,7 +308,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1054254494150674}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 100
   avoidancePriority: 50

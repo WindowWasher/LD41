@@ -20,9 +20,9 @@ public class AttackManager {
         return attackData != null && attackCooldownTimer.Expired();
     }
 
-    public bool InRange( GameObject target)
+    public bool InRange( Vector3 targetPosition)
     {
-        Vector3 offset = target.transform.position - attackerObj.transform.position;
+        Vector3 offset = targetPosition  - attackerObj.transform.position;
         float sqrLen = offset.sqrMagnitude;
         return sqrLen <= attackData.attackRange * attackData.attackRange;
             // return Vector3.Distance(target.transform.position, attackerObj.transform.position) <= attackData.attackRange;

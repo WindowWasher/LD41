@@ -412,11 +412,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 116b108d4243c6340a2c278f1eecf2f5, type: 2}
-  attackData: {fileID: 0}
   buildingActive: 0
   placementCanvas: {fileID: 223126219216262014}
   placementImage: {fileID: 114183108644724996}
   workers: 0
+  target: {fileID: 0}
 --- !u!114 &114713316096227288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,7 +438,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.55, y: 0.73800004, z: 0.55}
+  m_Extents: {x: 0.45, y: 0.73800004, z: 0.45}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1

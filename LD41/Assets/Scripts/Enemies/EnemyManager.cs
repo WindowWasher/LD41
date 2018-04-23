@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyManager : MonoBehaviour {
 
@@ -26,6 +27,8 @@ public class EnemyManager : MonoBehaviour {
 
         //enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
 
+        //intervalTimer.Start(10f);
+
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
         SpawnWave();
@@ -33,12 +36,21 @@ public class EnemyManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if(intervalTimer.Expired() && !waveRunning)
         {
             SpawnWave();
         }
+
+        if(GameObject.FindGameObjectsWithTag("Building").Where(b=>!b.GetComponent<Building>().IsWall()).Count() <= 0)
+        {
+            PlayerLose();
+        }
 	}
+
+    void PlayerLose()
+    {
+        //throw new KeyNotFoundException("You lost!");
+    }
 
     void SpawnWave()
     {
@@ -67,7 +79,14 @@ public class EnemyManager : MonoBehaviour {
 
 
         int numberOfEnemiesToSpawn = 5 + numPerWave * waveNumber;
-        numPerWave += 1; //Add some addtiona scaling
+        if(waveNumber == 0)
+        {
+            numberOfSpawnLocations = 2;
+            numberOfEnemiesToSpawn = 4;
+        }
+        //int numberOfEnemiesToSpawn = 20000 + 5 * waveNumber;
+        numPerWave += waveNumber; //Add some addtiona scaling
+        numPerWave += waveNumber / 10 * 10;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         List<GameObject> selectedSpawnPoints = new List<GameObject>();
@@ -134,7 +153,7 @@ public class EnemyManager : MonoBehaviour {
             }
 
             GameObject newEnemyPrefab;
-            if (Random.Range(0, 2) == 1)
+            if (Random.Range(0, 2) == 1 && waveNumber > 1)
             {
                 newEnemyPrefab = enemyPrefabs[1];
             }
