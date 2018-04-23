@@ -83,7 +83,7 @@ public class RangedAttack : MonoBehaviour
         if(checkTimer.Expired())
         {
             checkTimer.Start(0.2f);
-            Vector3 offset = target.transform.position - target.transform.position;
+            Vector3 offset = this.transform.position - target.transform.position;
             float sqrLen = offset.sqrMagnitude;
             if(sqrLen < 0.15f)
             {
