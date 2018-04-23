@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour {
 
     public List<GameObject> enemyPrefabs;
 
-    int waveNumber = 1;
+    int waveNumber = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -62,7 +62,7 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 15 * waveNumber;
+        int numberOfEnemiesToSpawn = 5 + 5 * waveNumber;
         int enemiesPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //foreach(var spawnP in currentSpawnPoints)
         for(int i = 0; i < randomIndexes.Count; ++i)
@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour {
             GameObject newEnemyPrefab;
             if (Random.Range(0, 2) == 1)
             {
-                newEnemyPrefab = enemyPrefabs[0];
+                newEnemyPrefab = enemyPrefabs[1];
             }
             else
             {
