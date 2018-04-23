@@ -119,6 +119,7 @@ public class GridManager : MonoBehaviour {
         return grid[x, y];
     }
 
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
@@ -135,6 +136,7 @@ public class GridManager : MonoBehaviour {
             }
         }
     }
+    */
 
     public Vector3 getMouseToNodeWorldPos()
     {
