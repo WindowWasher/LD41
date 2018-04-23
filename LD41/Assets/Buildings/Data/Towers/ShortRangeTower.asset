@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
+  m_Name: ShortRangeTower
+  m_EditorClassIdentifier: 
+  building: {fileID: 1947565377960376, guid: b07ecd2f5e0b8e1419229f4f47b168ac, type: 2}
+  buildingName: Cannon Tower
+  gridSize: {x: 2, y: 2}
+  icon: {fileID: 0}
+  resourceDeltas: []
+  maxWorkerSize: 1
+  attackData: {fileID: 11400000, guid: 140360024a871c0489825e62f4862ea7, type: 2}
