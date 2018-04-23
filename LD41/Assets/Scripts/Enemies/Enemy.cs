@@ -281,7 +281,7 @@ public class Enemy : MonoBehaviour {
         //int sightRange = 50;
         
         //List<GameObject> gameObjects = Target.GetBuildingsInRange(this.transform.position, sightRange);
-        List<GameObject> buildingObjects = Target.GetActiveBuildingObjs();
+        List<GameObject> buildingObjects = BuildingInfoManager.instance.getAllActiveBuildings();
         //List<Enemy> allEnemies = EnemyManager.Instance().GetAllEnemies();
 
         //List<GameObject> buildObjsNotFullyTargted = new List<GameObject>();
