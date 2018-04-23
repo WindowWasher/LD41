@@ -13,6 +13,8 @@ public class Building : MonoBehaviour {
 
     AttackManager attackManager = null;
 
+    public AudioClip audioClip;
+
     public bool buildingActive = false;
     private Node buildingStartNode;
 
@@ -97,6 +99,7 @@ public class Building : MonoBehaviour {
         {
             //Debug.Log("Shooting " + target.name);
             attackManager.Attack(target);
+            AudioSource.PlayClipAtPoint(audioClip, transform.position + new Vector3(0, 35, 0), 1f);
         }
 	}
 
