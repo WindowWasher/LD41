@@ -77,7 +77,7 @@ public class RangedAttack : MonoBehaviour
 
     public void Update()
     {
-        if(target == null)
+        if(Target.NullTarget(target))
         {
             Destroy(this.gameObject);
             return;

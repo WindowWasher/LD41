@@ -293,6 +293,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: c0bc52b3fdb31cd4ca3a5ea1af4eb149, type: 3}
   alive: 1
   buildingChanges: []
+  name: Barbarian
 --- !u!114 &114837640533531510
 MonoBehaviour:
   m_ObjectHideFlags: 1

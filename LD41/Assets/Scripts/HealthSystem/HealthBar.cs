@@ -17,12 +17,22 @@ public class HealthBar : MonoBehaviour {
 
     private void OnDisable()
     {
-        health.OnHealthChange -= UpdateHealth;
+        if(health.gameObject.activeSelf)
+        {
+            health.OnHealthChange -= UpdateHealth;
+        }
+        
     }
 
     void UpdateHealth(int currentHealth, int damageTaken)
     {
         healthFg.fillAmount = (float)currentHealth / health.maxHealth;
+    }
+
+    public void Reset()
+    {
+        healthFg.fillAmount = 100;
+        //health.OnHealthChange += UpdateHealth;
     }
 
     private void Update()

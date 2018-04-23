@@ -57,6 +57,11 @@ public class Target {
         return buildingObjs;
         
     }
+
+    public static bool NullTarget(GameObject target)
+    {
+        return target == null || target.activeSelf == false;
+    }
     //GameObject[] GetAllBuildingGameObjs()
     //{
     //    return GameObject.FindGameObjectsWithTag("Building");

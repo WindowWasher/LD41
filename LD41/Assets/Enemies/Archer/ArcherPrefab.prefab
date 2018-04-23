@@ -305,6 +305,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: de33504298c67d04aad738ff5f77a9e1, type: 3}
   alive: 1
   buildingChanges: []
+  name: Archer
 --- !u!114 &114912806412031646
 MonoBehaviour:
   m_ObjectHideFlags: 1
