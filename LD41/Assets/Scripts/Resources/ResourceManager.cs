@@ -133,8 +133,21 @@ public class ResourceManager:MonoBehaviour  {
         foreach (var gameObj in Target.GetActiveBuildingObjs())
         {
             Building building = gameObj.GetComponent<Building>();
+            bool goodsBuilding = false;
             foreach (ResourceDelta delta in building.buildingData.resourceDeltas.Where(d => !d.oneTimeChange))
             {
+                if(delta.resource == Resource.Goods)
+                {
+                    goodsBuilding = true;
+                }
+            }
+            foreach (ResourceDelta delta in building.buildingData.resourceDeltas.Where(d => !d.oneTimeChange))
+            {
+                if (goodsBuilding && resources[Resource.Goods].count <= 0 && (delta.resource == Resource.Goods || delta.resource == Resource.Gold))
+                {
+                    resources[Resource.Goods].count = 0;
+                    continue;
+                }
                 updates[delta.resource] += (delta.amount < 0 ? delta.amount : delta.amount * building.workers);
                 
             }

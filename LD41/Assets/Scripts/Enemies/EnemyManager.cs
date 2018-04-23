@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour {
     //public float waveSpawnRadius;
     //public Vector3 center;
 
-    public float interval;
+    float interval = 45f;
     public float localSpawnRadius;
 
     GameObject[] spawnPoints;
@@ -20,8 +20,9 @@ public class EnemyManager : MonoBehaviour {
 
     GameObject waveCountPanel;
 
-    int waveNumber = 0;
-    int numPerWave = 5;
+    int waveNumber = 1;
+    //int numPerWave = 5;
+    int lastWaveCount = 0;
     bool waveRunning = false;
 
 	// Use this for initialization
@@ -83,12 +84,15 @@ public class EnemyManager : MonoBehaviour {
 
 
 
-        int numberOfEnemiesToSpawn = 200* 5 + numPerWave * waveNumber;
-        if(waveNumber == 0)
+        //int numberOfEnemiesToSpawn = 200* 5 + numPerWave * waveNumber;
+        int numberOfEnemiesToSpawn = lastWaveCount + waveNumber * 2;
+        if (waveNumber == 1)
         {
             numberOfSpawnLocations = 2;
             numberOfEnemiesToSpawn = 2;
         }
+        lastWaveCount = numberOfEnemiesToSpawn;
+        int numPerWave = numberOfEnemiesToSpawn / numberOfSpawnLocations;
         //int numberOfEnemiesToSpawn = 20000 + 5 * waveNumber;
         numPerWave += waveNumber; //Add some addtiona scaling
         numPerWave += waveNumber / 10 * 10;
@@ -158,7 +162,7 @@ public class EnemyManager : MonoBehaviour {
             }
 
             GameObject newEnemyPrefab;
-            if (Random.Range(0, 2) == 1 && waveNumber > 1)
+            if (Random.Range(0, 2) == 1 && waveNumber > 2)
             {
                 newEnemyPrefab = enemyPrefabs[1];
             }

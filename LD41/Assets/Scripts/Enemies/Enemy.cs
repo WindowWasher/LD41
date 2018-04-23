@@ -122,12 +122,13 @@ public class Enemy : MonoBehaviour {
             {
                 this.transform.position = hit.position + new Vector3(0, 5f, 0);
             }
-            
-            //if(!agent.isOnNavMesh)
-            //{
-            //    Die();
-            //    return;
-            //}
+
+            if (!agent.isOnNavMesh)
+            {
+                Debug.Log("Weird? agent not on navmesh");
+                Die();
+                return;
+            }
         }
 
         //if (agent.enabled == false)
