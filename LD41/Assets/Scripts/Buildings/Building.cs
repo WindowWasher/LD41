@@ -44,7 +44,7 @@ public class Building : MonoBehaviour {
 
     public void Die()
     { 
-        Debug.Log(this.name + " died!");
+        //Debug.Log(this.name + " died!");
         ResourceManager.Instance().RemoveOneTimeBenifits(buildingData.resourceDeltas);
         GridManager.instance.SetOccupiedToValue(buildingStartNode, buildingData.gridSize, false);
         ResourceManager.Instance().AddPeople(workers);
