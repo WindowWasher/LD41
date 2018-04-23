@@ -45,16 +45,13 @@ public class BuildingPlacement : MonoBehaviour {
         List<GameObject> nonHouseObjs = new List<GameObject>();
         foreach(GameObject buildingObj in GameObject.FindGameObjectsWithTag("Building"))
         {
-            foreach(var delta in buildingObj.GetComponent<Building>().buildingData.resourceDeltas)
+            if(buildingObj.GetComponent<Building>().buildingData.buildingName == "House")
             {
-                if(delta.oneTimeChange && delta.resource == Resource.People && delta.amount > 0)
-                {
-                    houseObjs.Add(buildingObj);   
-                }
-                else
-                {
-                    nonHouseObjs.Add(buildingObj);
-                }
+                houseObjs.Add(buildingObj);
+            }
+            else
+            {
+                nonHouseObjs.Add(buildingObj);
             }
             
         }
@@ -64,8 +61,10 @@ public class BuildingPlacement : MonoBehaviour {
         {
             PlaceBeginningBuilding(bObj);
         }
+
         foreach (GameObject bObj in nonHouseObjs)
         {
+            Debug.Log(bObj.name);
             PlaceBeginningBuilding(bObj);
         }
 
@@ -90,8 +89,8 @@ public class BuildingPlacement : MonoBehaviour {
         Building newBuilding = buildingObj.GetComponent<Building>();
 
         Node startNode = gridRef.NodeFromWorldPoint(buildingObj.transform.position);
-        gridRef.UpdateGridFromNode(startNode, newBuilding.buildingData.gridSize);
         buildingObj.transform.position = startNode.worldBottomLeft;
+        gridRef.UpdateGridFromNode(startNode, newBuilding.buildingData.gridSize, true);
         newBuilding.BuildingPlaced(startNode);
 
         if (OnBuildingCreationAction != null)
@@ -108,12 +107,18 @@ public class BuildingPlacement : MonoBehaviour {
             PlaceStartBuildings();
         }
 
+        Node mouseNode = gridRef.GetNodeUnderMouse();
+
+        if (mouseNode == null)
+            return;
+
         // Click to place building
         if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData) && !EventSystem.current.IsPointerOverGameObject())
         {
             // Make any updates before disabling everything
-            gridRef.UpdateGridCurrentMousePosition(buildingData.gridSize);
-            buildingRef.GetComponent<Building>().BuildingPlaced(gridRef.GetNodeUnderMouse());
+            buildingRef.GetComponent<Building>().BuildingPlaced(mouseNode);
+            gridRef.UpdateGridFromNode(mouseNode, buildingData.gridSize, true);
+            buildingRef.transform.position = mouseNode.worldBottomLeft; 
 
             if (OnBuildingCreationAction != null)
             {
@@ -161,11 +166,10 @@ public class BuildingPlacement : MonoBehaviour {
 
         if (isBuilding && buildingRef)
         {
-            Vector3 mouseNodeBottomLeftPos = gridRef.getMouseToNodeBottomLeftWorld();
-            buildingRef.transform.position = mouseNodeBottomLeftPos;
-            placementCanvas.transform.position = mouseNodeBottomLeftPos;
+            buildingRef.transform.position = mouseNode.worldBottomLeft; 
+            placementCanvas.transform.position = mouseNode.worldBottomLeft;
 
-            if (gridRef.CanPlaceBuilding(buildingData.gridSize))
+            if (gridRef.CanPlaceBuilding(buildingData.gridSize, mouseNode))
                 placementImage.sprite = canPlaceGraphic;
             else
                 placementImage.sprite = cantPlaceGraphic;
