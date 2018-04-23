@@ -65,6 +65,7 @@ public class RangedAttack : MonoBehaviour
     float speed = 40f;
     GameObject target;
     AttackData attackData;
+    Timer checkTimer = new Timer();
     public void init(GameObject target, AttackData attackData)
     {
         this.target = target;
@@ -79,9 +80,16 @@ public class RangedAttack : MonoBehaviour
             return;
         }
 
-        if(Vector3.Distance(this.transform.position, target.transform.position) < 0.1)
+        if(checkTimer.Expired())
         {
-            Hit();
+            checkTimer.Start(0.2f);
+            Vector3 offset = target.transform.position - target.transform.position;
+            float sqrLen = offset.sqrMagnitude;
+            if(sqrLen < 0.15f)
+            {
+                Hit();
+            }
+            
         }
 
         float step = speed * Time.deltaTime;
