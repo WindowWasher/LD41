@@ -25,7 +25,9 @@ public class Building : MonoBehaviour {
     public int workers;
 
     public GameObject target = null;
-    bool lookForNewTarget = false;
+    //bool lookForNewTarget = false;
+
+    public Timer checkForTargets = new Timer();
 
 	// Use this for initialization
 	void Start () {
@@ -72,10 +74,10 @@ public class Building : MonoBehaviour {
         
         //BuildingInfoManager.Instance().ShowBuildingInfo(this);
 
-        if(buildingData.attackData != null)
-        {
-            this.gameObject.GetComponent<SphereCollider>().radius = buildingData.attackData.attackRange;
-        }
+        //if(buildingData.attackData != null)
+        //{
+        //    this.gameObject.GetComponent<SphereCollider>().radius = buildingData.attackData.attackRange;
+        //}
     }
 
     // Update is called once per frame
@@ -84,36 +86,36 @@ public class Building : MonoBehaviour {
         if (!buildingActive)
             return;
 
-        if(lookForNewTarget)
+        if(buildingData.attackData != null && target == null && checkForTargets.Expired())
         {
+            checkForTargets.Start(1f);
             target = Target.GetClosestTarget(this.transform.position, "Enemy");
-            lookForNewTarget = false;
         }
 
-        if (attackManager != null && target != null && attackManager.AttackReady() && workers > 0)
+        if (buildingData.attackData != null && target != null && attackManager.AttackReady() && workers > 0)
         {
             Debug.Log("Shooting " + target.name);
             attackManager.Attack(target);
         }
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!buildingActive || target != null || lookForNewTarget)
-            return;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!buildingActive || target != null || lookForNewTarget)
+    //        return;
 
-        if(other.gameObject.GetComponent<Enemy>() != null)
-        {
-            target = other.gameObject;
-            target.GetComponent<Health>().OnDeathChange += targetDied;
-        }
-    }
+    //    if(other.gameObject.GetComponent<Enemy>() != null)
+    //    {
+    //        target = other.gameObject;
+    //        target.GetComponent<Health>().OnDeathChange += targetDied;
+    //    }
+    //}
 
-    void targetDied()
-    {
-        target.GetComponent<Health>().OnDeathChange -= targetDied;
-        lookForNewTarget = true;
-    }
+    //void targetDied()
+    //{
+    //    target.GetComponent<Health>().OnDeathChange -= targetDied;
+    //    lookForNewTarget = true;
+    //}
 
     public bool IsWall()
     {
