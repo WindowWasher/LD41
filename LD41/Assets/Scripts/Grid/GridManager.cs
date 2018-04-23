@@ -82,15 +82,10 @@ public class GridManager : MonoBehaviour {
         return mouseOverNode;
     }
 
-    public void UpdateGridCurrentMousePosition(Vector2 size)
-    {
-        UpdateGridFromNode(mouseOverNode, size);
-    }
-
-    public void UpdateGridFromNode(Node startNode, Vector2 size)
+    public void UpdateGridFromNode(Node startNode, Vector2 size, bool occupiedState)
     {
 
-        SetOccupiedToValue(startNode, size, true);
+        SetOccupiedToValue(startNode, size, occupiedState);
         return;
 
 
@@ -157,13 +152,18 @@ public class GridManager : MonoBehaviour {
             return NodeFromWorldPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).worldBottomLeft;
     }
 
-    public bool CanPlaceBuilding(Vector2 size)
+    public bool CanPlaceBuilding(Vector2 size, Node optionalStartNode=null)
     {
-        if (mouseOverNode == null)
+        if (mouseOverNode == null && optionalStartNode == null)
             return false;
 
-        int x = mouseOverNode.xPos;
-        int y = mouseOverNode.yPos;
+        Node currNode = mouseOverNode;
+
+        if (optionalStartNode != null)
+            currNode = optionalStartNode;
+
+        int x = currNode.xPos;
+        int y = currNode.yPos;
 
         // Subtract 1 from size.x and size.y to be sure that we can make checks along the grid boundaries
         if (size.x - 1 + x < gridSizeX && size.y - 1 + y < gridSizeY)
