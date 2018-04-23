@@ -53,10 +53,6 @@ public class EnemyManager : MonoBehaviour {
             SpawnWave();
         }
 
-        if(BuildingInfoManager.instance.getAllActiveBuildings().Where(b=>!b.GetComponent<Building>().IsWall()).Count() <= 0)
-        {
-            PlayerLose();
-        }
 	}
 
     void PlayerLose()

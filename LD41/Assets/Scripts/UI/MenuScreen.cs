@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MenuScreen : MonoBehaviour {
 
@@ -23,7 +24,13 @@ public class MenuScreen : MonoBehaviour {
         {
             menuPanel.SetActive(!menuPanel.activeSelf);
         }
-	}
+
+        if (BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)
+        {
+            menuPanel.SetActive(true);
+            menuText.text = "You Loose";
+        }
+    }
 
     public void OnRestartButton()
     {

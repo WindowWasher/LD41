@@ -302,6 +302,7 @@ MonoBehaviour:
   movementData: {fileID: 11400000, guid: fde09642d65cb1440a5beedfb2f11597, type: 2}
   attackData: {fileID: 11400000, guid: 023ddd4947fb36a4a91b3a3b7d8abe86, type: 2}
   target: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: de33504298c67d04aad738ff5f77a9e1, type: 3}
   alive: 1
   buildingChanges: []
 --- !u!114 &114912806412031646

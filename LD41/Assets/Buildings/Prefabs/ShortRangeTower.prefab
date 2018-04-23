@@ -234,11 +234,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: 39e58ff4190dc254497ad17db7790e77, type: 2}
+  audioClip: {fileID: 8300000, guid: ff951f785a5958949a70ffeddc378b2f, type: 3}
   buildingActive: 0
   placementCanvas: {fileID: 223904439812974970}
   placementImage: {fileID: 114399614502309866}
   workers: 0
   target: {fileID: 0}
+  enemyAttackerCount: 0
 --- !u!114 &114099279409881730
 MonoBehaviour:
   m_ObjectHideFlags: 1
