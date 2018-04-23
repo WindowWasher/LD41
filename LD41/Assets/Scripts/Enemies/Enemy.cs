@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour {
     public GameObject target = null;
     private Vector3 targetPosition;
 
+
+    public AudioClip audioClip;
     Health health;
     AttackManager attackManager;
 
@@ -261,6 +263,7 @@ public class Enemy : MonoBehaviour {
                 if (attackManager.AttackReady())
                 {
                     attackManager.Attack(target);
+                    AudioSource.PlayClipAtPoint(audioClip, transform.position + new Vector3(0, 25,0), 1.0f);
                 }
             }
             else

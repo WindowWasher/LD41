@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour {
             SpawnWave();
         }
 
-        if(GameObject.FindGameObjectsWithTag("Building").Where(b=>!b.GetComponent<Building>().IsWall()).Count() <= 0)
+        if(BuildingInfoManager.instance.getAllActiveBuildings().Where(b=>!b.GetComponent<Building>().IsWall()).Count() <= 0)
         {
             PlayerLose();
         }
@@ -120,10 +120,8 @@ public class EnemyManager : MonoBehaviour {
             rangeValues.RemoveAt(index);
         }
 
-
-
         //int numberOfEnemiesToSpawn = 200* 5 + numPerWave * waveNumber;
-        int numberOfEnemiesToSpawn = 200 * lastWaveCount + waveNumber * 2;
+        int numberOfEnemiesToSpawn = lastWaveCount + waveNumber * 2;
         if (waveNumber == 1)
         {
             numberOfSpawnLocations = 2;
