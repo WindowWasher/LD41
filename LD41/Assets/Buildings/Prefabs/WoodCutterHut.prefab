@@ -59,9 +59,9 @@ GameObject:
   - component: {fileID: 65209725971537608}
   - component: {fileID: 114568004592088646}
   - component: {fileID: 114064238168456742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WoodCutterHut
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 224517248366767838}
   - component: {fileID: 223865286579785134}
   - component: {fileID: 114971266312878076}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PlacementCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 224120378064656458}
   - component: {fileID: 222825622576209066}
   - component: {fileID: 114026886437993912}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PlacementImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

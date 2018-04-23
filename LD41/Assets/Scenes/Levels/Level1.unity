@@ -4956,7 +4956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ba0ca559e879645a36b1bf8f309189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingData: {fileID: 11400000, guid: beaf1bbcb03b3074497de5e894d75b6b, type: 2}
+  buildingData: {fileID: 11400000, guid: 92ef597103d96a749acb1a984533604a, type: 2}
   buildingImage: {fileID: 1742785508}
   inactiveImage: {fileID: 515735415}
   buildButton: {fileID: 1742785507}
