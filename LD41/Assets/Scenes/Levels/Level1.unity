@@ -1936,8 +1936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3276d58dd56c63540a7ec45b0e68b14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 100
-  minZoom: 30
+  maxZoom: 40
+  minZoom: 10
   zoomSpeed: 200
   scrollSpeed: 50
   edgeDistanceForMouseScroll: 5
