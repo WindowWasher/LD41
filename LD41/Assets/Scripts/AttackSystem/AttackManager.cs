@@ -37,7 +37,7 @@ public class AttackManager {
         if(attackData.rangedAttackPrefab != null)
         {
             var rangedAttackObj = GameObject.Instantiate(attackData.rangedAttackPrefab);
-            rangedAttackObj.transform.position = attackerObj.transform.position;
+            rangedAttackObj.transform.position = attackerObj.GetComponentInChildren<HealthBar>().transform.position;
             rangedAttackObj.transform.LookAt(target.transform.position);
             rangedAttackObj.AddComponent<RangedAttack>();
             rangedAttackObj.GetComponent<RangedAttack>().init(target, attackData);
@@ -64,12 +64,15 @@ public class RangedAttack : MonoBehaviour
 {
     float speed = 40f;
     GameObject target;
+    GameObject targetHealth;
     AttackData attackData;
     Timer checkTimer = new Timer();
+    Vector3 lastPosition = Vector3.zero;
     public void init(GameObject target, AttackData attackData)
     {
         this.target = target;
         this.attackData = attackData;
+        this.targetHealth = target.GetComponentInChildren<HealthBar>().gameObject;
     }
 
     public void Update()
@@ -83,17 +86,26 @@ public class RangedAttack : MonoBehaviour
         if(checkTimer.Expired())
         {
             checkTimer.Start(0.2f);
-            Vector3 offset = this.transform.position - target.transform.position;
+            Vector3 offset = this.transform.position - targetHealth.transform.position - new Vector3(0, 2, 0);
             float sqrLen = offset.sqrMagnitude;
-            if(sqrLen < 0.15f)
+            if(sqrLen < 0.5f)
             {
                 Hit();
             }
             
         }
 
+        if(this.transform.position == lastPosition)
+        {
+            Hit();
+        }
+        else
+        {
+            lastPosition = this.transform.position;
+        }
+
         float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, targetHealth.transform.position - new Vector3(0, 2, 0), step);
     }
 
     private void Hit()
