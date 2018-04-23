@@ -76,15 +76,26 @@ public class RangedAttack : MonoBehaviour
             return;
         }
 
+        if(Vector3.Distance(this.transform.position, target.transform.position) < 0.1)
+        {
+            Hit();
+        }
+
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+    }
+
+    private void Hit()
+    {
+        target.GetComponent<Health>().Damage(attackData.attackDamage);
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == target)
         {
-            target.GetComponent<Health>().Damage(attackData.attackDamage);
+            Hit();
         }
     }
 

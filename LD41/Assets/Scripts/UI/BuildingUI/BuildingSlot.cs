@@ -137,7 +137,7 @@ public class BuildingSlot : MonoBehaviour {
         }
 
         // Cost
-        foreach (var delta in buildingData.resourceDeltas)
+        foreach (var delta in ResourceManager.SortResourceList(buildingData.resourceDeltas))
         {
             if (!delta.oneTimeChange || delta.amount > 0)
                 continue;
@@ -147,14 +147,15 @@ public class BuildingSlot : MonoBehaviour {
         }
 
         // Output
-        foreach (var delta in buildingData.resourceDeltas)
+        foreach (var delta in ResourceManager.SortResourceList(buildingData.resourceDeltas))
         {
-            if (delta.oneTimeChange && delta.amount < 0)
+            if (delta.oneTimeChange && delta.amount <0)
                 continue;
 
-            string intervalDataStr = string.Format("{0}{1}", (delta.amount <= 0 ? "" : "+"), delta.amount);
-            if (!delta.oneTimeChange)
-                intervalDataStr += "/worker";
+            int workerSize = Mathf.Max(buildingData.maxWorkerSize, 1);
+            string intervalDataStr = string.Format("{0}{1}", (delta.amount <= 0 ? "" : "+"), delta.amount * workerSize);
+            //if (!delta.oneTimeChange)
+            //    intervalDataStr += "/worker";
             var obj = GameObject.Instantiate(resourceDeltaListItem, toolTipOutputPanel.transform);
             obj.GetComponentInChildren<Text>().text = intervalDataStr;
             obj.GetComponentInChildren<Image>().sprite = ResourceManager.Instance().resources[delta.resource].hudImage;

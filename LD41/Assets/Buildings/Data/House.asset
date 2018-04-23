@@ -16,10 +16,13 @@ MonoBehaviour:
   gridSize: {x: 2, y: 2}
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   resourceDeltas:
-  - resource: 4
-    amount: -25
-    oneTimeChange: 1
   - resource: 0
-    amount: 10
+    amount: 5
+    oneTimeChange: 1
+  - resource: 5
+    amount: -15
+    oneTimeChange: 0
+  - resource: 2
+    amount: -50
     oneTimeChange: 1
   maxWorkerSize: 0
