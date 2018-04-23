@@ -106,7 +106,7 @@ public class BuildingPlacement : MonoBehaviour {
             return;
 
         // Click to place building
-        if (Input.GetMouseButtonDown(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButton(0) && isBuilding && gridRef.CanPlaceBuilding(buildingData.gridSize) && ResourceManager.Instance().CanAffordOneTimeCost(buildingData) && !EventSystem.current.IsPointerOverGameObject())
         {
             // Make any updates before disabling everything
             buildingRef.GetComponent<Building>().BuildingPlaced(mouseNode);

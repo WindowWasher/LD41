@@ -14,5 +14,5 @@ MonoBehaviour:
   resourceName: Food
   resourceEnum: 5
   initialCount: 100
-  count: 56
+  count: 214750079
   hudImage: {fileID: 21300000, guid: de203dee2f67f3446a6bafe8b1ef81e9, type: 3}

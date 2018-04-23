@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efe07703d298374eb8633cdcbbf8cd2, type: 3}
+  m_Name: LongRangeTower
+  m_EditorClassIdentifier: 
+  building: {fileID: 1738812920582318, guid: 5cd5c174d5970ff45802c2da49433dd6, type: 2}
+  buildingName: Sniper Tower
+  gridSize: {x: 3, y: 3}
+  icon: {fileID: 0}
+  resourceDeltas: []
+  maxWorkerSize: 1
+  attackData: {fileID: 11400000, guid: 55abc5225f305c84abef903fcaab41ef, type: 2}
