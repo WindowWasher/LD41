@@ -122,11 +122,12 @@ public class Enemy : MonoBehaviour {
             {
                 this.transform.position = hit.position + new Vector3(0, 5f, 0);
             }
-            else
-            {
-                Die();
-                return;
-            }
+            
+            //if(!agent.isOnNavMesh)
+            //{
+            //    Die();
+            //    return;
+            //}
         }
 
         //if (agent.enabled == false)

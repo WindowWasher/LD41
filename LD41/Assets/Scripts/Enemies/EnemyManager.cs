@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class EnemyManager : MonoBehaviour {
 
     public List<GameObject> enemyPrefabs;
 
+    GameObject waveCountPanel;
+
     int waveNumber = 0;
     int numPerWave = 5;
     bool waveRunning = false;
@@ -28,6 +31,7 @@ public class EnemyManager : MonoBehaviour {
         //enemyPrefabs.Add((GameObject)Resources.Load("Enemies/Barbarian"));
 
         //intervalTimer.Start(10f);
+        waveCountPanel = GameObject.Find("WaveCountPanel");
 
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
@@ -54,7 +58,6 @@ public class EnemyManager : MonoBehaviour {
 
     void SpawnWave()
     {
-        return;
         //List<GameObject> currentSpawnPoints = new List<GameObject>();
         //foreach(var spawnP in spawnPoints)
         //{
@@ -69,6 +72,7 @@ public class EnemyManager : MonoBehaviour {
         }
 
         int numberOfSpawnLocations = 3;
+        //int numberOfSpawnLocations = spawnPoints.Length;
         List<int> randomIndexes = new List<int>();
         for(int i = 0; i < numberOfSpawnLocations; i++)
         {
@@ -83,7 +87,7 @@ public class EnemyManager : MonoBehaviour {
         if(waveNumber == 0)
         {
             numberOfSpawnLocations = 2;
-            numberOfEnemiesToSpawn = 4;
+            numberOfEnemiesToSpawn = 2;
         }
         //int numberOfEnemiesToSpawn = 20000 + 5 * waveNumber;
         numPerWave += waveNumber; //Add some addtiona scaling
@@ -101,7 +105,7 @@ public class EnemyManager : MonoBehaviour {
         //StartCoroutine(DoSpawning(selectedSpawnPoints, enemiesPerWave));
 
         intervalTimer.Start(interval);
-
+        waveCountPanel.GetComponentInChildren<Text>().text = "Wave: " + waveNumber.ToString();
         waveNumber += 1;
     }
 

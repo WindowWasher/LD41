@@ -132,7 +132,7 @@ public class BuildingSlot : MonoBehaviour {
     public void ShowToolTipInfo()
     {
         toolTip.SetActive(true);
-        toolTip.transform.position = this.transform.position + new Vector3(150, 250, 0);
+        toolTip.transform.position = this.transform.position + new Vector3(175, 250, 0);
 
         ToolTipBuildingName.text = buildingData.buildingName;
         toolTipPeopleUsage.text = "Max: " + buildingData.maxWorkerSize.ToString();
