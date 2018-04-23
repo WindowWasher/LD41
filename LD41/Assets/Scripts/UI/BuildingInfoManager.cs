@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +8,10 @@ public class BuildingInfoManager : MonoBehaviour {
 
     public GameObject resourceDeltaListItem;
 
+    public List<GameObject> activeBuildings = new List<GameObject>();
+    private List<GameObject> inactiveBuildings = new List<GameObject>();
+
+    public static BuildingInfoManager instance;
     GameObject buildingPanel;
     Image buildingImage;
     Text buildingName;
@@ -19,8 +23,14 @@ public class BuildingInfoManager : MonoBehaviour {
 
     Building building = null;
 
-	// Use this for initialization
-	void Start () {
+    private void OnEnable()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         //buildingPanel = GameObject.Find("BuildingInfoPanel");
 
         //buildingImage = GameObject.Find("BuildingInfoImage").GetComponent<Image>();
@@ -80,8 +90,30 @@ public class BuildingInfoManager : MonoBehaviour {
 
             
         //}
-		
+
+        foreach (GameObject building in activeBuildings)
+        {
+            if (building == null)
+                inactiveBuildings.Add(building);
+        }
+
+        foreach (GameObject building in inactiveBuildings)
+            activeBuildings.Remove(building);
+        inactiveBuildings.Clear();
 	}
+
+    public List<GameObject> getAllActiveBuildings()
+    {
+        List<GameObject> currentActiveBuildings = new List<GameObject>();
+
+        foreach(GameObject building in activeBuildings)
+        {
+            if (building != null)
+                currentActiveBuildings.Add(building);
+        }
+
+        return currentActiveBuildings;
+    }
 
     public void DisableBuildingPanel()
     {
@@ -90,11 +122,6 @@ public class BuildingInfoManager : MonoBehaviour {
             GameObject.Destroy(child.gameObject);
         }
         buildingPanel.SetActive(false);
-    }
-
-    public static BuildingInfoManager Instance()
-    {
-        return GameObject.Find("BuildingInfoManager").GetComponent<BuildingInfoManager>();
     }
 
     public void ShowBuildingInfo(Building building)

@@ -86,6 +86,7 @@ public class BuildingPlacement : MonoBehaviour {
         buildingObj.transform.position = startNode.worldBottomLeft;
         gridRef.UpdateGridFromNode(startNode, newBuilding.buildingData.gridSize, true);
         newBuilding.BuildingPlaced(startNode);
+        BuildingInfoManager.instance.activeBuildings.Add(buildingObj);
 
         if (OnBuildingCreationAction != null)
         {
@@ -114,6 +115,7 @@ public class BuildingPlacement : MonoBehaviour {
             gridRef.UpdateGridFromNode(mouseNode, buildingData.gridSize, true);
             buildingRef.transform.position = mouseNode.worldBottomLeft; 
 
+            BuildingInfoManager.instance.activeBuildings.Add(buildingRef);
             if (OnBuildingCreationAction != null)
             {
                 OnBuildingCreationAction(buildingRef.GetComponent<Building>());
