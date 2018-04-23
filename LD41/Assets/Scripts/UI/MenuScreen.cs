@@ -11,10 +11,13 @@ public class MenuScreen : MonoBehaviour {
     public Text menuText;
     public Button restartButton;
     public Button exitButton;
+    public Timer timer;
 
 	// Use this for initialization
 	void Start () {
+        timer = new Timer();
         menuPanel.SetActive(false);
+        timer.Start(3f);
 	}
 	
 	// Update is called once per frame
@@ -24,8 +27,9 @@ public class MenuScreen : MonoBehaviour {
         {
             menuPanel.SetActive(!menuPanel.activeSelf);
         }
-
-        if (BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)
+        
+        Debug.Log(BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count());
+        if (timer.Expired() && BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)
         {
             menuPanel.SetActive(true);
             menuText.text = "You Loose";
