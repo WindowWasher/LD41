@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
                 string intervalDataStr = string.Format(" ({0}{1})", (intervalData <= 0 ? "" : "+"), intervalData);
                 panels[resource].GetComponentInChildren<Text>().text = resource.count.ToString() + intervalDataStr;
             }
-            if (resource.count < 0 || (resource.resourceEnum == Resource.People && ResourceManager.Instance().resources[Resource.Food].count <= 0))
+            if (resource.count < 0 || intervalData < 0 || (resource.resourceEnum == Resource.People && ResourceManager.Instance().resources[Resource.Food].count <= 0))
             {
                 panels[resource].GetComponentInChildren<Text>().color = Color.red;
             }
