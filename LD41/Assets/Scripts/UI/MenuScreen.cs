@@ -9,6 +9,7 @@ public class MenuScreen : MonoBehaviour {
 
     public GameObject menuPanel;
     public Text menuText;
+    public Button resumeButton;
     public Button restartButton;
     public Button exitButton;
     public Timer timer;
@@ -24,6 +25,10 @@ public class MenuScreen : MonoBehaviour {
 
         instructions = GameObject.Find("Instructions");
 
+        resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
+        resumeButton.onClick.AddListener(ResumeClick);
+
+        resumeButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         exitButton.gameObject.SetActive(false);
 
@@ -39,6 +44,7 @@ public class MenuScreen : MonoBehaviour {
     {
         Time.timeScale = 1;
         beginButton.gameObject.SetActive(false);
+        resumeButton.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         exitButton.gameObject.SetActive(true);
         menuPanel.SetActive(false);
@@ -65,6 +71,12 @@ public class MenuScreen : MonoBehaviour {
             menuPanel.SetActive(true);
             menuText.text = "You Loose";
         }
+    }
+
+    public void ResumeClick()
+    {
+        menuPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OnRestartButton()
