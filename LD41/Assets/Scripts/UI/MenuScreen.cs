@@ -13,19 +13,51 @@ public class MenuScreen : MonoBehaviour {
     public Button exitButton;
     public Timer timer;
 
-	// Use this for initialization
-	void Start () {
+    Button beginButton;
+    GameObject instructions;
+
+    // Use this for initialization
+    void Start () {
+
+        beginButton = GameObject.Find("BeginButton").GetComponent<Button>();
+        beginButton.onClick.AddListener(BeginLevel);
+
+        instructions = GameObject.Find("Instructions");
+
+        restartButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(false);
+
+        Time.timeScale = 0;
+
         timer = new Timer();
-        menuPanel.SetActive(false);
+        
         timer.Start(3f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+
+    void BeginLevel()
+    {
+        Time.timeScale = 1;
+        beginButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(true);
+        exitButton.gameObject.SetActive(true);
+        menuPanel.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             menuPanel.SetActive(!menuPanel.activeSelf);
+            if (menuPanel.activeSelf)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
         }
         
         if (timer.Expired() && BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)

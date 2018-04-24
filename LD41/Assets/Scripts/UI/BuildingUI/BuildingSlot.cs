@@ -87,7 +87,7 @@ public class BuildingSlot : MonoBehaviour {
             inactiveImage.enabled = false;
             buildButton.interactable = true;
         }
-        if(hovering && toolTipTimer.Expired() && !toolTip.activeSelf)
+        if(hovering && (Time.timeScale == 0 || toolTipTimer.Expired()) && !toolTip.activeSelf)
         {
             ShowToolTipInfo();
         }
@@ -95,7 +95,6 @@ public class BuildingSlot : MonoBehaviour {
 
     public void OnPointerEnter()
     {
-        //Debug.Log("Enter!");
         hovering = true;
         toolTipTimer.Start(toolTipTimerWait);
         

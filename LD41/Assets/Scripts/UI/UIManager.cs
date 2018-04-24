@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Dictionary<ResourceInventory, GameObject> panels;
+
 	// Use this for initialization
 	void Start () {
         //Debug.Log("Starting");
@@ -20,7 +21,10 @@ public class UIManager : MonoBehaviour
         ResourceManager.Instance().OnResourceChange += updateResources;
         updateResources(null);
 
-	}
+
+
+
+    }
 
     public void updateResources(ResourceInventory changedResource)
     {
