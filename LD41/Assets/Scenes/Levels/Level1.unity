@@ -1503,7 +1503,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -320.8
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -2542,7 +2542,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -245.19992
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -3726,7 +3726,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -4052,7 +4052,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -196.49998
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -5344,6 +5344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuPanel: {fileID: 1895502423}
   menuText: {fileID: 59749279}
+  resumeButton: {fileID: 0}
   restartButton: {fileID: 490669923}
   exitButton: {fileID: 1686553767}
 --- !u!114 &633231477
@@ -6026,7 +6027,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -7947,7 +7948,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -9122,7 +9123,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 633231476}
-        m_MethodName: OnRestartButton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10488,7 +10489,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -185.4
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
@@ -10736,7 +10737,7 @@ MonoBehaviour:
 
     <b>Controls</b>: WASD or Mouse to move. Mouse Click or Shift+MouseClick to place
     Buildings.  Right click to delete buildings.  Press M to cheat (add 100 of every
-    resource).
+    resource) and Escape to Pause.
 
 
     Take some time to familarize yourself with the buildings. '
@@ -12112,7 +12113,7 @@ Prefab:
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -456.19998
       objectReference: {fileID: 0}
     - target: {fileID: 224612738783305396, guid: aa0eb30a59e8f904d8e4d02836f0aac5,
         type: 2}

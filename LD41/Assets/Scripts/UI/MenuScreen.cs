@@ -69,7 +69,7 @@ public class MenuScreen : MonoBehaviour {
         if (timer.Expired() && BuildingInfoManager.instance.getAllActiveBuildings().Where(b => !b.GetComponent<Building>().IsWall()).Count() <= 0)
         {
             menuPanel.SetActive(true);
-            menuText.text = "You Loose";
+            instructions.GetComponentInChildren<Text>().text = "The barbarians have burned your city to the ground! There were no surviors.";
         }
     }
 
