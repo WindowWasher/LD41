@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour {
     //public float waveSpawnRadius;
     //public Vector3 center;
 
-    float interval = 75f;
+    float interval = 60f;
     public float localSpawnRadius;
 
     GameObject[] spawnPoints;
