@@ -312,7 +312,8 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if(other == target)
+        triggerHits.Remove(other.gameObject);
+        if (other == target)
         {
             lockedOn = false;
             target = null;
@@ -322,8 +323,6 @@ public class Enemy : MonoBehaviour {
                 break;
             }
         }
-
-        triggerHits.Remove(other.gameObject);
     }
 
     GameObject GetTarget()
