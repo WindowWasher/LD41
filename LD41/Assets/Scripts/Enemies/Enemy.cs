@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour {
 
     public string name;
 
+    public List<GameObject> triggerHits = new List<GameObject>();
+
 
     // Use this for initialization
     void Start () {
@@ -294,7 +296,7 @@ public class Enemy : MonoBehaviour {
         
 	}
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Building building = other.gameObject.GetComponent<Building>();
         if (building != null && !lockedOn && building.buildingActive)
@@ -303,7 +305,9 @@ public class Enemy : MonoBehaviour {
             attacking = true;
             lockedOn = true;
         }
-        
+
+        triggerHits.Add(other.gameObject);
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -311,7 +315,15 @@ public class Enemy : MonoBehaviour {
         if(other == target)
         {
             lockedOn = false;
+            target = null;
+            foreach(GameObject newTarget in triggerHits)
+            {
+                target = newTarget;
+                break;
+            }
         }
+
+        triggerHits.Remove(other.gameObject);
     }
 
     GameObject GetTarget()
