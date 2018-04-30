@@ -31,6 +31,8 @@ public class Building : MonoBehaviour {
 
     public Timer checkForTargets = new Timer();
 
+    public bool isWall = false;
+
     public int enemyAttackerCount = 0;
 	// Use this for initialization
 	void Start () {
@@ -74,6 +76,7 @@ public class Building : MonoBehaviour {
         // Auto Add workers if available
         workers = Mathf.Min(peopleAvailable, buildingData.maxWorkerSize);
         ResourceManager.Instance().Add(Resource.People, -workers);
+        isWall = (buildingData.name == "Wall");
         
         //BuildingInfoManager.Instance().ShowBuildingInfo(this);
 
@@ -125,7 +128,8 @@ public class Building : MonoBehaviour {
     public bool IsWall()
     {
         // TODO
-        return this.buildingData.name == "Wall";
+        //return this.buildingData.name == "Wall";
+        return isWall;
     }
 
 }
