@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour {
 
     public List<GameObject> triggerHits = new List<GameObject>();
 
+    Timer setTargetTimer = new Timer();
+
 
     // Use this for initialization
     void Start () {
@@ -55,8 +57,8 @@ public class Enemy : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
         agent.Warp(this.transform.position);
-        BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
-        buildingPlacement.OnBuildingCreationAction += newBuilding;
+        //BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+        //buildingPlacement.OnBuildingCreationAction += newBuilding;
 
         health = GetComponent<Health>();
         health.currentHealth = health.maxHealth;
@@ -64,7 +66,7 @@ public class Enemy : MonoBehaviour {
 
         foreach (var buildingObj in Target.GetActiveBuildingObjs())
         {
-            buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
+            //buildingObj.GetComponent<Building>().OnBuildingDeath += buildingDestroyed;
             buildingChanges.Add(buildingObj.GetComponent<Building>());
         }
 
@@ -84,6 +86,8 @@ public class Enemy : MonoBehaviour {
             //    return;
             //}
         }
+
+        setTargetTimer.Start(Random.Range(0, 0.9f));
     }
 
     void Die()
@@ -91,13 +95,13 @@ public class Enemy : MonoBehaviour {
         //Debug.Log(this.name + " died!");
         alive = false;
         target = null;
-        BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
-        buildingPlacement.OnBuildingCreationAction -= newBuilding;
+        //BuildingPlacement buildingPlacement = GameObject.FindObjectOfType<BuildingPlacement>();
+        //buildingPlacement.OnBuildingCreationAction -= newBuilding;
 
-        foreach(Building building in buildingChanges)
-        {
-            building.OnBuildingDeath -= buildingDestroyed;
-        }
+        //foreach(Building building in buildingChanges)
+        //{
+        //    building.OnBuildingDeath -= buildingDestroyed;
+        //}
 
         EnemyManager.Instance().enemyObjectPool[name].Add(this.gameObject);
         this.gameObject.SetActive(false);
@@ -107,8 +111,8 @@ public class Enemy : MonoBehaviour {
 
     void newBuilding(Building newBuilding)
     {
-        newBuilding.OnBuildingDeath += buildingDestroyed;
-        buildingChanges.Add(newBuilding.GetComponent<Building>());
+        //newBuilding.OnBuildingDeath += buildingDestroyed;
+        //buildingChanges.Add(newBuilding.GetComponent<Building>());
         //if (target != null)
         //{
         //    Building currentBuilding = target.GetComponent<Building>();
@@ -124,8 +128,13 @@ public class Enemy : MonoBehaviour {
 
     void buildingDestroyed(Building destroyedBuilding)
     {
-        destroyedBuilding.OnBuildingDeath -= buildingDestroyed;
-        buildingChanges.Remove(destroyedBuilding);
+        //destroyedBuilding.OnBuildingDeath -= buildingDestroyed;
+        //buildingChanges.Remove(destroyedBuilding);
+
+
+
+
+
         //if (target != null)
         //{
         //    Building currentBuilding = target.GetComponent<Building>();
@@ -244,6 +253,9 @@ public class Enemy : MonoBehaviour {
         //        return;
         //    }
         //}
+
+        if (!setTargetTimer.Expired())
+            return;
 
 		if(target == null)
         {

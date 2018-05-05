@@ -209,7 +209,7 @@ public class EnemyManager : MonoBehaviour {
             }
 
             GameObject newEnemyPrefab;
-            if (Random.Range(0, 2) == 1 && waveNumber > 2)
+            if (Random.Range(0, 3) == 1 && waveNumber > 2)
             {
                 newEnemyPrefab = enemyPrefabs[1];
             }

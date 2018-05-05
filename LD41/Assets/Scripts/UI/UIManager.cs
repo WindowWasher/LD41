@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Dictionary<ResourceInventory, GameObject> panels;
+    Timer nextUpdate = new Timer();
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,10 @@ public class UIManager : MonoBehaviour
 
     public void updateResources(ResourceInventory changedResource)
     {
+        // start slowing down after 3 minutes
+        if (!nextUpdate.Expired() && Time.deltaTime > 180)
+            return;
+        nextUpdate.Start(0.25f);
         foreach (ResourceInventory resource in ResourceManager.Instance().resources.Values)
         {
             int intervalData = ResourceManager.Instance().GetIntervalDelta(resource.resourceEnum);

@@ -49,6 +49,8 @@ public class ResourceManager:MonoBehaviour  {
         {
             resources[inventory.resourceEnum] = inventory;
         }
+
+        resources[Resource.People].count = 0;
     }
 
 
@@ -297,7 +299,7 @@ public class ResourceManager:MonoBehaviour  {
             foreach (ResourceInventory resource in resourceList)
             {
                 //resources[resource.resourceEnum].
-                this.Add(resource.resourceEnum, 100);
+                this.Add(resource.resourceEnum, 200);
             }
         }
 
